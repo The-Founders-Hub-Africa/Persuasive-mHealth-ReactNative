@@ -1,39 +1,99 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { Stack } from "expo-router";
+import React from "react";
+import OnboardingScreen from "@/screens/OnboardingScreen";
+import SignupScreen from "@/screens/(auth)/SignupScreen";
+import LoginScreen from "@/screens/(auth)/LoginScreen";
+import ResetPasswordScreen from "@/screens/(auth)/ResetPasswordScreen";
+import ForgotPasswordScreen from "@/screens/(auth)/ForgotPasswordScreen";
+import OTPVerificationScreen from "@/screens/(auth)/OTPVerificationScreen";
+import ProfileSetupScreen from "@/screens/(dashboard)/ProfileSetupScreen";
+import BottomTabs from "@/components/Navigation/BottomTabs";
+import { Provider } from "react-redux";
+import { store } from "@/integrations/store";
+import AnalyticsScreen from "@/screens/(dashboard)/AnalyticsScreen";
+import ToastManager from "toastify-react-native";
+import Alert_System from "@/integrations/features/alert/Alert";
+import DecisionScreen from "@/screens/decisionscreen";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Provider store={store}>
+        <ToastManager textStyle={{ fontSize: 16, width: "100%" }} />
+
+          <Stack.Screen
+            name="DecisionScreen"
+            options={{
+              headerShadowVisible: false,
+              headerTitle: "",
+            }}
+          />
+
+          <Stack.Screen
+            name="Onboarding"
+            options={{
+              headerShadowVisible: false,
+              headerTitle: "",
+            }}
+          />
+
+          
+          <Stack.Screen
+            name="Signup"
+            options={{
+              headerShadowVisible: false,
+              headerTitle: "",
+            }}
+          />
+          <Stack.Screen
+            name="OTP Verification"
+            options={{
+              headerShadowVisible: false,
+              headerTitle: "",
+            }}
+          />
+          <Stack.Screen
+            name="Login"
+            options={{
+              headerShadowVisible: false,
+              headerTitle: "",
+            }}
+          />
+          <Stack.Screen
+            name="Forgot Password"
+            options={{
+              headerShadowVisible: false,
+              headerTitle: "",
+            }}
+          />
+          <Stack.Screen
+            name="Reset Password"
+            options={{
+              headerShadowVisible: false,
+              headerTitle: "",
+            }}
+          />
+          <Stack.Screen
+            name="Profile Setup"
+            options={{
+              headerShadowVisible: false,
+              headerTitle: "",
+            }}
+          />
+          <Stack.Screen
+            name="Analytics"
+            options={{
+              headerShadowVisible: false,
+            }}
+          />
+          <Stack.Screen
+            name="Dashboard"
+            options={{
+              headerShown: false,
+            }}
+          />
+        <Alert_System />
+    </Provider>
   );
 }
+
