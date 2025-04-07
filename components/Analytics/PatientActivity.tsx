@@ -1,14 +1,15 @@
 import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import SectionHeader from "../common/SectionHeader";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { BarChart } from "react-native-gifted-charts";
 import theme from "@/styles/theme";
 import typography from "@/styles/typography";
 import { useAppSelector } from "@/integrations/hooks";
+import { useRouter } from "expo-router";
 
 const PatientActivity = ({ hideViewAll }: { hideViewAll?: boolean }) => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter();
+
   const appointmentsData = useAppSelector(state => state.appointments.data);
 
   const [barData, setBarData] = useState<
@@ -121,7 +122,7 @@ const PatientActivity = ({ hideViewAll }: { hideViewAll?: boolean }) => {
       }}>
       <SectionHeader
         title="Patient Activity"
-        onPress={() => navigation.navigate("Analytics")}
+        onPress={() => navigation.navigate("/analytics")}
         hideViewAll={hideViewAll}
       />
       {renderTitle()}

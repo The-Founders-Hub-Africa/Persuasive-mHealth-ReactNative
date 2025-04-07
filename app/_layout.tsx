@@ -6,11 +6,11 @@ import LoginScreen from "@/screens/(auth)/LoginScreen";
 import ResetPasswordScreen from "@/screens/(auth)/ResetPasswordScreen";
 import ForgotPasswordScreen from "@/screens/(auth)/ForgotPasswordScreen";
 import OTPVerificationScreen from "@/screens/(auth)/OTPVerificationScreen";
-import ProfileSetupScreen from "@/screens/(dashboard)/ProfileSetupScreen";
+import ProfileSetupScreen from "@/app/(dashboard)/ProfileSetupScreen";
 import BottomTabs from "@/components/Navigation/BottomTabs";
 import { Provider } from "react-redux";
 import { store } from "@/integrations/store";
-import AnalyticsScreen from "@/screens/(dashboard)/AnalyticsScreen";
+import AnalyticsScreen from "@/app/analytics";
 import ToastManager from "toastify-react-native";
 import Alert_System from "@/integrations/features/alert/Alert";
 import DecisionScreen from "@/screens/decisionscreen";
@@ -22,7 +22,7 @@ export default function RootLayout() {
         <ToastManager textStyle={{ fontSize: 16, width: "100%" }} />
 
           <Stack.Screen
-            name="DecisionScreen"
+            name="decision-screen"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
@@ -30,7 +30,7 @@ export default function RootLayout() {
           />
 
           <Stack.Screen
-            name="Onboarding"
+            name="onboarding"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
@@ -39,55 +39,55 @@ export default function RootLayout() {
 
           
           <Stack.Screen
-            name="Signup"
+            name="signup"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
             }}
           />
           <Stack.Screen
-            name="OTP Verification"
+            name="otp-verification"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
             }}
           />
           <Stack.Screen
-            name="Login"
+            name="login"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
             }}
           />
           <Stack.Screen
-            name="Forgot Password"
+            name="forgot-password"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
             }}
           />
           <Stack.Screen
-            name="Reset Password"
+            name="reset-password"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
             }}
           />
           <Stack.Screen
-            name="Profile Setup"
+            name="profile-setup"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
             }}
           />
           <Stack.Screen
-            name="Analytics"
+            name="analytics"
             options={{
               headerShadowVisible: false,
             }}
           />
           <Stack.Screen
-            name="Dashboard"
+            name="dashboard"
             options={{
               headerShown: false,
             }}
