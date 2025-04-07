@@ -1,19 +1,19 @@
 import { Stack } from "expo-router";
 import React from "react";
-import OnboardingScreen from "@/screens/OnboardingScreen";
-import SignupScreen from "@/screens/(auth)/SignupScreen";
-import LoginScreen from "@/screens/(auth)/LoginScreen";
-import ResetPasswordScreen from "@/screens/(auth)/ResetPasswordScreen";
-import ForgotPasswordScreen from "@/screens/(auth)/ForgotPasswordScreen";
-import OTPVerificationScreen from "@/screens/(auth)/OTPVerificationScreen";
-import ProfileSetupScreen from "@/app/(dashboard)/ProfileSetupScreen";
-import BottomTabs from "@/components/Navigation/BottomTabs";
+// import OnboardingScreen from "@/screens/OnboardingScreen";
+// import SignupScreen from "@/app/(auth)/SignupScreen";
+// import LoginScreen from "@/app/(auth)/LoginScreen";
+// import ResetPasswordScreen from "@/app/(auth)/ResetPasswordScreen";
+// import ForgotPasswordScreen from "@/app/(auth)/ForgotPasswordScreen";
+// import OTPVerificationScreen from "@/app/(auth)/OTPVerificationScreen";
+// import ProfileSetupScreen from "@/app/(dashboard)/ProfileSetupScreen";
+// import BottomTabs from "@/components/Navigation/BottomTabs";
 import { Provider } from "react-redux";
 import { store } from "@/integrations/store";
-import AnalyticsScreen from "@/app/analytics";
+// import AnalyticsScreen from "@/app/analytics";
 import ToastManager from "toastify-react-native";
 import Alert_System from "@/integrations/features/alert/Alert";
-import DecisionScreen from "@/screens/decisionscreen";
+// import DecisionScreen from "@/screens/decisionscreen";
 
 
 export default function RootLayout() {

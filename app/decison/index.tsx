@@ -3,10 +3,10 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
-import typography from "../styles/typography";
-import formStyles from "../styles/formStyles";
+import typography from "../../styles/typography";
+import formStyles from "../../styles/formStyles";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
-import { boardUser } from "../integrations/features/user/boarderUserSlice";
+import { boardUser } from "../../integrations/features/user/boarderUserSlice";
 import styles from "./SplashScreen/styles";
 
 

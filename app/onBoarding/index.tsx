@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { NavigationProp } from "@react-navigation/native";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
-import typography from "../styles/typography";
-import formStyles from "../styles/formStyles";
+import typography from "../../styles/typography";
+import formStyles from "../../styles/formStyles";
 import { useAppDispatch } from "@/integrations/hooks";
-import { boardUser } from "../integrations/features/user/boarderUserSlice";
+import { boardUser } from "../../integrations/features/user/boarderUserSlice";
+import { useRouter } from "expo-router";
 
 const onboardingData = [
   {
@@ -32,11 +32,9 @@ const onboardingData = [
   },
 ];
 
-export default function OnboardingScreen({
-  navigation,
-}: {
-  navigation: NavigationProp<any>;
-}) {
+export default function OnboardingScreen() {
+  const navigation = useRouter();
+
   const [index, setIndex] = useState(0);
 
   const dispatch = useAppDispatch();
@@ -45,7 +43,7 @@ export default function OnboardingScreen({
     if (index < onboardingData.length - 1) {
       setIndex(index + 1);
     } else {
-      navigation.navigate("Signup");
+      navigation.navigate("/Signup");
       dispatch(boardUser())
     }
   };
