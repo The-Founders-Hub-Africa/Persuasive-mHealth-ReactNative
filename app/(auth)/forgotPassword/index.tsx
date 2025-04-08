@@ -10,22 +10,21 @@ import {
 } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { useState } from "react";
-import { NavigationProp } from "@react-navigation/native";
 import React from "react";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
 import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
+import { useRouter } from "expo-router";
 
 type FormData = {
   email: string;
 };
 
-export default function ForgotPasswordScreen({
-  navigation,
-}: {
-  navigation: NavigationProp<any>;
-}) {
+export default function ForgotPasswordScreen() {
+  
+  const navigation = useRouter();
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const {
@@ -51,7 +50,7 @@ export default function ForgotPasswordScreen({
   };
 
   const handleOpenEmailApp = () => {
-    navigation.navigate("Reset Password");
+    navigation.navigate("../resetPassword");
   };
 
   return (
@@ -143,7 +142,7 @@ export default function ForgotPasswordScreen({
           {/* Remembered your password */}
           <View style={formStyles.infoGroup}>
             <Text style={formStyles.infoText}>Remembered your password? </Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <TouchableOpacity onPress={() => navigation.navigate("../login")}>
               <Text style={formStyles.infoLink}>Login here.</Text>
             </TouchableOpacity>
           </View>

@@ -10,7 +10,6 @@ import {
 import { MaterialIcons, SimpleLineIcons, Feather } from "@expo/vector-icons";
 import globalStyles from "@/styles/global";
 import theme from "@/styles/theme";
-import { NavigationProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import formStyles from "@/styles/formStyles";
 import typography from "@/styles/typography";
@@ -20,6 +19,7 @@ import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { useRegisterMPUserMutation } from "@/integrations/features/apis/apiSlice";
 // import Alert_System from "@/src/integrations/features/alert/Alert";
 import { userRegistered } from "@/integrations/features/user/boarderUserSlice";
+import { useRouter } from "expo-router";
 
 type FormData = {
   email: string;
@@ -29,11 +29,9 @@ type FormData = {
   agreed: boolean;
 };
 
-export default function SignupScreen({
-  navigation,
-}: {
-  navigation: NavigationProp<any>;
-}) {
+export default function SignupScreen() {
+  const navigation = useRouter();
+  
   const {
     control,
     handleSubmit,
@@ -56,9 +54,9 @@ export default function SignupScreen({
   useEffect(() => {
     if (user.logedin) {
       if (user.verified_number) {
-        navigation.navigate("Dashboard");
+        navigation.navigate("../home");
       } else {
-        navigation.navigate("OTP Verification");
+        navigation.navigate("../OTPVerification");
       }
     }
   }, [user]);
@@ -88,7 +86,7 @@ export default function SignupScreen({
           })
         );
         dispatch(userRegistered());
-        navigation.navigate("OTP Verification");
+        navigation.navigate("../OTPVerification");
       } else if (res.error) {
         dispatch(addAlert({ ...res.error, page: "signup" }));
       }
@@ -358,7 +356,7 @@ export default function SignupScreen({
         {/* Already have an account */}
         <View style={formStyles.infoGroup}>
           <Text style={formStyles.infoText}>Already have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <TouchableOpacity onPress={() => navigation.navigate("../login")}>
             <Text style={formStyles.infoLink}>Login.</Text>
           </TouchableOpacity>
         </View>

@@ -11,7 +11,6 @@ import {
 import { Feather, SimpleLineIcons } from "@expo/vector-icons";
 import globalStyles from "@/styles/global";
 import theme from "@/styles/theme";
-import { NavigationProp } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
@@ -21,6 +20,7 @@ import { loginUser } from "@/integrations/features/user/usersSlice";
 // import { useDispatch, useSelector } from "react-redux"
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
+import { useRouter } from "expo-router";
 // import Alert_System from "@/src/integrations/features/alert/Alert";
 
 type FormData = {
@@ -28,11 +28,8 @@ type FormData = {
   password: string;
 };
 
-export default function LoginScreen({
-  navigation,
-}: {
-  navigation: NavigationProp<any>;
-}) {
+export default function LoginScreen() {
+const navigation = useRouter();
 
   const {
     control,
@@ -51,9 +48,9 @@ export default function LoginScreen({
   useEffect(() => {
     if (user.logedin) {
       if (user.verified_number) {
-        navigation.navigate("Dashboard");
+        navigation.navigate("../dashboard");
       } else {
-        navigation.navigate("OTP Verification");
+        navigation.navigate("../OTPVerification");
       }
     }
   }, [user]);
@@ -96,9 +93,9 @@ export default function LoginScreen({
       // setuserlogged(true)
       if (res.data.user.full_name == 'Not Set') {
         console.log('profile not set')
-        navigation.navigate("Profile Setup");
+        navigation.navigate("../profileSetup");
       } else {
-        navigation.navigate("Dashboard");
+        navigation.navigate("./home");
       }
       
     } else if (res.error) {
@@ -206,7 +203,7 @@ export default function LoginScreen({
 
         {/* Forgot password */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("Forgot Password")}
+          onPress={() => navigation.navigate("../forgetPassword")}
           style={{ alignSelf: "flex-end" }}>
           <Text style={{ color: theme.colors["purple-700"], fontSize: 14 }}>
             Forgot password?
@@ -239,7 +236,7 @@ export default function LoginScreen({
         {/* Don't have an account */}
         <View style={formStyles.infoGroup}>
           <Text style={formStyles.infoText}>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+          <TouchableOpacity onPress={() => navigation.navigate("../signUp")}>
             <Text style={formStyles.infoLink}>Sign up.</Text>
           </TouchableOpacity>
         </View>

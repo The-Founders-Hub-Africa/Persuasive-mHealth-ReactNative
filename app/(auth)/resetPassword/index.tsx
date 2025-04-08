@@ -9,22 +9,20 @@ import {
   Alert,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { NavigationProp } from "@react-navigation/native";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
 import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
+import { useRouter } from "expo-router";
 
 type FormData = {
   password: string;
   confirmPassword: string;
 };
 
-export default function ResetPasswordScreen({
-  navigation,
-}: {
-  navigation: NavigationProp<any>;
-}) {
+export default function ResetPasswordScreen() {
+   const navigation = useRouter();
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     control,
@@ -39,7 +37,7 @@ export default function ResetPasswordScreen({
 
   const onSubmit = (data: FormData) => {
     if (data.password && data.confirmPassword === data.password) {
-      navigation.navigate("Login");
+      navigation.navigate("../login");
     } else {
       Alert.alert("Please fill all fields");
     }

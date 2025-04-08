@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useForm, Controller } from "react-hook-form";
-import { NavigationProp } from "@react-navigation/native";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
 import typography from "@/styles/typography";
@@ -22,6 +21,7 @@ import {
   logoutUser,
 } from "@/integrations/features/user/usersSlice";
 import ModalPopup from "@/components/common/ModalPopup";
+import { useRouter } from "expo-router";
 // import Alert_System from "@/src/integrations/features/alert/Alert";
 
 type FormData = {
@@ -33,11 +33,8 @@ type FormData = {
   otp5: string;
 };
 
-export default function OTPVerificationScreen({
-  navigation,
-}: {
-  navigation: NavigationProp<any>;
-}) {
+export default function OTPVerificationScreen() {
+  const navigation = useRouter();
   const [otpSent, setOtpSent] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);

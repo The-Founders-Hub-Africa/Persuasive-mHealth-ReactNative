@@ -22,7 +22,7 @@ export default function RootLayout() {
         <ToastManager textStyle={{ fontSize: 16, width: "100%" }} />
 
           <Stack.Screen
-            name="decision-screen"
+            name="decision"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
@@ -46,7 +46,7 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
-            name="otp-verification"
+            name="OTPVerification"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
@@ -60,21 +60,21 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
-            name="forgot-password"
+            name="forgotpassword"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
             }}
           />
           <Stack.Screen
-            name="reset-password"
+            name="resetPassword"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
             }}
           />
           <Stack.Screen
-            name="profile-setup"
+            name="profileSetup"
             options={{
               headerShadowVisible: false,
               headerTitle: "",

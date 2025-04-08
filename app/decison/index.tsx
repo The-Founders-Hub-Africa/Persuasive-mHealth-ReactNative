@@ -21,23 +21,25 @@ export default function DecisionScreen() {
     if (user.logedin) {
       if (user.verified_number && user.full_name != 'Not Set') {
         // navigation.navigate("Dashboard");
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "Dashboard" }],
-        });
+        // navigation.reset({
+        //   index: 0,
+        //   routes: [{ name: "Dashboard" }],
+        // });
+        navigation.replace("../home")
       } else if (user.full_name == 'Not Set') {
         // navigation.navigate("Profile Setup");
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "Profile Setup" }],
-        });
-        navigation.replace("../Profile Setup"),
+        // navigation.reset({
+        //   index: 0,
+        //   routes: [{ name: "Profile Setup" }],
+        // });
+        navigation.replace("../profileSetup")
       }else {
         // navigation.navigate("OTP Verification");
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "OTP Verification" }],
-        });
+        // navigation.reset({
+        //   index: 0,
+        //   routes: [{ name: "OTP Verification" }],
+        // });
+        navigation.replace("../OTPVerification")
       }
     } else {
 
@@ -47,14 +49,14 @@ export default function DecisionScreen() {
         //   index: 0,
         //   routes: [{ name: "Login" }],
         // });
-        navigation.replace("../Login"),
+        navigation.replace("../login")
       } else if (board.navigate && board.boarded) {
         // navigation.navigate("Signup");
         //  navigation.reset({
         //   index: 0,
         //   routes: [{ name: "Signup" }],
         // });
-        navigation.replace("../Signup"),
+        navigation.replace("../signUp")
       } else if(board.navigate && !board.boarded) {
         // navigation.navigate("Onboarding");
         //  navigation.reset({
@@ -62,11 +64,13 @@ export default function DecisionScreen() {
         //   routes: [{ name: "Onboarding" }],
          
         // });
-        navigation.replace("../Onboarding"),
+        navigation.replace("../onBoarding")
       }
       
     }
+    
   }, [user,board]);
+
 
   
 
