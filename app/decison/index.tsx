@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { NavigationProp } from "@react-navigation/native";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
 import typography from "../../styles/typography";
 import formStyles from "../../styles/formStyles";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { boardUser } from "../../integrations/features/user/boarderUserSlice";
-import styles from "./SplashScreen/styles";
+import styles from "@/styles/splashScreen";
+import { useRouter } from "expo-router";
 
 
-export default function DecisionScreen({
-  navigation,
-}: {
-  navigation: NavigationProp<any>;
-}) {
+export default function DecisionScreen() {
+  const navigation = useRouter();
  console.log('Decision Screen')
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
@@ -34,7 +31,7 @@ export default function DecisionScreen({
           index: 0,
           routes: [{ name: "Profile Setup" }],
         });
-
+        navigation.replace("../Profile Setup"),
       }else {
         // navigation.navigate("OTP Verification");
         navigation.reset({
@@ -46,22 +43,26 @@ export default function DecisionScreen({
 
       if (board.navigate && board.boarded && board.registered) {
         // navigation.navigate("Login");
-         navigation.reset({
-          index: 0,
-          routes: [{ name: "Login" }],
-        });
+        //  navigation.reset({
+        //   index: 0,
+        //   routes: [{ name: "Login" }],
+        // });
+        navigation.replace("../Login"),
       } else if (board.navigate && board.boarded) {
         // navigation.navigate("Signup");
-         navigation.reset({
-          index: 0,
-          routes: [{ name: "Signup" }],
-        });
+        //  navigation.reset({
+        //   index: 0,
+        //   routes: [{ name: "Signup" }],
+        // });
+        navigation.replace("../Signup"),
       } else if(board.navigate && !board.boarded) {
         // navigation.navigate("Onboarding");
-         navigation.reset({
-          index: 0,
-          routes: [{ name: "Onboarding" }],
-        });
+        //  navigation.reset({
+        //   index: 0,
+        //   routes: [{ name: "Onboarding" }],
+         
+        // });
+        navigation.replace("../Onboarding"),
       }
       
     }
