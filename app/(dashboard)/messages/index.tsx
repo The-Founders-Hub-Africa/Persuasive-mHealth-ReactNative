@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { addPatientAndMessage } from "@/integrations/features/patient/patientAndMessageSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 // import Alert_System from "@/src/integrations/features/alert/Alert";
-import { useFocusEffect } from "@react-navigation/native";
+// import { useFocusEffect } from "@react-navigation/native";
 
 const MessagesScreen = ({ canSearch }: { canSearch: boolean }) => {
   const [search, setSearch] = useState("");
@@ -39,25 +39,25 @@ const MessagesScreen = ({ canSearch }: { canSearch: boolean }) => {
 
   // }, [patients,error])
   
-  useFocusEffect(
-    React.useCallback(() => {
+  // useFocusEffect(
+  //   React.useCallback(() => {
     
-    let data = {
-      data: { action: "get_all_last", data: {} },
-      token: user.usertoken,
-    };
-    patientandmessage(data).then(data => {
-      if (data.error) {
-        dispatch(addAlert({ ...data.error, page: "message_list" }));
-      }
+  //   let data = {
+  //     data: { action: "get_all_last", data: {} },
+  //     token: user.usertoken,
+  //   };
+  //   patientandmessage(data).then(data => {
+  //     if (data.error) {
+  //       dispatch(addAlert({ ...data.error, page: "message_list" }));
+  //     }
 
-      if (data.data) {
-        dispatch(addPatientAndMessage({ ...data.data, save: true }));
-      }
-    });
+  //     if (data.data) {
+  //       dispatch(addPatientAndMessage({ ...data.data, save: true }));
+  //     }
+  //   });
       
-    }, [])
-  );  
+  //   }, [])
+  // );  
 
   useEffect(() => {
     let data = [init];

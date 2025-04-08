@@ -43,13 +43,13 @@ export default function OnboardingScreen() {
     if (index < onboardingData.length - 1) {
       setIndex(index + 1);
     } else {
-      navigation.navigate("/Signup");
+      navigation.navigate("../signUp");
       dispatch(boardUser())
     }
   };
 
   const handleSkip = () => {
-    navigation.navigate("Signup");
+    navigation.navigate("../signUp");
     dispatch(boardUser())
   };
 

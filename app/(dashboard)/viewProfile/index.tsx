@@ -14,16 +14,16 @@ import { Entypo, Feather } from "@expo/vector-icons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import globalStyles from "@/styles/global";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { baseUrl } from "@/integrations/features/apis/apiSlice";
+import { useRouter } from "expo-router";
 
 const ViewProfileScreen = () => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter()
 
   const handleEditProfile = () => {
-    navigation.navigate("Edit Profile");
+    navigation.navigate("../editProfile");
   };
 
   const dispatch = useAppDispatch();
@@ -157,7 +157,7 @@ const ViewProfileScreen = () => {
 
         <TouchableOpacity
           style={formStyles.submitButton}
-          onPress={() => navigation.navigate("Analytics")}>
+          onPress={() => navigation.navigate("../analytics")}>
           <Text style={formStyles.submitText}>View Analytics</Text>
         </TouchableOpacity>
       </View>

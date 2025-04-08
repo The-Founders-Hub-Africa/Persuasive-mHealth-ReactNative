@@ -14,7 +14,6 @@ import theme from "@/styles/theme";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { logoutUser } from "@/integrations/features/user/usersSlice";
 import { useLogoutMutation } from "@/integrations/features/apis/apiSlice";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 import typography from "@/styles/typography";
 import { Ionicons } from "@expo/vector-icons";
 import formStyles from "@/styles/formStyles";
@@ -22,9 +21,10 @@ import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useRouter } from "expo-router";
 
 const SettingsScreen = () => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter()
   const [value, setValue] = React.useState("");
 
   const [logout, { isLoading }] = useLogoutMutation();
@@ -34,7 +34,7 @@ const SettingsScreen = () => {
   const handleLogout = async () => {
     let res = await logout(user.usertoken);
     dispatch(logoutUser());
-    navigation.navigate("Login");
+    navigation.navigate("../login");
   };
 
   return (
@@ -84,7 +84,7 @@ const SettingsScreen = () => {
 
         {/* Top */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("View Profile")}
+          onPress={() => navigation.navigate("../viewProfile")}
           style={{
             width: "100%",
           }}>
@@ -111,7 +111,7 @@ const SettingsScreen = () => {
 
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("Edit Profile")}>
+            onPress={() => navigation.navigate("../editProfile")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <Ionicons
@@ -132,7 +132,7 @@ const SettingsScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("Security")}>
+            onPress={() => navigation.navigate("../security")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <Feather
@@ -153,7 +153,7 @@ const SettingsScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("Notification Settings")}>
+            onPress={() => navigation.navigate("../notificationSettings")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <Feather
@@ -180,7 +180,7 @@ const SettingsScreen = () => {
 
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("Privacy & Policy")}>
+            onPress={() => navigation.navigate("../privacyPolicy")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <Ionicons
@@ -201,7 +201,7 @@ const SettingsScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("Support & Legal")}>
+            onPress={() => navigation.navigate("../support")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <FontAwesome
@@ -222,7 +222,7 @@ const SettingsScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("Terms & Conditions")}>
+            onPress={() => navigation.navigate("../terms")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <FontAwesome
@@ -249,7 +249,7 @@ const SettingsScreen = () => {
 
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("FAQ")}>
+            onPress={() => navigation.navigate("../FAQ")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <MaterialCommunityIcons

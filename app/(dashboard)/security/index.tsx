@@ -8,13 +8,13 @@ import {
 import React from "react";
 import globalStyles from "@/styles/global";
 import theme from "@/styles/theme";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 import typography from "@/styles/typography";
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
+import { useRouter } from "expo-router";
 
 const SecurityScreen = () => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter()
 
   return (
     <ScrollView>
@@ -24,7 +24,7 @@ const SecurityScreen = () => {
 
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("Old Password")}>
+            onPress={() => navigation.navigate("../oldPassword")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <Feather
