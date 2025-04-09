@@ -14,7 +14,7 @@ import formStyles from "@/styles/formStyles";
 import { Controller, useForm } from "react-hook-form";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import theme from "@/styles/theme";
-import DatePicker from "react-native-modern-datepicker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import modalStyles from "@/styles/modalStyles";
 import { Picker } from "@react-native-picker/picker";
 // import { launchImageLibrary } from "react-native-image-picker";
@@ -27,9 +27,9 @@ import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { addPatients } from "@/integrations/features/patient/patientsSlice";
 import { Appointments, convertDate, convertDate2 } from "@/integrations/axios_store";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import { addSingleAppointment } from "@/integrations/features/appointment/appointmentsSlice";
+import { useRouter } from "expo-router";
 
 type FormData = {
   patient: number;
@@ -45,7 +45,23 @@ type FormData = {
 
 const NewAppointmentsScreen = () => {
   const [showModal, setShowModal] = useState(false);
-  const navigation = useNavigation<NavigationProp<any>>();
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  
+    const showDatePicker = () => {
+      setDatePickerVisibility(true);
+    };
+  
+    const hideDatePicker = () => {
+      setDatePickerVisibility(false);
+    };
+  
+    const handleConfirm = (date:string) => {
+      console.warn("A date has been picked: ", date);
+      hideDatePicker();
+    };
+  
+    const navigation = useRouter();
+
   const [calendarVisible, setCalendarVisible] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [fileDetails, setfileDetails] = useState({ type: "", filename: "" });
@@ -127,7 +143,7 @@ const NewAppointmentsScreen = () => {
       setIsSubmitting(false)
       dispatch(addSingleAppointment(res.data.event));
       setShowModal(true);
-      navigation.navigate("Appointments");
+      navigation.navigate("../appointments");
     } else {
       setIsSubmitting(false)
       let err = {
@@ -368,7 +384,7 @@ const NewAppointmentsScreen = () => {
           animationType="slide"
           onRequestClose={() => setCalendarVisible(false)}>
           <View style={modalStyles.modalCntr}>
-            <DatePicker
+            {/* <DatePicker
               style={{ borderRadius: 10 }}
               current={getValues("date")}
               options={{
@@ -384,7 +400,7 @@ const NewAppointmentsScreen = () => {
                 setCalendarVisible(false);
               }}
               mode="calendar"
-            />
+            /> */}
           </View>
         </Modal>
 
@@ -423,7 +439,7 @@ const NewAppointmentsScreen = () => {
           animationType="slide"
           onRequestClose={() => setShowPicker(false)}>
           <View style={modalStyles.modalCntr}>
-            <DatePicker
+            {/* <DatePicker
               mode="time"
               minuteInterval={5}
               options={{
@@ -439,7 +455,7 @@ const NewAppointmentsScreen = () => {
                 setShowPicker(false);
               }}
               style={{ borderRadius: 10 }}
-            />
+            /> */}
           </View>
         </Modal>
 

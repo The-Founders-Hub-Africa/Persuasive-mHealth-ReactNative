@@ -16,7 +16,7 @@ import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { Picker } from "@react-native-picker/picker";
 import { useForm, Controller } from "react-hook-form";
 import * as ImagePicker from "expo-image-picker";
-import DatePicker from "react-native-modern-datepicker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import modalStyles from "@/styles/modalStyles";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
@@ -24,14 +24,10 @@ import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import ModalPopup from "@/components/common/ModalPopup";
-import {
-  NavigationProp,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
 import { convertDate, convertDate2, get_id, Patients } from "@/integrations/axios_store";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { addSinglePatient } from "@/integrations/features/patient/patientsSlice";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 type FormData = {
   id: number;
@@ -56,10 +52,29 @@ export default function EditPatientScreen() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const navigation = useNavigation<NavigationProp<any>>();
-  const route = useRoute();
-  let param = route.params;
-  let id = get_id(param);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  
+    const showDatePicker = () => {
+      setDatePickerVisibility(true);
+    };
+  
+    const hideDatePicker = () => {
+      setDatePickerVisibility(false);
+    };
+  
+    const handleConfirm = (date:string) => {
+      console.warn("A date has been picked: ", date);
+      hideDatePicker();
+    };
+  
+    const navigation = useRouter();
+    let id = 0
+    let {id:id_} = useLocalSearchParams<{id?:string}>();
+    if(id_){
+      id = parseInt(id_)
+      }
+    
+  
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
   const [patient] = useAppSelector(state =>
@@ -129,7 +144,7 @@ export default function EditPatientScreen() {
       setIsSubmitting(false)
       dispatch(addSinglePatient(res.data.patient));
       setShowModal(true);
-      navigation.navigate("Patients");
+      navigation.navigate("../patients");
     } else {
       setIsSubmitting(false)
       let err = {
@@ -366,7 +381,7 @@ export default function EditPatientScreen() {
             animationType="slide"
             onRequestClose={() => setCalendarVisible(false)}>
             <View style={modalStyles.modalCntr}>
-              <DatePicker
+              {/* <DatePicker
                 style={{ borderRadius: 10 }}
                 current={getValues("date_of_birth")}
                 options={{
@@ -382,7 +397,7 @@ export default function EditPatientScreen() {
                   setCalendarVisible(false);
                 }}
                 mode="calendar"
-              />
+              /> */}
             </View>
           </Modal>
 

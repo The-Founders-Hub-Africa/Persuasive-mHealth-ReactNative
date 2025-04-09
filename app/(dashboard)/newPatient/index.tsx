@@ -11,7 +11,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedbackBase,
 } from "react-native";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { Picker } from "@react-native-picker/picker";
@@ -32,10 +31,11 @@ import {
   Patients,
 } from "@/integrations/axios_store";
 import { addPatientCount } from "@/integrations/features/user/usersSlice";
-import DatePicker from "react-native-modern-datepicker";
-// import DatePicker from "react-native-date-picker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+
 // import Alert_System from "@/src/integrations/features/alert/Alert";
 import Toast from "toastify-react-native";
+import { useRouter } from "expo-router";
 
 type FormData = {
   full_name: string;
@@ -59,7 +59,7 @@ export default function NewPatientScreen() {
   //   Toast.success("Promised is resolved");
   // }, []);
 
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter();
   const [calendarVisible, setCalendarVisible] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [fileDetails, setfileDetails] = useState({ type: "", filename: "" });
@@ -128,7 +128,7 @@ export default function NewPatientScreen() {
         dispatch(addSinglePatient(response.data.patient));
         dispatch(addPatientCount({ gender: response.data.patient.gender }));
         setShowModal(true);
-        navigation.navigate("Patients");
+        navigation.navigate("../patients");
       } else {
         dispatch(addAlert({ status: response.status, data: response.data }));
       }
@@ -439,7 +439,7 @@ export default function NewPatientScreen() {
                 contentContainerStyle={{ flexGrow: 1 }}
                 keyboardShouldPersistTaps="handled"
               > */}
-              <DatePicker
+              {/* <DatePicker
                 onSelectedChange={(date: string) => {
                   setValue("date_of_birth", date);
                   setCalendarVisible(false);
@@ -455,7 +455,7 @@ export default function NewPatientScreen() {
                   textSecondaryColor: theme.colors["neutral-500"],
                   borderColor: "rgba(122, 146, 165, 0.1)",
                 }}
-              />
+              /> */}
               {/* </ScrollView> */}
             </View>
             {/* </View> */}

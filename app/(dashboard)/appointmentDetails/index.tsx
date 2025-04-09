@@ -14,16 +14,18 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { Feather } from "@expo/vector-icons";
 import PatientProfileCard from "@/components/common/PatientProfileCard";
 import formStyles from "@/styles/formStyles";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { get_id } from "@/integrations/axios_store";
-import { useRoute } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
+import { useLocalSearchParams, useRouter } from "expo-router";
 const AppointmentDetailsScreen = () => {
-  const navigation = useNavigation<NavigationProp<any>>();
 
-  const route = useRoute();
-  let param = route.params;
-  let id = get_id(param);
+  const navigation = useRouter();
+  let id = 0
+  let {id:id_} = useLocalSearchParams<{id?:string}>();
+  if(id_){
+    id = parseInt(id_)
+  }
+
   const [appointment] = useAppSelector(state =>
     state.appointments.data.filter(data => data.id === id)
   );
@@ -148,14 +150,14 @@ const AppointmentDetailsScreen = () => {
             </TextInput>
           </View>
         </View>
-
+        
         <TouchableOpacity
           style={formStyles.submitButton}
           onPress={() =>
-            navigation.navigate("Edit Appointment", {
+            navigation.push({pathname:"../editAppointment", params:{
               id: appointment.id,
               name: appointment.patient_name,
-            })
+            }})
           }>
           <Text style={formStyles.submitText}>Edit appointment</Text>
         </TouchableOpacity>
@@ -186,7 +188,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors["purple-100"],
   },
   bottomItem: {
-    flexDirection: "row",
+    flexDirection: "row", 
     alignItems: "flex-start",
     gap: 16,
   },

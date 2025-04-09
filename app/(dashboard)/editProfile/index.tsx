@@ -9,7 +9,6 @@ import {
   Modal,
   Alert,
 } from "react-native";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import {
   Feather,
   FontAwesome,
@@ -21,7 +20,6 @@ import { Picker } from "@react-native-picker/picker";
 import { useForm, Controller } from "react-hook-form";
 import * as ImagePicker from "expo-image-picker";
 // import { launchImageLibrary } from "react-native-image-picker";
-import DatePicker from "react-native-modern-datepicker";
 import modalStyles from "@/styles/modalStyles";
 import theme, { calendarTheme } from "@/styles/theme";
 import globalStyles from "@/styles/global";
@@ -32,6 +30,9 @@ import { convertDate, convertDate2, UserProfile } from "@/integrations/axios_sto
 import { loginUser } from "@/integrations/features/user/usersSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { baseUrl } from "@/integrations/features/apis/apiSlice";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+
 
 type FormData = {
   full_name: string;
@@ -46,10 +47,34 @@ type FormData = {
 };
 
 export default function EditProfileScreen() {
-  const navigation = useNavigation<NavigationProp<any>>();
+
   const [calendarVisible, setCalendarVisible] = useState(false);
   const [imageDetails, setimageDetails] = useState({ type: "", filename: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date:string) => {
+    console.warn("A date has been picked: ", date);
+    hideDatePicker();
+  };
+
+  const navigation = useRouter();
+  // let id = 0
+  // let {id:id_} = useLocalSearchParams<{id?:string}>();
+  // if(id_){
+  //   id = parseInt(id_)
+  //   }
+  
+
 
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
@@ -113,7 +138,7 @@ export default function EditProfileScreen() {
         })
       );
        setIsSubmitting(false)
-      navigation.navigate("Home");
+      navigation.navigate("../home");
     } else {
       setIsSubmitting(false)
       let err = {
@@ -474,7 +499,7 @@ export default function EditProfileScreen() {
             animationType="slide"
             onRequestClose={() => setCalendarVisible(false)}>
             <View style={modalStyles.modalCntr}>
-              <DatePicker
+              {/* <DatePicker
                 style={{ borderRadius: 10 }}
                 current={getValues("date_of_birth")}
                 options={{
@@ -490,7 +515,7 @@ export default function EditProfileScreen() {
                   setCalendarVisible(false);
                 }}
                 mode="calendar"
-              />
+              /> */}
             </View>
           </Modal>
         </View>

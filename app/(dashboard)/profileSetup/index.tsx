@@ -16,12 +16,10 @@ import {
   MaterialIcons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
-import { NavigationProp } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import { useForm, Controller } from "react-hook-form";
 import * as ImagePicker from "expo-image-picker";
-import { launchImageLibrary } from "react-native-image-picker";
-import DatePicker from "react-native-modern-datepicker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import theme, { calendarTheme } from "@/styles/theme";
 import globalStyles from "@/styles/global";
 import typography from "@/styles/typography";
@@ -31,6 +29,7 @@ import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { convertDate, convertDate2, UserProfile } from "@/integrations/axios_store";
 import { loginUser } from "@/integrations/features/user/usersSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
+import { useRouter } from "expo-router";
 
 type FormData = {
   full_name: string;
@@ -44,17 +43,11 @@ type FormData = {
   work_experience: number;
 };
 
-export default function ProfileSetupScreen({
-  navigation,
-  route,
-}: {
-  navigation: NavigationProp<any>;
-  route: any;
-}) {
+export default function ProfileSetupScreen() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { email, phone_number } = route.params || {};
+  // const { email, phone_number } = route.params || {};
   const [calendarVisible, setCalendarVisible] = useState(false);
-
+  const navigation = useRouter()
   const [imageDetails, setimageDetails] = useState({ type: "", filename: "" });
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
@@ -84,10 +77,10 @@ export default function ProfileSetupScreen({
 
   
 
-  useEffect(() => {
-    if (email) setValue("email", email);
-    if (phone_number) setValue("phone_number", phone_number);
-  }, [email, phone_number, setValue]);
+  // useEffect(() => {
+  //   if (email) setValue("email", email);
+  //   if (phone_number) setValue("phone_number", phone_number);
+  // }, [email, phone_number, setValue]);
 
   // Request permission for image picker
   const requestPermission = async () => {
@@ -132,7 +125,7 @@ export default function ProfileSetupScreen({
       );
       // navigation.navigate("Home");
       // lets see if this works
-      navigation.navigate("Dashboard", { screen: "Home" });
+      navigation.navigate("../home");
     } else {
       setIsSubmitting(false)
       let err = {
@@ -447,7 +440,7 @@ export default function ProfileSetupScreen({
           animationType="slide"
           onRequestClose={() => setCalendarVisible(false)}>
           <View style={modalStyles.modalCntr}>
-            <DatePicker
+            {/* <DatePicker
               onSelectedChange={(date: string) => {
                 setValue("date_of_birth", date);
                 setCalendarVisible(false);
@@ -463,7 +456,7 @@ export default function ProfileSetupScreen({
                 textSecondaryColor: theme.colors["neutral-500"],
                 borderColor: "rgba(122, 146, 165, 0.1)",
               }}
-            />
+            /> */}
           </View>
         </Modal>
 
