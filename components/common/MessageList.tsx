@@ -3,7 +3,7 @@ import React from "react";
 import typography from "@/styles/typography";
 import theme from "@/styles/theme";
 import { MessageProps } from "@/types";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 
 
 const MessageList = ({ messagesData }: { messagesData: MessageProps[] }) => {
@@ -19,10 +19,10 @@ const MessageList = ({ messagesData }: { messagesData: MessageProps[] }) => {
 export default MessageList;
 
 const MessageCard = ({ message }: { message: MessageProps }) => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter()
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Message Details", { id: message.id,name:message.full_name })}
+      onPress={() => navigation.push({pathname:"../messageDetails", params: { id: message.id,name:message.full_name }})}
       style={{
       marginBottom: 24,
       }}>

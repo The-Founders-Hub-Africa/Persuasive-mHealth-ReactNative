@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { PatientProps } from "@/types";
 import typography from "@/styles/typography";
+import { useRouter } from "expo-router";
 
 const PatientList = ({
   patientsData,
@@ -41,34 +41,25 @@ export const PatientCard = ({
   patient: PatientProps;
   patientPage: boolean;
 }) => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter();
   const [menuVisible, setMenuVisible] = useState(false);
 
   const moveToEdit = () => {
-    patientPage
-      ? navigation.navigate("Edit Patient", {
+      navigation.push({pathname: "../editPatient", params: {
           id: patient.id,
           name: patient.full_name,
-        })
-      : navigation.navigate("Patients", {
-          screen: "Edit Patient",
-          params: { id: patient.id, name: patient.full_name },
-        });
+        }})
   };
 
   return (
     <TouchableOpacity
       onPress={() => {
-        patientPage
-          ? navigation.navigate("Patient Details", {
-              id: patient.id,
-              name: patient.full_name,
-            })
-          : navigation.navigate("Patients", {
-              screen: "Patient Details",
-              params: { id: patient.id, name: patient.full_name },
-            });
+        navigation.push({pathname: "../patientDetails", params: {
+          id: patient.id,
+          name: patient.full_name,
+        }})
       }}
+      
       style={{
         backgroundColor: theme.colors["purple-50"],
         flexDirection: "row",

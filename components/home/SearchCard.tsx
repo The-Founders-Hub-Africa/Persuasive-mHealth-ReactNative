@@ -2,12 +2,12 @@ import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import React from "react";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import typography from "@/styles/typography";
+import { useRouter } from "expo-router";
 
 const SearchCard = () => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter();
 
   return (
     <View
@@ -20,6 +20,7 @@ const SearchCard = () => {
         gap: 24,
         marginBottom: 18,
       }}>
+        
       <Text
         style={
           (typography.textXL_SemiBold,
@@ -33,7 +34,7 @@ const SearchCard = () => {
       <TouchableOpacity
         style={globalStyles.searchInputCntr}
         activeOpacity={0.7}
-        onPress={() => navigation.navigate("Search")}>
+        onPress={() => navigation.navigate("../search")}>
         <View
           style={[
             globalStyles.searchIconCntr,

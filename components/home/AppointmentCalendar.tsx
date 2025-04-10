@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { Calendar } from "react-native-calendars";
 import theme, { calendarTheme } from "@/styles/theme";
 import { Entypo, Feather } from "@expo/vector-icons";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import SectionHeader from "../common/SectionHeader";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { convertDate } from "@/integrations/axios_store";
+import { useRouter } from "expo-router";
 
 const AppointmentCalendar = () => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter();
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
   const appointment = useAppSelector(state => state.appointments.data);
@@ -40,7 +40,7 @@ const AppointmentCalendar = () => {
       }}>
       <SectionHeader
         title="Appointments"
-        onPress={() => navigation.navigate("Appointments")}
+        onPress={() => navigation.navigate("../appointments")}
       />
 
       <Calendar

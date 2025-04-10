@@ -3,12 +3,12 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import theme from "@/styles/theme";
 import typography from "@/styles/typography";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { useAppSelector } from "@/integrations/hooks";
 import { baseUrl } from "@/integrations/features/apis/apiSlice";
+import { useRouter } from "expo-router";
 
 const Greetings = () => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter();
   const user = useAppSelector(state => state.user);
 
   return (
@@ -45,7 +45,7 @@ const Greetings = () => {
           alignItems: "center",
           gap: 16,
         }}>
-        <Pressable onPress={() => navigation.navigate("Notifications")}>
+        <Pressable onPress={() => navigation.navigate("../notifications")}>
           <Ionicons
             name="notifications-outline"
             size={24}

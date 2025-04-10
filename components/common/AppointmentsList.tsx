@@ -1,6 +1,5 @@
 import React  from "react";
 import { AppointmentProps } from "@/types";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 // import Alert_System from "@/src/integrations/features/alert/Alert";
 import AppointmentCard from "./AppointmentCard";
 import { View } from "react-native";
@@ -13,7 +12,6 @@ const AppointmentsList = ({
   appointmentsData: AppointmentProps[];
   }) => {
   
-    const navigation = useNavigation<NavigationProp<any>>();
   return (
     <View
       style={{

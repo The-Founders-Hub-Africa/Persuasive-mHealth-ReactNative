@@ -7,10 +7,16 @@ import { useAppSelector } from "@/integrations/hooks";
 import { get_id } from "@/integrations/axios_store";
 import Tabs from "@/components/common/Tabs";
 import PersonalData from "@/components/patients/PersonalData";
+import { useLocalSearchParams } from "expo-router";
 const PatientDetailsScreen = () => {
-  const route = useRoute();
-  let param = route.params;
-  let id = get_id(param);
+
+    let id = 0
+    let patientName = ''
+      let {id:id_,name} = useLocalSearchParams<{id?:string,name?:string}>();
+      if(id_ && name){
+        id = parseInt(id_)
+        patientName = name
+        }
   const [patient] = useAppSelector(state =>
     state.patients.data.filter(data => data.id === id)
   );

@@ -12,15 +12,13 @@ import {
 import globalStyles from "@/styles/global";
 import theme from "@/styles/theme";
 import typography from "@/styles/typography";
-
-import { useRoute } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { useWhatsappRecordsMutation } from "@/integrations/features/apis/apiSlice";
 import { get_id, get_name } from "@/integrations/axios_store";
 import { addwhatsappMessage } from "@/integrations/features/whatsappMessages/whatsappMessageSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
-// import Alert_System from "@/src/integrations/features/alert/Alert";
-import { getMediaFiles } from "@/src/integrations/mediaFiles";
+// import Alert_System from "@/integrations/features/alert/Alert";
+import { getMediaFiles } from "@/integrations/mediaFiles";
 import VideoScreen from "./videoScreen";
 import AudioScreen from "./audioScreen";
 import {
@@ -28,11 +26,12 @@ import {
   PinchGestureHandler,
   State,
 } from "react-native-gesture-handler";
-import ImageViewer from "react-native-image-zoom-viewer";
+import { useLocalSearchParams } from "expo-router";
+// import ImageViewer from "react-native-image-zoom-viewer";
 
 const MessageDetailsScreen = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const route = useRoute();
+  
   const scale = new Animated.Value(1);
 
   // remember to uninstall expo-av expo-video-player react-native-sound-player react-native-video
@@ -41,9 +40,14 @@ const MessageDetailsScreen = () => {
   const [image, setImage] = useState<{ [key: number]: string }>({});
   const [video, setVideo] = useState<{ [key: number]: string }>({});
 
-  let param = route.params;
-  let id = get_id(param);
-  let patientName = get_name(param);
+  
+  let id = 0
+  let patientName = ''
+    let {id:id_,name} = useLocalSearchParams<{id?:string,name?:string}>();
+    if(id_ && name){
+      id = parseInt(id_)
+      patientName = name
+      }
 
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);

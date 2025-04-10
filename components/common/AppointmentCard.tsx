@@ -7,12 +7,12 @@ import typography from "@/styles/typography";
 import theme from "@/styles/theme";
 import { Feather } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { useAppointmentsMutation } from "@/integrations/features/apis/apiSlice";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { addSingleAppointment } from "@/integrations/features/appointment/appointmentsSlice";
 import { convertDate } from "@/integrations/axios_store";
+import { useRouter } from "expo-router";
 
 const AppointmentCard = ({
   appointment,
@@ -21,7 +21,7 @@ const AppointmentCard = ({
   appointment: AppointmentProps;
   appointmentPage: boolean;
 }) => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter();
   const [menuVisible, setMenuVisible] = useState(false);
   const isPassed = new Date(convertDate(appointment.date)) <= new Date();
   const isCompletedOrCancelled =
@@ -66,30 +66,34 @@ const AppointmentCard = ({
     });
   };
 
+  // const moveToEdit = () => {
+  //   appointmentPage
+  //     ? navigation.push({pathname: "../editAppointment", params: {
+  //         id: appointment.id,
+  //         name: appointment.patient_name,
+  //       }})
+  //     : navigation.push({pathname:"appointments", params: {
+  //         screen: "Edit Appointment",
+  //         params: { id: appointment.id, name: appointment.patient_name },
+  //       });
+  // };
+
   const moveToEdit = () => {
-    appointmentPage
-      ? navigation.navigate("Edit Appointment", {
+      navigation.push({pathname: "../editAppointment", params: {
           id: appointment.id,
           name: appointment.patient_name,
-        })
-      : navigation.navigate("Appointments", {
-          screen: "Edit Appointment",
-          params: { id: appointment.id, name: appointment.patient_name },
-        });
+        }})
+      
   };
+
 
   return (
     <TouchableOpacity
       onPress={() => {
-        appointmentPage
-          ? navigation.navigate("Appointment Details", {
+        navigation.push({pathname:"../appointmentDetails", params: {
               id: appointment.id,
               name: appointment.patient_name,
-            })
-          : navigation.navigate("Appointments", {
-              screen: "Appointment Details",
-              params: { id: appointment.id, name: appointment.patient_name },
-            });
+            }})
       }}
       style={{
         backgroundColor: theme.colors["purple-50"],

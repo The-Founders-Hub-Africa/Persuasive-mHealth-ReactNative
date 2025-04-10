@@ -45,7 +45,6 @@ type FormData = {
 
 export default function ProfileSetupScreen() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // const { email, phone_number } = route.params || {};
   const [calendarVisible, setCalendarVisible] = useState(false);
   const navigation = useRouter()
   const [imageDetails, setimageDetails] = useState({ type: "", filename: "" });

@@ -3,14 +3,14 @@ import React from "react";
 import SectionHeader from "../common/SectionHeader";
 import { AppointmentProps } from "@/types";
 import AppointmentsList from "../common/AppointmentsList";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 
 const RecentAppointments = ({
   appointmentsData,
 }: {
   appointmentsData: AppointmentProps[];
 }) => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useRouter();
   return (
     <View
       style={{
@@ -19,7 +19,7 @@ const RecentAppointments = ({
       }}>
       <SectionHeader
         title="Upcoming Appointments"
-        onPress={() => navigation.navigate("Appointments")}
+        onPress={() => navigation.navigate("../appointments")}
       />
 
       <AppointmentsList appointmentsData={appointmentsData.slice(0, 3)} />
