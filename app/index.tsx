@@ -43,16 +43,14 @@ export default function DecisionScreen() {
   }, [user, board]);
 
 
-  console.log('hello')
-
 
   return (
      
        <View style={styles.container}>
-      {/* <Image
+      <Image
         source={require("../assets/images/logo.png")}
         style={styles.logo}
-      /> */}
+      />
       </View>
                
   );
