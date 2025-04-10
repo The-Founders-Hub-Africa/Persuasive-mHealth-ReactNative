@@ -8,6 +8,7 @@ import {get_initial_appointments_data,addAppointments} from './features/appointm
 
 import {addPatients, get_initial_patients_data} from './features/patient/patientsSlice'
 
+
 const initializeStore = async (store) => {
   const user_data = await get_initial_user_data();
   store.dispatch(loginUser({ ...user_data, save: false }));
@@ -22,7 +23,7 @@ const initializeStore = async (store) => {
   store.dispatch(addAppointments({ data: appointments.data, save: false }))
 
   const board = await get_initial_board_data()
-  store.dispatch(loadData(board))
+  store.dispatch(loadData({...board}))
 };
 
 export default initializeStore;

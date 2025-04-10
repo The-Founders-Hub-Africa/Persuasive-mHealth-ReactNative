@@ -1,19 +1,9 @@
 import { Stack } from "expo-router";
 import React from "react";
-// import OnboardingScreen from "@/screens/OnboardingScreen";
-// import SignupScreen from "@/app/(auth)/SignupScreen";
-// import LoginScreen from "@/app/(auth)/LoginScreen";
-// import ResetPasswordScreen from "@/app/(auth)/ResetPasswordScreen";
-// import ForgotPasswordScreen from "@/app/(auth)/ForgotPasswordScreen";
-// import OTPVerificationScreen from "@/app/(auth)/OTPVerificationScreen";
-// import ProfileSetupScreen from "@/app/(dashboard)/ProfileSetupScreen";
-// import BottomTabs from "@/components/Navigation/BottomTabs";
 import { Provider } from "react-redux";
 import { store } from "@/integrations/store";
-// import AnalyticsScreen from "@/app/analytics";
 import ToastManager from "toastify-react-native";
 import Alert_System from "@/integrations/features/alert/Alert";
-// import DecisionScreen from "@/screens/decisionscreen";
 
 
 export default function RootLayout() {
@@ -34,7 +24,7 @@ export default function RootLayout() {
           />
 
           <Stack.Screen
-            name="onboarding"
+            name="onBoarding"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
@@ -42,7 +32,7 @@ export default function RootLayout() {
           />
 
           <Stack.Screen
-            name="signup"
+            name="signUp"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
@@ -63,7 +53,7 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
-            name="forgotpassword"
+            name="forgotPassword"
             options={{
               headerShadowVisible: false,
               headerTitle: "",
@@ -87,12 +77,6 @@ export default function RootLayout() {
             name="analytics"
             options={{
               headerShadowVisible: false,
-            }}
-          />
-          <Stack.Screen
-            name="dashboard"
-            options={{
-              headerShown: false,
             }}
           />
         </Stack>
