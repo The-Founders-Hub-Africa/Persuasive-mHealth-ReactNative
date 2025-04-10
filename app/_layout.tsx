@@ -21,6 +21,7 @@ export default function RootLayout() {
     <Provider store={store}>
         <ToastManager textStyle={{ fontSize: 16, width: "100%" }} />
 
+        <Stack>
           <Stack.Screen
             name="decision"
             options={{
@@ -37,7 +38,6 @@ export default function RootLayout() {
             }}
           />
 
-          
           <Stack.Screen
             name="signup"
             options={{
@@ -92,6 +92,7 @@ export default function RootLayout() {
               headerShown: false,
             }}
           />
+        </Stack>
         <Alert_System />
     </Provider>
   );

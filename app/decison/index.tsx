@@ -18,56 +18,29 @@ export default function DecisionScreen() {
    const board = useAppSelector(state => state.board);
 
    useEffect(() => {
+    const timeout = setTimeout(() => {
     if (user.logedin) {
       if (user.verified_number && user.full_name != 'Not Set') {
-        // navigation.navigate("Dashboard");
-        // navigation.reset({
-        //   index: 0,
-        //   routes: [{ name: "Dashboard" }],
-        // });
         navigation.replace("../home")
       } else if (user.full_name == 'Not Set') {
-        // navigation.navigate("Profile Setup");
-        // navigation.reset({
-        //   index: 0,
-        //   routes: [{ name: "Profile Setup" }],
-        // });
         navigation.replace("../profileSetup")
       }else {
-        // navigation.navigate("OTP Verification");
-        // navigation.reset({
-        //   index: 0,
-        //   routes: [{ name: "OTP Verification" }],
-        // });
         navigation.replace("../OTPVerification")
       }
     } else {
 
       if (board.navigate && board.boarded && board.registered) {
-        // navigation.navigate("Login");
-        //  navigation.reset({
-        //   index: 0,
-        //   routes: [{ name: "Login" }],
-        // });
         navigation.replace("../login")
       } else if (board.navigate && board.boarded) {
-        // navigation.navigate("Signup");
-        //  navigation.reset({
-        //   index: 0,
-        //   routes: [{ name: "Signup" }],
-        // });
         navigation.replace("../signUp")
       } else if(board.navigate && !board.boarded) {
-        // navigation.navigate("Onboarding");
-        //  navigation.reset({
-        //   index: 0,
-        //   routes: [{ name: "Onboarding" }],
-         
-        // });
         navigation.replace("../onBoarding")
       }
       
     }
+  }, 0); // Ensure navigation happens after the app is ready
+
+  return () => clearTimeout(timeout); // Cleanup timeout
     
   }, [user,board]);
 
