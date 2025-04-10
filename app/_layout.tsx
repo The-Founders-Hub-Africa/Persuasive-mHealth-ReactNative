@@ -21,7 +21,10 @@ export default function RootLayout() {
     <Provider store={store}>
         <ToastManager textStyle={{ fontSize: 16, width: "100%" }} />
 
-        <Stack>
+        <Stack
+         screenOptions={{
+          headerShown: false,
+        }}>
           <Stack.Screen
             name="decision"
             options={{

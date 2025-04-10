@@ -18,7 +18,8 @@ export default function DecisionScreen() {
    const board = useAppSelector(state => state.board);
 
    useEffect(() => {
-    const timeout = setTimeout(() => {
+    // const timeout = setTimeout(() => {
+      console.log('hello from index')
       if (user.logedin) {
         if (user.verified_number && user.full_name != 'Not Set') {
           navigation.replace("../home");
@@ -36,22 +37,22 @@ export default function DecisionScreen() {
           navigation.replace("../onBoarding");
         }
       }
-    }, 0); // Ensure navigation happens after the app is ready
+    // }, 0); // Ensure navigation happens after the app is ready
 
-    return () => clearTimeout(timeout); // Cleanup timeout
+    // return () => clearTimeout(timeout); // Cleanup timeout
   }, [user, board]);
 
 
-  
+  console.log('hello')
 
 
   return (
      
        <View style={styles.container}>
-      <Image
+      {/* <Image
         source={require("../assets/images/logo.png")}
         style={styles.logo}
-      />
+      /> */}
       </View>
                
   );
