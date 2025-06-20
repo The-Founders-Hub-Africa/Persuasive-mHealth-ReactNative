@@ -4,12 +4,12 @@ import styles from "@/styles/splashScreen";
 import { useRouter } from "expo-router";
 
 
-type RootStackParamList = {
-  SplashScreen: undefined;
-  DecisionScreen: undefined;
-  Onboarding: undefined;
-  Signup: undefined;
-};
+// type RootStackParamList = {
+//   SplashScreen: undefined;
+//   DecisionScreen: undefined;
+//   Onboarding: undefined;
+//   SignUp: undefined;
+// };
 
 export default function SplashScreen() {
   const navigation = useRouter();

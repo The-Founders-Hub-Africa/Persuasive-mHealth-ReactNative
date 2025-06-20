@@ -74,7 +74,11 @@ export default function ProfileSetupScreen() {
     },
   });
 
-  
+  useEffect(() => {
+    if (!user.logedin) {
+      navigation.replace('/login');
+    }
+  }, [user]);
 
   // useEffect(() => {
   //   if (email) setValue("email", email);

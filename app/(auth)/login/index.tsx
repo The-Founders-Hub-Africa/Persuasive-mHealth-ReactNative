@@ -48,7 +48,7 @@ const navigation = useRouter();
   useEffect(() => {
     if (user.logedin) {
       if (user.verified_number) {
-        navigation.navigate("../dashboard");
+        navigation.navigate("../home");
       } else {
         navigation.navigate("../OTPVerification");
       }

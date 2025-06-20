@@ -15,73 +15,13 @@ export default function RootLayout() {
          screenOptions={{
           headerShown: false,
         }}>
-          <Stack.Screen
-            name="decision"
-            options={{
-              headerShadowVisible: false,
-              headerTitle: "",
-            }}
-          />
-
-          <Stack.Screen
-            name="onBoarding"
-            options={{
-              headerShadowVisible: false,
-              headerTitle: "",
-            }}
-          />
-
-          <Stack.Screen
-            name="signUp"
-            options={{
-              headerShadowVisible: false,
-              headerTitle: "",
-            }}
-          />
-          <Stack.Screen
-            name="OTPVerification"
-            options={{
-              headerShadowVisible: false,
-              headerTitle: "",
-            }}
-          />
-          <Stack.Screen
-            name="login"
-            options={{
-              headerShadowVisible: false,
-              headerTitle: "",
-            }}
-          />
-          <Stack.Screen
-            name="forgotPassword"
-            options={{
-              headerShadowVisible: false,
-              headerTitle: "",
-            }}
-          />
-          <Stack.Screen
-            name="resetPassword"
-            options={{
-              headerShadowVisible: false,
-              headerTitle: "",
-            }}
-          />
-          <Stack.Screen
-            name="profileSetup"
-            options={{
-              headerShadowVisible: false,
-              headerTitle: "",
-            }}
-          />
-          <Stack.Screen
-            name="analytics"
-            options={{
-              headerShadowVisible: false,
-            }}
-          />
+          
+           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
         <Alert_System />
+       
     </Provider>
   );
 }
 
+// navigation.getId is not a function
