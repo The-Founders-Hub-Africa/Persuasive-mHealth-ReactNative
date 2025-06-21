@@ -1,18 +1,11 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Tabs, useRouter } from 'expo-router';
-import { Feather, Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from 'react-native';
-import theme from '@/styles/theme';
-import { useState } from 'react';
+import { Tabs } from 'expo-router';
+import { Ionicons } from "@expo/vector-icons";
 
 
 export default function TabLayout() {
 
-  const navigation = useRouter();
-   const [canSearch, setCanSearch] = useState(false);
-
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }} backBehavior='order'>
+    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue',headerShown:false }} backBehavior='order'>
       <Tabs.Screen name='(home)'
       options={{
           title: 'Home',
@@ -24,31 +17,13 @@ export default function TabLayout() {
        <Tabs.Screen name='patients'
           options={{
           title: 'Patients',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="people-outline" color={color} />,
-          headerRight: () => (
-            <TouchableOpacity onPress={()=>navigation.navigate("./patients/newPatient")}>
-              <Feather
-                name="plus"
-                size={24}
-                color={theme.colors["neutral-700"]}
-              />
-            </TouchableOpacity>
-          ),
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="people-outline" color={color} />
         }}
       />
 
        <Tabs.Screen name='appointments'
       options={{
           title: 'Appointments',
-          headerRight: () => (
-            <TouchableOpacity onPress={()=>navigation.navigate("./appointments/newAppointments")}>
-              <Feather
-                name="plus"
-                size={24}
-                color={theme.colors["neutral-700"]}
-              />
-            </TouchableOpacity>
-          ),
           tabBarIcon: ({ color }) => <Ionicons size={28} name="calendar-outline" color={color} />,
 
         }}
@@ -57,16 +32,6 @@ export default function TabLayout() {
        <Tabs.Screen name='messages'
       options={{
           title: 'Messages',
-            headerRight: () => (
-            <TouchableOpacity onPress={() => setCanSearch(prev => !prev)}>
-              {/* ⬆️ Toggle search input visibility */}
-              <Feather
-                name="search"
-                size={24}
-                color={theme.colors["neutral-700"]}
-              />
-            </TouchableOpacity>
-          ),
           tabBarIcon: ({ color }) => <Ionicons size={28} name="chatbubble-outline" color={color} />,
 
         }}

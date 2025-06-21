@@ -1,6 +1,27 @@
-import { Stack } from 'expo-router';
+import theme from '@/styles/theme';
+import { Feather } from '@expo/vector-icons';
+import { Stack, useRouter } from 'expo-router';
+import { TouchableOpacity } from 'react-native';
 
 export default function PatientsLayout() {
-    return  <Stack screenOptions={{ headerShown: false }} />
-    
-}
+      const navigation = useRouter();
+
+   return  (
+        <Stack screenOptions={{ headerShown: true }} >
+        <Stack.Screen name="index"  options={{ title: 'Patients',
+            headerRight:() => (
+            <TouchableOpacity onPress={()=>navigation.navigate("./patients/newPatient")}>
+              <Feather
+                name="plus"
+                size={24}
+                color={theme.colors["neutral-700"]}
+              />
+            </TouchableOpacity>
+          ),
+
+         }}/>
+        <Stack.Screen name="editPatient"  options={{ title: 'Edit Patient' }}/>
+        <Stack.Screen name="newPatient" options={{ title: 'New Patient' }} />
+        <Stack.Screen name="patientDetails" options={{ title: 'Patient Details' }} />
+        </Stack>
+    )}

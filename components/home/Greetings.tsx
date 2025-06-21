@@ -53,6 +53,7 @@ const Greetings = () => {
           />
         </Pressable>
 
+      <Pressable onPress={() => navigation.navigate("./viewProfile")}>
         <Image
           source={{ uri: `${baseUrl}${user.image}` }}
           style={{
@@ -62,6 +63,7 @@ const Greetings = () => {
             backgroundColor: theme.colors["purple-100"],
           }}
         />
+        </Pressable>
       </View>
     </View>
   );

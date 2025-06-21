@@ -84,7 +84,7 @@ const SettingsScreen = () => {
 
         {/* Top */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("./settings/viewProfile")}
+          onPress={() => navigation.navigate("./viewProfile")}
           style={{
             width: "100%",
           }}>

@@ -1,6 +1,27 @@
-import { Stack } from 'expo-router';
+import theme from '@/styles/theme';
+import { Feather } from '@expo/vector-icons';
+import { Stack, useRouter } from 'expo-router';
+import { TouchableOpacity } from 'react-native';
 
 export default function AppointmentsLayout() {
-    return  <Stack screenOptions={{ headerShown: false }} />
-    
-}
+      const navigation = useRouter();
+
+   return  (
+        <Stack screenOptions={{ headerShown: true }} >
+        <Stack.Screen name="index"  options={{ title: 'Appointments',
+            headerRight: () => (
+                <TouchableOpacity onPress={()=>navigation.navigate("./appointments/newAppointments")}>
+                  <Feather
+                    name="plus"
+                    size={24}
+                    color={theme.colors["neutral-700"]}
+                         />
+                    </TouchableOpacity>
+                     ),
+
+         }}/>
+        <Stack.Screen name="editAppointment"  options={{ title: 'Edit Appointment' }}/>
+        <Stack.Screen name="newAppointments" options={{ title: 'New Appointment' }} />
+        <Stack.Screen name="appointmentDetails" options={{ title: 'Appointment Details' }} />
+        </Stack>
+    )}
