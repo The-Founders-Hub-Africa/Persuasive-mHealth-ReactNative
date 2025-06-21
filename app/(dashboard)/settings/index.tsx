@@ -40,7 +40,7 @@ const SettingsScreen = () => {
   return (
     <ScrollView>
       <View style={[globalStyles.dashboardContainer, { gap: 24 }]}>
-        <View
+        {/* <View
           style={{
             width: "100%",
           }}>
@@ -80,7 +80,7 @@ const SettingsScreen = () => {
               <Text style={formStyles.submitText}>Cancel</Text>
             </TouchableOpacity>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         {/* Top */}
         <TouchableOpacity
@@ -111,7 +111,7 @@ const SettingsScreen = () => {
 
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("../editProfile")}>
+            onPress={() => navigation.navigate("./settings/editProfile")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <Ionicons
@@ -132,7 +132,7 @@ const SettingsScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("../security")}>
+            onPress={() => navigation.navigate("./settings/security")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <Feather
@@ -153,7 +153,7 @@ const SettingsScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("../notificationSettings")}>
+            onPress={() => navigation.navigate("./settings/notificationSettings")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <Feather

@@ -19,7 +19,7 @@ const Alert_System = () => {
         console.log(alert.status_code)
         if(alert.status_code === 401){
           dispatch(logoutUser())
-          navigation.replace('../app/login')
+          navigation.replace('/login')
         }
         // let type = alert.status_code === 200 ? 'success' : 'error'
         for (const message of alert.message) {

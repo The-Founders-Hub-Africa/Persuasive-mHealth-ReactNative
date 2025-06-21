@@ -1,29 +1,87 @@
-import { Stack } from 'expo-router';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Tabs, useRouter } from 'expo-router';
+import { Feather, Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from 'react-native';
+import theme from '@/styles/theme';
+import { useState } from 'react';
 
 
-const DashboardLayout = () => {
+export default function TabLayout() {
 
-  // This layout is used for the dashboard section of the app.
-  // It can be used to define common components or styles for all dashboard screens.
-  // Currently, it does not have any specific components or styles defined.
-  // You can add components like a header, footer, or sidebar here if needed.
-  // For now, it simply returns an empty Stack component with headerShown set to false.
-  // You can also add navigation options or other configurations to the Stack component if needed.
-  // This layout is used to wrap all dashboard-related screens.
+  const navigation = useRouter();
+   const [canSearch, setCanSearch] = useState(false);
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-    </Stack>
-    
+    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }} backBehavior='order'>
+      <Tabs.Screen name='home/index'
+      options={{
+          title: 'Home',
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="home-outline" color={color} />,
+
+        }}
+      />
+
+       <Tabs.Screen name='patients/index'
+          options={{
+          title: 'Patients',
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="people-outline" color={color} />,
+          headerRight: () => (
+            <TouchableOpacity onPress={()=>navigation.navigate("../newPatient")}>
+              <Feather
+                name="plus"
+                size={24}
+                color={theme.colors["neutral-700"]}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+
+       <Tabs.Screen name='appointments/index'
+      options={{
+          title: 'Appointments',
+          headerRight: () => (
+            <TouchableOpacity onPress={()=>navigation.navigate("../newAppointments")}>
+              <Feather
+                name="plus"
+                size={24}
+                color={theme.colors["neutral-700"]}
+              />
+            </TouchableOpacity>
+          ),
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="calendar-outline" color={color} />,
+
+        }}
+      />
+
+       <Tabs.Screen name='messages/index'
+      options={{
+          title: 'Messages',
+            headerRight: () => (
+            <TouchableOpacity onPress={() => setCanSearch(prev => !prev)}>
+              {/* ⬆️ Toggle search input visibility */}
+              <Feather
+                name="search"
+                size={24}
+                color={theme.colors["neutral-700"]}
+              />
+            </TouchableOpacity>
+          ),
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="chatbubble-outline" color={color} />,
+
+        }}
+      />
 
 
+       <Tabs.Screen name='settings'
+        options={{
+          title: 'Settings',
+          popToTopOnBlur:true,
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="settings-outline" color={color} />,
+
+        }}
+      /> 
+     
+    </Tabs>
   );
-};
-
-export default DashboardLayout;
-
-
+}

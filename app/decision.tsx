@@ -46,7 +46,7 @@ export default function DecisionScreen() {
   return (
        <View style={styles.container}>
       <Image
-        source={require("../../assets/images/whiteLogo.png")}
+        source={require("../assets/images/whiteLogo.png")}
         style={styles.logo}
       />
       </View>          

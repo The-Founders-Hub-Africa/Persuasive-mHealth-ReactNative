@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
-import typography from "../../styles/typography";
-import formStyles from "../../styles/formStyles";
+// import typography from "../styles/typography";
+import formStyles from "../styles/formStyles";
 import { useAppDispatch } from "@/integrations/hooks";
-import { boardUser } from "../../integrations/features/user/boarderUserSlice";
+import { boardUser } from "../integrations/features/user/boarderUserSlice";
 import { useRouter } from "expo-router";
+import typography from "@/styles/typography";
 
 const onboardingData = [
   {

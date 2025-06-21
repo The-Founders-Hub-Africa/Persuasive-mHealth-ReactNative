@@ -17,20 +17,18 @@ import formStyles from "@/styles/formStyles";
 import { useChangePasswordMutation } from "@/integrations/features/apis/apiSlice";
 import { useAppDispatch,useAppSelector } from "@/integrations/hooks";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
-import { clearOld } from "@/integrations/features/user/boarderUserSlice";
+import { addOld } from "@/integrations/features/user/boarderUserSlice";
+import { useRouter } from "expo-router";
 
 type FormData = {
   password: string;
-  confirmPassword: string;
 };
 
-const ResetPasswordScreen = () => {
-
+const OldPasswordScreen = () => {
+  const navigation = useRouter();
   const [changePassword, { isLoading }] = useChangePasswordMutation();
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
-  const old = useAppSelector(state => state.board.old);
-
   const {
     control,
     handleSubmit,
@@ -38,29 +36,28 @@ const ResetPasswordScreen = () => {
   } = useForm<FormData>({
     defaultValues: {
       password: "",
-      confirmPassword: "",
     },
   });
 
   const onSubmit = (dataForm: FormData) => {
-    let data_ = {
-      'action': 'change_password',
-      'old_password': old,
-      'new_password' : dataForm.password,
-      'token': user.usertoken
-    }
+    let data_ = { 'action': 'old_password', 'old_password': dataForm.password, 'token': user.usertoken }
+    
     changePassword(data_).then(data => {
-          if (data.error) {
-            dispatch(addAlert({ ...data.error, page: "reset password page" }));
-            
-              }
-      if (data.data) { 
-             dispatch(addAlert({ ...data.data, page: "reset password page", status:200 }));
-             dispatch(clearOld());
-            // navigation.navigate("Reset Password");
+      if (data.error) {
+        dispatch(addAlert({ ...data.error, page: "old password page" }));
+        
           }
-         
-        });
+      if (data.data) { 
+        dispatch(addOld(dataForm.password));
+        navigation.navigate("./resetPassword");
+      }
+     
+    });
+    
+    
+      // Found screens with the same name nested inside one another.Check:
+      // Dashboard > Home, Dashboard > Home > Home,
+        
     
   };
 
@@ -69,8 +66,7 @@ const ResetPasswordScreen = () => {
       <View style={[globalStyles.dashboardContainer, { gap: 24 }]}>
         <View style={styles.groupSection}>
           <Text style={styles.groupSectionTitle}>
-            To set a new password, pleases enter a new password you will like to
-            use.
+            To set a new password, pleases enter your current password first.
           </Text>
 
           {/* Password Input */}
@@ -86,27 +82,6 @@ const ResetPasswordScreen = () => {
                 control={control}
                 rules={{
                   required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: "Password must not exceed 20 characters",
-                  },
-                  pattern: {
-                    value:
-                      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/,
-                    message:
-                      "Password must contain at least one capital letter, one small letter, one number, and one of the following special characters: @$!%*?&",
-                  },
-                  validate: value => {
-                    const invalidChars = /[^A-Za-z\d@$!%*?&]/g; // Reject anything not in allowed set
-                    if (invalidChars.test(value)) {
-                      return "Password contains invalid special characters. Only @$!%*?& are allowed.";
-                    }
-                    return true;
-                  },
                 }}
                 render={({ field: { onChange, value } }) => (
                   <TextInput
@@ -124,46 +99,6 @@ const ResetPasswordScreen = () => {
             {errors.password && (
               <Text style={globalStyles.errorText}>
                 {errors.password?.message?.toString()}
-              </Text>
-            )}
-          </View>
-
-          {/* Confirm Password Input */}
-          <View style={formStyles.inputGroup}>
-            <Text style={formStyles.label}>Confirm password</Text>
-            <View style={formStyles.inputCntr}>
-              <MaterialIcons
-                name="lock"
-                size={20}
-                color={theme.colors["neutral-500"]}
-              />
-              <Controller
-                control={control}
-                rules={{
-                  required: "Confirm password is required",
-                  validate: (value, formValues) => {
-                    if (value !== formValues.password) {
-                      return "Passwords do not match";
-                    }
-                    return true;
-                  },
-                }}
-                render={({ field: { onChange, value } }) => (
-                  <TextInput
-                    style={formStyles.inputText}
-                    placeholder="********"
-                    placeholderTextColor={theme.colors["disabled-text"]}
-                    secureTextEntry
-                    value={value}
-                    onChangeText={onChange}
-                  />
-                )}
-                name="confirmPassword"
-              />
-            </View>
-            {errors.confirmPassword && (
-              <Text style={globalStyles.errorText}>
-                {errors.confirmPassword?.message?.toString()}
               </Text>
             )}
           </View>
@@ -186,7 +121,7 @@ const ResetPasswordScreen = () => {
                   ? theme.colors["disabled-text"]
                   : theme.colors.white,
               }}>
-              Save password
+              Change password
             </Text>
           </TouchableOpacity>
         </View>
@@ -195,7 +130,7 @@ const ResetPasswordScreen = () => {
   );
 };
 
-export default ResetPasswordScreen;
+export default OldPasswordScreen;
 
 const styles = StyleSheet.create({
   profileContainer: {
@@ -268,3 +203,5 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
 });
+
+
