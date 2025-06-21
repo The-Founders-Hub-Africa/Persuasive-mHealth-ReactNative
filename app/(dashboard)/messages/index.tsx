@@ -8,12 +8,11 @@ import { usePatientMutation } from "@/integrations/features/apis/apiSlice";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { addPatientAndMessage } from "@/integrations/features/patient/patientAndMessageSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
-import { useFocusEffect } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 // import Alert_System from "@/src/integrations/features/alert/Alert";
 
 const MessagesScreen = ({ canSearch }: { canSearch: boolean }) => {
-  const [search, setSearch] = useState("");
-  
+  const [search, setSearch] = useState("");  
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
   const patientAndMessages = useAppSelector(state => state.patientandmessage);
@@ -38,6 +37,30 @@ const MessagesScreen = ({ canSearch }: { canSearch: boolean }) => {
   //   }
 
   // }, [patients,error])
+
+      const navigation  = useRouter()
+      const [loading, setLoading] = useState(true);
+    
+      useEffect(() => {
+    
+        if(user){
+          setLoading(false);
+        }
+    
+        if(!user.logedin && !loading){
+            console.log('user not logged in reporting from home screen')
+            navigation.replace("/login");
+          }
+    
+          if(user.logedin && user.full_name == 'Not Set' && !loading){
+            navigation.replace("/profileSetup");
+          }
+          if(user.logedin && !user.verified_number && !loading){
+            navigation.replace("/OTPVerification");
+          }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [user,loading])
+      
   
   useFocusEffect(
     React.useCallback(() => {

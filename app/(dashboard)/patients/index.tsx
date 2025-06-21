@@ -11,6 +11,7 @@ import { addPatients } from "@/integrations/features/patient/patientsSlice";
 import { usePatientMutation } from "@/integrations/features/apis/apiSlice";
 import { search_name } from "@/integrations/axios_store";
 import PatientList from "@/components/common/PatientList";
+import { useRouter } from "expo-router";
 
 const PatientsScreen = () => {
   const [search, setSearch] = useState("");
@@ -20,6 +21,29 @@ const PatientsScreen = () => {
   const patients = useAppSelector((state) => state.patients.data);
 
   const [state, setState] = useState(patients);
+
+      const navigation  = useRouter()
+      const [loading, setLoading] = useState(true);
+    
+      useEffect(() => {
+    
+        if(user){
+          setLoading(false);
+        }
+    
+        if(!user.logedin && !loading){
+            console.log('user not logged in reporting from home screen')
+            navigation.replace("/login");
+          }
+    
+          if(user.logedin && user.full_name == 'Not Set' && !loading){
+            navigation.replace("/profileSetup");
+          }
+          if(user.logedin && !user.verified_number && !loading){
+            navigation.replace("/OTPVerification");
+          }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [user,loading])
 
   useEffect(() => {
     if (search) {

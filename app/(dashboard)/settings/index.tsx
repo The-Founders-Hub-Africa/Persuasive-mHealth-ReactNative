@@ -8,7 +8,7 @@ import {
   TextInput,
   Linking,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import globalStyles from "@/styles/global";
 import theme from "@/styles/theme";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
@@ -36,6 +36,29 @@ const SettingsScreen = () => {
     dispatch(logoutUser());
     navigation.navigate("../login");
   };
+
+  
+      const [loading, setLoading] = useState(true);
+    
+      useEffect(() => {
+    
+        if(user){
+          setLoading(false);
+        }
+    
+        if(!user.logedin && !loading){
+            console.log('user not logged in reporting from home screen')
+            navigation.replace("/login");
+          }
+    
+          if(user.logedin && user.full_name == 'Not Set' && !loading){
+            navigation.replace("/profileSetup");
+          }
+          if(user.logedin && !user.verified_number && !loading){
+            navigation.replace("/OTPVerification");
+          }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [user,loading])
 
   return (
     <ScrollView>

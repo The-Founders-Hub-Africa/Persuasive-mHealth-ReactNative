@@ -1,5 +1,5 @@
 import { ScrollView, View } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import globalStyles from "@/styles/global";
 import Greetings from "@/components/home/Greetings";
 import SearchCard from "@/components/home/SearchCard";
@@ -14,24 +14,51 @@ import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { addPatients } from '@/integrations/features/patient/patientsSlice'
 import { addAppointments } from "@/integrations/features/appointment/appointmentsSlice";
+import { useRouter } from "expo-router";
 
 
 
 const HomeScreen = () => {
 
   const dispatch = useAppDispatch();
+  const navigation = useRouter();
    const user = useAppSelector(state => state.user);
   const patients = useAppSelector(state => state.patients.data);
   const appointment = useAppSelector(state => state.appointments.data);
   const [patientsApi, { isLoading }] = usePatientMutation();
   const [appointmentApi, { isLoading:isloading }] = useAppointmentsMutation();
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+
+    if(user){
+      setLoading(false);
+    }
+
+    if(!user.logedin && !loading){
+        console.log('user not logged in reporting from home screen')
+        navigation.replace("/login");
+      }
+
+      if(user.logedin && user.full_name == 'Not Set' && !loading){
+        navigation.replace("/profileSetup");
+      }
+      if(user.logedin && !user.verified_number && !loading){
+        navigation.replace("/OTPVerification");
+      }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user,loading])
+
     useEffect(() => {
+
       if(user.logedin){
         let data = {
           data: { action: 'get_all', data:{} },
           token: user.usertoken
         }
+
+
       patientsApi(data).then(data => {
         if (data.error) {
           dispatch(addAlert({ ...data.error, page: "home_screen" }))

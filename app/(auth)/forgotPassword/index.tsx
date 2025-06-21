@@ -50,7 +50,7 @@ export default function ForgotPasswordScreen() {
   };
 
   const handleOpenEmailApp = () => {
-    navigation.navigate("../resetPassword");
+    navigation.navigate("./resetPassword");
   };
 
   return (

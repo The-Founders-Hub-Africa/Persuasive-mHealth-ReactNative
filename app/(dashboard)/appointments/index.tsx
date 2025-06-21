@@ -11,6 +11,7 @@ import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { addAppointments } from "@/integrations/features/appointment/appointmentsSlice";
 import AppointmentCard from "@/components/common/AppointmentCard";
 import { convertDate, search_name } from "@/integrations/axios_store";
+import { useRouter } from "expo-router";
 // import { getPatientById } from "@/src/integrations/features/patient/patientsSlice";
 
 const AppointmentsScreen = () => {
@@ -23,6 +24,29 @@ const AppointmentsScreen = () => {
   const [appointmentApi, { isLoading }] = useAppointmentsMutation();
 
   // const getPatientById = (patientsData:AppointmentProps, id:number) => patientsData.filter(patient:AppointmentProps => patient.id === id);
+
+    const navigation  = useRouter()
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+  
+      if(user){
+        setLoading(false);
+      }
+  
+      if(!user.logedin && !loading){
+          console.log('user not logged in reporting from home screen')
+          navigation.replace("/login");
+        }
+  
+        if(user.logedin && user.full_name == 'Not Set' && !loading){
+          navigation.replace("/profileSetup");
+        }
+        if(user.logedin && !user.verified_number && !loading){
+          navigation.replace("/OTPVerification");
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user,loading])
 
   useEffect(() => {
     let data = {

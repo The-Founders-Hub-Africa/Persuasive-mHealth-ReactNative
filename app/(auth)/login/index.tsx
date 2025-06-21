@@ -90,14 +90,16 @@ const navigation = useRouter();
           save: true,
         })
       );
-      // setuserlogged(true)
+      
+
       if (res.data.user.full_name == 'Not Set') {
-        console.log('profile not set')
-        navigation.navigate("../profileSetup");
+        console.log('profile not set reporting from login page' )
+        navigation.push("./profileSetup");
       } else {
         navigation.navigate("./home");
       }
       
+
     } else if (res.error) {
       dispatch(addAlert({ ...res.error, page: "login" }));
     }
@@ -203,7 +205,7 @@ const navigation = useRouter();
 
         {/* Forgot password */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("../forgetPassword")}
+          onPress={() => navigation.navigate("../forgotPassword")}
           style={{ alignSelf: "flex-end" }}>
           <Text style={{ color: theme.colors["purple-700"], fontSize: 14 }}>
             Forgot password?
