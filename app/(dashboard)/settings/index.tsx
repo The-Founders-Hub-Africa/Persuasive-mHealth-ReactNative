@@ -84,7 +84,7 @@ const SettingsScreen = () => {
 
         {/* Top */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("../viewProfile")}
+          onPress={() => navigation.navigate("./settings/viewProfile")}
           style={{
             width: "100%",
           }}>
@@ -180,7 +180,7 @@ const SettingsScreen = () => {
 
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("../privacyPolicy")}>
+            onPress={() => navigation.navigate("./settings/privacyPolicy")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <Ionicons
@@ -201,7 +201,7 @@ const SettingsScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("../support")}>
+            onPress={() => navigation.navigate("./settings/support")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <FontAwesome
@@ -222,7 +222,7 @@ const SettingsScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("../terms")}>
+            onPress={() => navigation.navigate("./settings/terms")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <FontAwesome
@@ -249,7 +249,7 @@ const SettingsScreen = () => {
 
           <TouchableOpacity
             style={styles.groupSectionLink}
-            onPress={() => navigation.navigate("../FAQ")}>
+            onPress={() => navigation.navigate("./settings/faq")}>
             <View style={styles.groupSectionLeft}>
               <View>
                 <MaterialCommunityIcons

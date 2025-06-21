@@ -13,7 +13,7 @@ export default function TabLayout() {
 
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }} backBehavior='order'>
-      <Tabs.Screen name='home/index'
+      <Tabs.Screen name='(home)'
       options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="home-outline" color={color} />,
@@ -21,12 +21,12 @@ export default function TabLayout() {
         }}
       />
 
-       <Tabs.Screen name='patients/index'
+       <Tabs.Screen name='patients'
           options={{
           title: 'Patients',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="people-outline" color={color} />,
           headerRight: () => (
-            <TouchableOpacity onPress={()=>navigation.navigate("../newPatient")}>
+            <TouchableOpacity onPress={()=>navigation.navigate("./patients/newPatient")}>
               <Feather
                 name="plus"
                 size={24}
@@ -37,11 +37,11 @@ export default function TabLayout() {
         }}
       />
 
-       <Tabs.Screen name='appointments/index'
+       <Tabs.Screen name='appointments'
       options={{
           title: 'Appointments',
           headerRight: () => (
-            <TouchableOpacity onPress={()=>navigation.navigate("../newAppointments")}>
+            <TouchableOpacity onPress={()=>navigation.navigate("./appointments/newAppointments")}>
               <Feather
                 name="plus"
                 size={24}
@@ -54,7 +54,7 @@ export default function TabLayout() {
         }}
       />
 
-       <Tabs.Screen name='messages/index'
+       <Tabs.Screen name='messages'
       options={{
           title: 'Messages',
             headerRight: () => (
