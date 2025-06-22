@@ -19,7 +19,6 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { useForm, Controller } from "react-hook-form";
 import * as ImagePicker from "expo-image-picker";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import theme, { calendarTheme } from "@/styles/theme";
 import globalStyles from "@/styles/global";
 import typography from "@/styles/typography";
