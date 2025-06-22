@@ -31,7 +31,6 @@ import { loginUser } from "@/integrations/features/user/usersSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { baseUrl } from "@/integrations/features/apis/apiSlice";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 
 type FormData = {
