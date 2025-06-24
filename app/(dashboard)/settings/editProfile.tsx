@@ -26,7 +26,7 @@ import globalStyles from "@/styles/global";
 import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
-import { convertDate, convertDate2, UserProfile } from "@/integrations/axios_store";
+import { convertDate, UserProfile } from "@/integrations/axios_store";
 import { loginUser } from "@/integrations/features/user/usersSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { baseUrl } from "@/integrations/features/apis/apiSlice";
@@ -119,10 +119,7 @@ const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     let data_ = {
       token: user.usertoken,
       data: {
-        formdata: {
-                    ...data,
-                    date_of_birth: convertDate2(data.date_of_birth),
-                  },
+        formdata: data,
         img: imageDetails,
       },
     };

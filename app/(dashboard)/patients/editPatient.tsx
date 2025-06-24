@@ -11,12 +11,11 @@ import {
   StyleSheet,
 } from "react-native";
 import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { Picker } from "@react-native-picker/picker";
 import { useForm, Controller } from "react-hook-form";
 import * as ImagePicker from "expo-image-picker";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import modalStyles from "@/styles/modalStyles";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
@@ -24,7 +23,7 @@ import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import ModalPopup from "@/components/common/ModalPopup";
-import { convertDate, convertDate2, get_id, Patients } from "@/integrations/axios_store";
+import { convertDate, Patients } from "@/integrations/axios_store";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { addSinglePatient } from "@/integrations/features/patient/patientsSlice";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -122,7 +121,6 @@ export default function EditPatientScreen() {
     setIsSubmitting(true)
     let newData = {
       ...data,
-      date_of_birth: convertDate2(data.date_of_birth),
       medical_practitioner: user.id,
       identifier: "",
       id: patient?.id,
@@ -374,32 +372,24 @@ export default function EditPatientScreen() {
             </TouchableOpacity>
           </View>
 
-          {/* Calendar Modal */}
-          <Modal
-            visible={calendarVisible}
-            transparent={true}
-            animationType="slide"
-            onRequestClose={() => setCalendarVisible(false)}>
-            <View style={modalStyles.modalCntr}>
-              {/* <DatePicker
-                style={{ borderRadius: 10 }}
-                current={getValues("date_of_birth")}
-                options={{
-                  textHeaderColor: theme.colors["purple-700"],
-                  textDefaultColor: theme.colors["neutral-700"],
-                  selectedTextColor: "#fff",
-                  mainColor: theme.colors["purple-700"],
-                  textSecondaryColor: theme.colors["neutral-500"],
-                  borderColor: "rgba(122, 146, 165, 0.1)",
-                }}
-                onSelectedChange={(date: string) => {
-                  setValue("date_of_birth", date);
-                  setCalendarVisible(false);
-                }}
-                mode="calendar"
-              /> */}
-            </View>
-          </Modal>
+         {/* Date Picker Modal */}
+          {calendarVisible && (
+             <View>
+          <DateTimePicker
+            value={new Date(getValues("date_of_birth"))}
+            mode="date"
+            display="default"
+            onChange={(event, date) => {
+              setCalendarVisible(false);
+              if (date) {
+                setValue("date_of_birth", date.toISOString().split("T")[0]); // Format date to YYYY-MM-DD 
+              }
+            }}
+          />
+        </View>
+          )}
+          
+
 
           {/* Genotype */}
           <View style={formStyles.inputGroup}>

@@ -20,9 +20,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import ModalPopup from "@/components/common/ModalPopup";
 import {
   Appointments,
-  get_id,
-  convertDate,
-  convertDate2,
+  convertDate
 } from "@/integrations/axios_store";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import * as ImagePicker from "expo-image-picker";
@@ -115,7 +113,6 @@ const EditAppointmentScreen = () => {
       ...data,
       patient: appointment.patient,
       medical_practitioner: user.id,
-      date: convertDate2(data.date),
       status:'pending',
       id: appointment.id,
     };

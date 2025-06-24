@@ -105,10 +105,7 @@ export default function ProfileSetupScreen() {
     setIsSubmitting(true);
     const data_ = {token: user.usertoken,
       data: {
-        formdata: {
-          ...data,
-          date_of_birth: data.date_of_birth,
-        },
+        formdata: data,
         img: imageDetails,
       },
     };

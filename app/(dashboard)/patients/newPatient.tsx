@@ -16,7 +16,7 @@ import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { Picker } from "@react-native-picker/picker";
 import { useForm, Controller } from "react-hook-form";
 import * as ImagePicker from "expo-image-picker";
-import modalStyles from "@/styles/modalStyles";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
 import typography from "@/styles/typography";
@@ -26,15 +26,11 @@ import ModalPopup from "@/components/common/ModalPopup";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { addSinglePatient } from "@/integrations/features/patient/patientsSlice";
 import {
-  convertDate,
-  convertDate2,
   Patients,
 } from "@/integrations/axios_store";
 import { addPatientCount } from "@/integrations/features/user/usersSlice";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 // import Alert_System from "@/src/integrations/features/alert/Alert";
-import Toast from "toastify-react-native";
 import { useRouter } from "expo-router";
 
 type FormData = {
@@ -116,10 +112,7 @@ export default function NewPatientScreen() {
       let response = await Patients({
         token: user.usertoken,
         data: {
-          formdata: {
-            ...data,
-            date_of_birth: convertDate2(data.date_of_birth),
-          },
+          formdata: data,
           img: fileDetails,
         },
       });
@@ -423,70 +416,22 @@ export default function NewPatientScreen() {
             </TouchableOpacity>
           </View>
 
-          {/* Calendar Modal */}
-          <Modal
-            visible={calendarVisible}
-            transparent={true}
-            animationType="slide"
-            onRequestClose={() => setCalendarVisible(false)}
-          >
-            {/* <TouchableWithoutFeedbackBase
-              onPress={() => setCalendarVisible(false)}
-            > */}
-            {/* <View style={modalStyles.modalBackdrop}> */}
-            <View style={modalStyles.modalCntr}>
-              {/* <ScrollView
-                contentContainerStyle={{ flexGrow: 1 }}
-                keyboardShouldPersistTaps="handled"
-              > */}
-              {/* <DatePicker
-                onSelectedChange={(date: string) => {
-                  setValue("date_of_birth", date);
-                  setCalendarVisible(false);
-                }}
-                current={getValues("date_of_birth")}
-                mode="calendar"
-                style={{ height: 400, borderRadius: 10 }}
-                options={{
-                  textHeaderColor: theme.colors["purple-700"],
-                  textDefaultColor: theme.colors["neutral-700"],
-                  selectedTextColor: "#fff",
-                  mainColor: theme.colors["purple-700"],
-                  textSecondaryColor: theme.colors["neutral-500"],
-                  borderColor: "rgba(122, 146, 165, 0.1)",
-                }}
-              /> */}
-              {/* </ScrollView> */}
-            </View>
-            {/* </View> */}
-            {/* </TouchableWithoutFeedbackBase> */}
-          </Modal>
-
-          {/*<Modal
-            visible={calendarVisible}
-            transparent={true}
-            animationType="slide"
-            onRequestClose={() => setCalendarVisible(false)}
-          >
-            <View style={modalStyles.modalCntr}>
-              <DatePicker
-                date={date}
-                mode="date"
-                onDateChange={(selectedDate) => setDate(selectedDate)}
-              />
-              <TouchableOpacity
-                onPress={() => {
-                  const formattedDate = date.toISOString().split("T")[0];
-                  setValue("date_of_birth", formattedDate, {
-                    shouldValidate: true,
-                  });
-                  setCalendarVisible(false);
-                }}
-              >
-                <Text style={{ color: "white", marginTop: 10 }}>Confirm</Text>
-              </TouchableOpacity>
-            </View>
-          </Modal>*/}
+        {/* Date Picker Modal */}
+          {calendarVisible && (
+             <View>
+          <DateTimePicker
+            value={new Date(getValues("date_of_birth"))}
+            mode="date"
+            display="default"
+            onChange={(event, date) => {
+              setCalendarVisible(false);
+              if (date) {
+                setValue("date_of_birth", date.toISOString().split("T")[0]); // Format date to YYYY-MM-DD 
+              }
+            }}
+          />
+        </View>
+          )}
 
           {/* Genotype */}
           <View style={formStyles.inputGroup}>

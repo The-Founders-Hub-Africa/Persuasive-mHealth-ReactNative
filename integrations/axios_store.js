@@ -36,24 +36,6 @@ export const convertDate = (dateStr) => {
   return `${year}-${months[month]}-${day.padStart(2, "0")}`;
 };
 
-export const convertDate2 = (dateStr) => {
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const [year, month, day] = dateStr.split("/");
-  return `${year}-${month}-${day.padStart(2, "0")}`;
-};
 
 export const getPatientAgeGroups = (patients) => {
   const calculateAge = (dateOfBirth) => {
