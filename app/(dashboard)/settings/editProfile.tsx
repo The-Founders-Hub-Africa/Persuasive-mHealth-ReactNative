@@ -499,13 +499,13 @@ const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
             onChange={(event, date) => {
               setCalendarVisible(false);
               if (date) {
-                setValue("date_of_birth", date.toISOString().split("T")[0]); // Format date to YYYY-MM-DD 
+                setValue("date_of_birth", date.toISOString().split("T")[0]);
               }
             }}
           />
         </View>
           )}
-          
+        </View>
 
         {/* Continue Button */}
         <TouchableOpacity
