@@ -51,8 +51,6 @@ export const convertDate2 = (dateStr) => {
     "Nov",
     "Dec",
   ];
-
-  console.log("date string", dateStr);
   const [year, month, day] = dateStr.split("/");
   return `${year}-${month}-${day.padStart(2, "0")}`;
 };
@@ -109,7 +107,6 @@ const base64ToBlob = (base64, type) => {
 
 const createForm = (data, blob_name) => {
   let needed = data.data;
-
   let formdata = new FormData();
 
   for (const [key, value] of Object.entries(needed.formdata)) {
@@ -132,6 +129,7 @@ const createForm = (data, blob_name) => {
 
 export const UserProfile = async (data) => {
   let formdata = createForm(data, "image");
+  console.log("formdata", formdata);
   return axios
     .post(user_url, formdata, {
       headers: {

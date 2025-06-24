@@ -18,6 +18,7 @@ import {
 } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import { useForm, Controller } from "react-hook-form";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import * as ImagePicker from "expo-image-picker";
 import theme, { calendarTheme } from "@/styles/theme";
 import globalStyles from "@/styles/global";
@@ -25,7 +26,7 @@ import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
 import modalStyles from "@/styles/modalStyles";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
-import { convertDate, convertDate2, UserProfile } from "@/integrations/axios_store";
+import { convertDate, UserProfile } from "@/integrations/axios_store";
 import { loginUser } from "@/integrations/features/user/usersSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { useRouter } from "expo-router";
@@ -101,22 +102,20 @@ export default function ProfileSetupScreen() {
   // };
 
   const handleContinue = async (data: FormData) => {
-    setIsSubmitting(true)
-    let data_ = {
-      token: user.usertoken,
+    setIsSubmitting(true);
+    const data_ = {token: user.usertoken,
       data: {
         formdata: {
-                    ...data,
-                    date_of_birth: convertDate2(data.date_of_birth),
-                  },
+          ...data,
+          date_of_birth: data.date_of_birth,
+        },
         img: imageDetails,
       },
     };
 
-    // console.log(data_)
     let res = await UserProfile(data_);
     if (res.success) {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
       dispatch(
         loginUser({
           ...res.data.user,
@@ -435,33 +434,23 @@ export default function ProfileSetupScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Calendar Modal */}
-        <Modal
-          visible={calendarVisible}
-          transparent={true}
-          animationType="slide"
-          onRequestClose={() => setCalendarVisible(false)}>
-          <View style={modalStyles.modalCntr}>
-            {/* <DatePicker
-              onSelectedChange={(date: string) => {
-                setValue("date_of_birth", date);
-                setCalendarVisible(false);
-              }}
-              current={getValues("date_of_birth")}
-              mode="calendar"
-              style={{ borderRadius: 10 }}
-              options={{
-                textHeaderColor: theme.colors["purple-700"],
-                textDefaultColor: theme.colors["neutral-700"],
-                selectedTextColor: "#fff",
-                mainColor: theme.colors["purple-700"],
-                textSecondaryColor: theme.colors["neutral-500"],
-                borderColor: "rgba(122, 146, 165, 0.1)",
-              }}
-            /> */}
-          </View>
-        </Modal>
-
+        {/* Date Picker Modal */}
+          {calendarVisible && (
+             <View>
+          <DateTimePicker
+            value={new Date(getValues("date_of_birth"))}
+            mode="date"
+            display="default"
+            onChange={(event, date) => {
+              setCalendarVisible(false);
+              if (date) {
+                setValue("date_of_birth", date.toISOString().split("T")[0]); // Format date to YYYY-MM-DD 
+              }
+            }}
+          />
+        </View>
+          )}
+          
         {/* Continue Button */}
         <TouchableOpacity
           onPress={handleSubmit(handleContinue)}

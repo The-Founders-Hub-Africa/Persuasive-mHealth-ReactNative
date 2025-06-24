@@ -14,11 +14,9 @@ import formStyles from "@/styles/formStyles";
 import { Controller, useForm } from "react-hook-form";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import theme from "@/styles/theme";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import modalStyles from "@/styles/modalStyles";
 import { Picker } from "@react-native-picker/picker";
-import typography from "@/styles/typography";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import ModalPopup from "@/components/common/ModalPopup";
 import {
   Appointments,
@@ -367,32 +365,22 @@ const EditAppointmentScreen = () => {
           )}
         </View>
 
-        {/* Calendar Modal */}
-        <Modal
-          visible={calendarVisible}
-          transparent
-          animationType="slide"
-          onRequestClose={() => setCalendarVisible(false)}>
-          <View style={modalStyles.modalCntr}>
-            {/* <DatePicker
-              style={{ borderRadius: 10 }}
-              current={getValues("date")}
-              options={{
-                textHeaderColor: theme.colors["purple-700"],
-                textDefaultColor: theme.colors["neutral-700"],
-                selectedTextColor: "#fff",
-                mainColor: theme.colors["purple-700"],
-                textSecondaryColor: theme.colors["neutral-500"],
-                borderColor: "rgba(122, 146, 165, 0.1)",
-              }}
-              onSelectedChange={(date: string) => {
-                setValue("date", date);
-                setCalendarVisible(false);
-              }}
-              mode="calendar"
-            /> */}
-          </View>
-        </Modal>
+         {/* Date Picker Modal */}
+          {calendarVisible && (
+             <View>
+          <DateTimePicker
+            value={new Date(getValues("date"))}
+            mode="date"
+            display="default"
+            onChange={(event, date) => {
+              setCalendarVisible(false);
+              if (date) {
+                setValue("date", date.toISOString().split("T")[0]); // Format date to YYYY-MM-DD 
+              }
+            }}
+          />
+        </View>
+          )}
 
         {/* Time Picker */}
         <View style={formStyles.inputGroup}>
@@ -422,32 +410,25 @@ const EditAppointmentScreen = () => {
           )}
         </View>
 
-        {/* Time Modal */}
-        <Modal
-          visible={showPicker}
-          transparent
-          animationType="slide"
-          onRequestClose={() => setShowPicker(false)}>
-          <View style={modalStyles.modalCntr}>
-            {/* <DatePicker
-              mode="time"
-              minuteInterval={5}
-              options={{
-                textHeaderColor: theme.colors["purple-700"],
-                textDefaultColor: theme.colors["neutral-700"],
-                selectedTextColor: "#fff",
-                mainColor: theme.colors["purple-700"],
-                textSecondaryColor: theme.colors["neutral-500"],
-                borderColor: "rgba(122, 146, 165, 0.1)",
-              }}
-              onTimeChange={time => {
-                setValue("time", time);
-                setShowPicker(false);
-              }}
-              style={{ borderRadius: 10 }}
-            /> */}
-          </View>
-        </Modal>
+          {/* Time Picker Modal */}
+          {showPicker && (
+             <View>
+          <DateTimePicker
+            value={new Date(getValues("time"))}
+            mode="time"
+            display="default"
+            onChange={(event, time) => {
+              setShowPicker(false);
+              if (time) {
+                // Format time to "HH:mm"
+                const formattedTime = `${time.getHours().toString().padStart(2, "0")}:${time.getMinutes().toString().padStart(2, "0")}`;
+                setValue("time", formattedTime);
+              }
+            }}
+          />
+        </View>
+          )}
+        
 
         {/* Mode Selection */}
         <View style={formStyles.inputGroup}>

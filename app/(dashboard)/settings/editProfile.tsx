@@ -31,6 +31,7 @@ import { loginUser } from "@/integrations/features/user/usersSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { baseUrl } from "@/integrations/features/apis/apiSlice";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 
 type FormData = {
@@ -491,33 +492,23 @@ const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
             </TouchableOpacity>
           </View>
 
-          {/* Calendar Modal */}
-          <Modal
-            visible={calendarVisible}
-            transparent={true}
-            animationType="slide"
-            onRequestClose={() => setCalendarVisible(false)}>
-            <View style={modalStyles.modalCntr}>
-              {/* <DatePicker
-                style={{ borderRadius: 10 }}
-                current={getValues("date_of_birth")}
-                options={{
-                  textHeaderColor: theme.colors["purple-700"],
-                  textDefaultColor: theme.colors["neutral-700"],
-                  selectedTextColor: "#fff",
-                  mainColor: theme.colors["purple-700"],
-                  textSecondaryColor: theme.colors["neutral-500"],
-                  borderColor: "rgba(122, 146, 165, 0.1)",
-                }}
-                onSelectedChange={(date: string) => {
-                  setValue("date_of_birth", date);
-                  setCalendarVisible(false);
-                }}
-                mode="calendar"
-              /> */}
-            </View>
-          </Modal>
+          {/* Date Picker Modal */}
+          {calendarVisible && (
+             <View>
+          <DateTimePicker
+            value={new Date(getValues("date_of_birth"))}
+            mode="date"
+            display="default"
+            onChange={(event, date) => {
+              setCalendarVisible(false);
+              if (date) {
+                setValue("date_of_birth", date.toISOString().split("T")[0]); // Format date to YYYY-MM-DD 
+              }
+            }}
+          />
         </View>
+          )}
+          
 
         {/* Continue Button */}
         <TouchableOpacity
