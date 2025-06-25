@@ -123,7 +123,7 @@ export default function ProfileSetupScreen() {
       );
       // navigation.navigate("Home");
       // lets see if this works
-      navigation.navigate("../home");
+      navigation.replace("/home");
     } else {
       setIsSubmitting(false)
       let err = {
