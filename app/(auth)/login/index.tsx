@@ -48,9 +48,9 @@ const navigation = useRouter();
   useEffect(() => {
     if (user.logedin) {
       if (user.verified_number) {
-        navigation.navigate("../home");
+        navigation.navigate("/home");
       } else {
-        navigation.navigate("../OTPVerification");
+        navigation.navigate("/OTPVerification");
       }
     }
   }, [user]);
@@ -94,11 +94,11 @@ const navigation = useRouter();
 
       if (res.data.user.full_name == 'Not Set') {
         console.log('profile not set reporting from login page' )
-        navigation.push("./profileSetup");
+        navigation.replace("/profileSetup");
       } else {
-        navigation.navigate("./home");
+        navigation.replace("/home");
       }
-      
+         
 
     } else if (res.error) {
       dispatch(addAlert({ ...res.error, page: "login" }));
@@ -205,7 +205,7 @@ const navigation = useRouter();
 
         {/* Forgot password */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("../forgotPassword")}
+          onPress={() => navigation.navigate("/forgotPassword")}
           style={{ alignSelf: "flex-end" }}>
           <Text style={{ color: theme.colors["purple-700"], fontSize: 14 }}>
             Forgot password?
@@ -238,7 +238,7 @@ const navigation = useRouter();
         {/* Don't have an account */}
         <View style={formStyles.infoGroup}>
           <Text style={formStyles.infoText}>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("../signUp")}>
+          <TouchableOpacity onPress={() => navigation.navigate("/signUp")}>
             <Text style={formStyles.infoLink}>Sign up.</Text>
           </TouchableOpacity>
         </View>

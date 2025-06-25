@@ -16,20 +16,20 @@ export default function DecisionScreen() {
     const timeout = setTimeout(() => {
     if (user.logedin) {
       if (user.verified_number && user.full_name != 'Not Set') {
-        navigation.replace("../home")
+        navigation.replace("/home")
       } else if (user.full_name == 'Not Set') {
-        navigation.replace("../profileSetup")
+        navigation.replace("/profileSetup")
       }else {
-        navigation.replace("../OTPVerification")
+        navigation.replace("/OTPVerification")
       }
     } else {
 
       if (board.navigate && board.boarded && board.registered) {
-        navigation.replace("../login")
+        navigation.replace("/login")
       } else if (board.navigate && board.boarded) {
-        navigation.replace("../signUp")
+        navigation.replace("/signUp")
       } else if(board.navigate && !board.boarded) {
-        navigation.replace("../onBoarding")
+        navigation.replace("/onBoarding")
       }
       
     }
