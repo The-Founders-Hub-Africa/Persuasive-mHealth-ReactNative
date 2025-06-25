@@ -104,6 +104,7 @@ export default function OTPVerificationScreen() {
         // loginUser({ ...user, verified_number: true, logedin: true, save: true })
         logoutUser()
       );
+      navigation.replace('./login')
     } else if (res.error) {
       dispatch(addAlert({ ...res.error, page: "otp" }));
     }
