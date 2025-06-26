@@ -16,7 +16,7 @@ export default function SplashScreen() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.replace('../decision');
+      navigation.replace('/decision');
       // navigation.navigate("DecisionScreen");
     }, 1000);
 
