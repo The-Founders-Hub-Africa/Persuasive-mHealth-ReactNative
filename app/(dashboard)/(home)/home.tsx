@@ -32,10 +32,6 @@ const HomeScreen = () => {
 
   useEffect(() => {
 
-    if(user){
-      setLoading(false);
-    }
-
     if(!user.logedin && !loading){
         console.log('user not logged in reporting from home screen')
         navigation.replace("/login");
@@ -51,6 +47,10 @@ const HomeScreen = () => {
   }, [user,loading])
 
     useEffect(() => {
+
+        if(user){
+      setLoading(false);
+    }
 
       if(user.logedin){
         let data = {

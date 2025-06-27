@@ -93,7 +93,6 @@ const navigation = useRouter();
       
 
       if (res.data.user.full_name == 'Not Set') {
-        console.log('profile not set reporting from login page' )
         navigation.replace("/profileSetup");
       } else {
         navigation.replace("/home");
