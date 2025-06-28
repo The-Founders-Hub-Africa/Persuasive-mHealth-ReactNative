@@ -105,7 +105,6 @@ const navigation = useRouter();
 
     
     } else if (res.error) {
-    setLoading(false);
       dispatch(addAlert({ ...res.error, page: "login" }));
     }
   };
