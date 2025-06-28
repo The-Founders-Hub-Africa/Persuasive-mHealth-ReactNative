@@ -34,14 +34,14 @@ const HomeScreen = () => {
 
     if(!user.logedin && !loading){
         console.log('user not logged in reporting from home screen')
-        navigation.replace("/login");
+        navigation.navigate("/login");
       }
 
       if(user.logedin && user.full_name == 'Not Set' && !loading){
-        navigation.replace("/profileSetup");
+        navigation.navigate("/profileSetup");
       }
       if(user.logedin && !user.verified_number && !loading){
-        navigation.replace("/OTPVerification");
+        navigation.navigate("/OTPVerification");
       }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user,loading])

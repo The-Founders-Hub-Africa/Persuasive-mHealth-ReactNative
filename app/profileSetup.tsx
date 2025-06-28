@@ -50,6 +50,7 @@ export default function ProfileSetupScreen() {
   const [imageDetails, setimageDetails] = useState({ type: "", filename: "" });
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
+  const [loading, setLoading] = useState(true);
 
   const {
     control,
@@ -75,27 +76,27 @@ export default function ProfileSetupScreen() {
   });
 
   useEffect(() => {
-    if (!user.logedin) {
-      navigation.replace('/login');
+    if (!user.logedin && !loading) {
+      navigation.navigate('/login');
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    if (user) {
+      setLoading(false);
     }
   }, [user]);
 
+  // const requestPermission = async () => {
+  //   const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  //   if (status !== "granted") {
+  //     Alert.alert("Permission to access camera roll is required!");
+  //   }
+  // };
+
   // useEffect(() => {
-  //   if (email) setValue("email", email);
-  //   if (phone_number) setValue("phone_number", phone_number);
-  // }, [email, phone_number, setValue]);
-
-  // Request permission for image picker
-  const requestPermission = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert("Permission to access camera roll is required!");
-    }
-  };
-
-  useEffect(() => {
-    requestPermission();
-  }, []);
+  //   requestPermission();
+  // }, []);
 
   // const handleContinue = async (data: FormData) => {
   //   navigation.navigate("Dashboard", { screen: "Home" });
@@ -123,7 +124,7 @@ export default function ProfileSetupScreen() {
       );
       // navigation.navigate("Home");
       // lets see if this works
-      navigation.replace("/home");
+      navigation.navigate("/home");
     } else {
       setIsSubmitting(false)
       let err = {

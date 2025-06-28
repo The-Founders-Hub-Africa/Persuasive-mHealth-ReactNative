@@ -44,16 +44,29 @@ const navigation = useRouter();
 
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
-
+  const [loading, setLoading] = useState(true);
+  const [login, { isLoading }] = useLoginMutation();
+  
   useEffect(() => {
-    if (user.logedin) {
-      if (user.verified_number) {
+    console.log("LoginScreen ran");
+    if (user.logedin && !loading  && !isLoading) {
+      if (user.verified_number && user.full_name != 'Not Set') {
         navigation.navigate("/home");
-      } else {
+      } else if (!user.verified_number){
         navigation.navigate("/OTPVerification");
+      } else if(user.full_name == 'Not Set') {
+        navigation.navigate("/profileSetup");
       }
     }
-  }, [user]);
+  }, [loading,isLoading,user]);
+
+
+  useEffect(() => {
+      if (user && loading) {
+        setLoading(false);
+      }
+    }, [user]);
+
   // const onSubmit = (data: FormData) => {
   //   if (data.phone_number && data.password) {
   //     navigation.navigate("Dashboard");
@@ -62,12 +75,10 @@ const navigation = useRouter();
   //   }
   // };
 
-  const [login, { isLoading }] = useLoginMutation();
-
   // const onSubmit = async (formdata: FormData) => {
   //   navigation.navigate("Dashboard");
   // };
-
+  
   const onSubmit = async (formdata: FormData) => {
     if (!formdata.phone_number && !formdata.password) {
       // remember to dispatch alert
@@ -80,8 +91,10 @@ const navigation = useRouter();
       password: formdata.password,
     };
 
+
     let res = await login(data);
     if (res.data) {
+
       dispatch(
         loginUser({
           ...res.data.user,
@@ -89,17 +102,11 @@ const navigation = useRouter();
           logedin: true,
           save: true,
         })
-      );
-      
+      ); 
 
-      if (res.data.user.full_name == 'Not Set') {
-        navigation.replace("/profileSetup");
-      } else {
-        navigation.replace("/home");
-      }
-         
-
+    
     } else if (res.error) {
+    setLoading(false);
       dispatch(addAlert({ ...res.error, page: "login" }));
     }
   };
