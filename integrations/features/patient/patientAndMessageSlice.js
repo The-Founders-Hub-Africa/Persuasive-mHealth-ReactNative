@@ -11,11 +11,12 @@ const initialData = {
 }
 
 
-export const get_initial_patient_data = async () => {
+export const get_initial_patient_and_message_data = async () => {
   let data = await readFromAsyncStorage("patientandmessage")
+  let patientandmessageData = initialData
+
   if (!data) {
     writeToAsyncStorage("patientandmessage", initialData)
-    patientandmessageData = initialData
   } else {
     patientandmessageData = data 
   }
@@ -46,3 +47,4 @@ export const patientAndMessageSlice = createSlice({
 export const {addPatientAndMessage} = patientAndMessageSlice.actions;
 
 export default patientAndMessageSlice.reducer;
+
