@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.casper_emeka.persuasivemhealth"
     },
     "web": {
       "bundler": "metro",
@@ -43,6 +44,7 @@
         "origin": false
       },
       "eas": {
+        "projectId": "189d5708-bd45-4671-850c-db41530b630c"
       }
     }
   }
