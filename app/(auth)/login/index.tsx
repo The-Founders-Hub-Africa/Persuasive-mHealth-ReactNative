@@ -82,7 +82,6 @@ const navigation = useRouter();
   const onSubmit = async (formdata: FormData) => {
     if (!formdata.phone_number && !formdata.password) {
       // remember to dispatch alert
-      Alert.alert("Please fill all fields");
       return;
     }
 
