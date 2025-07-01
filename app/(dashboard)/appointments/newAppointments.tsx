@@ -139,8 +139,10 @@ const NewAppointmentsScreen = () => {
       //
       setIsSubmitting(false)
       dispatch(addSingleAppointment(res.data.event));
+      console.log('Appointment created successfully')
+      console.log(res.data);
       setShowModal(true);
-      navigation.navigate("../appointments");
+      navigation.navigate("/appointments");
     } else {
       setIsSubmitting(false)
       let err = {

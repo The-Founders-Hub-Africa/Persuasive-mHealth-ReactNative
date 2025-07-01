@@ -60,6 +60,8 @@ const AppointmentsScreen = () => {
 
       if (data.data) {
         dispatch(addAppointments({ data: data.data, save: true }));
+        console.log("Appointments data fetched successfully");
+        console.log(data.data);
       }
     });
   }, []);

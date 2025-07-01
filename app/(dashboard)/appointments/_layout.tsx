@@ -10,7 +10,7 @@ export default function AppointmentsLayout() {
         <Stack screenOptions={{ headerShown: true }} >
         <Stack.Screen name="index"  options={{ title: 'Appointments',
             headerRight: () => (
-                <TouchableOpacity onPress={()=>navigation.navigate("./appointments/newAppointments")}>
+                <TouchableOpacity onPress={()=>navigation.navigate("/appointments/newAppointments")}>
                   <Feather
                     name="plus"
                     size={24}
@@ -20,8 +20,30 @@ export default function AppointmentsLayout() {
                      ),
 
          }}/>
-        <Stack.Screen name="editAppointment"  options={{ title: 'Edit Appointment' }}/>
+        <Stack.Screen name="editAppointment" 
+        
+        options={({
+            route,
+          }: {
+            route: { params?: { name?: string } };
+          }) => ({
+            title: route.params?.name
+              ? `Appointment with ${route.params.name}`
+              : 'Edit Appointment' ,
+          })}
+          
+        />
         <Stack.Screen name="newAppointments" options={{ title: 'New Appointment' }} />
-        <Stack.Screen name="appointmentDetails" options={{ title: 'Appointment Details' }} />
+        <Stack.Screen name="appointmentDetails" 
+          options={({
+            route,
+          }: {
+            route: { params?: { name?: string } };
+          }) => ({
+            title: route.params?.name
+              ? `Appointment with ${route.params.name}`
+              : 'Edit Appointment' ,
+          })}
+         />
         </Stack>
     )}

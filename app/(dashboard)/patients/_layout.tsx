@@ -10,7 +10,7 @@ export default function PatientsLayout() {
         <Stack screenOptions={{ headerShown: true }} >
         <Stack.Screen name="index"  options={{ title: 'Patients',
             headerRight:() => (
-            <TouchableOpacity onPress={()=>navigation.navigate("./patients/newPatient")}>
+            <TouchableOpacity onPress={()=>navigation.navigate("/patients/newPatient")}>
               <Feather
                 name="plus"
                 size={24}
@@ -20,8 +20,28 @@ export default function PatientsLayout() {
           ),
 
          }}/>
-        <Stack.Screen name="editPatient"  options={{ title: 'Edit Patient' }}/>
+        <Stack.Screen name="editPatient" 
+        options={({
+            route,
+          }: {
+            route: { params?: { name?: string } };
+          }) => ({
+            title: route.params?.name
+              ? `${route.params.name} Profile`
+              : 'Edit Patient' ,
+          })}
+        />
         <Stack.Screen name="newPatient" options={{ title: 'New Patient' }} />
-        <Stack.Screen name="patientDetails" options={{ title: 'Patient Details' }} />
+        <Stack.Screen name="patientDetails" 
+        options={({
+            route,
+          }: {
+            route: { params?: { name?: string } };
+          }) => ({
+            title: route.params?.name
+              ? `${route.params.name} Profile`
+              : 'Edit Patient' ,
+          })}
+        />
         </Stack>
     )}

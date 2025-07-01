@@ -154,7 +154,7 @@ const AppointmentDetailsScreen = () => {
         <TouchableOpacity
           style={formStyles.submitButton}
           onPress={() =>
-            navigation.push({pathname:"../editAppointment", params:{
+            navigation.push({pathname:"/appointments/editAppointment", params:{
               id: appointment.id,
               name: appointment.patient_name,
             }})

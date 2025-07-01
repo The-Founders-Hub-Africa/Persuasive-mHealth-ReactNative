@@ -25,6 +25,15 @@ export default function MessagesLayout() {
          }}/>
         <Stack.Screen
           name="messageDetails"
+           options={({
+            route,
+          }: {
+            route: { params?: { name?: string } };
+          }) => ({
+            title: route.params?.name
+              ? route.params.name
+              : 'Message Details',
+          })}
          
         />
         </Stack>
