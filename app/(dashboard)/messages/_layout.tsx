@@ -23,7 +23,9 @@ export default function MessagesLayout() {
           )
 
          }}/>
-        <Stack.Screen name="editAppointment"  options={{ title: 'Edit Appointment' }}/>
-        <Stack.Screen name="appointmentDetails" options={{ title: 'Message Details' }} />
+        <Stack.Screen
+          name="messageDetails"
+         
+        />
         </Stack>
     )}

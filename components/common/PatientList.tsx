@@ -45,7 +45,7 @@ export const PatientCard = ({
   const [menuVisible, setMenuVisible] = useState(false);
 
   const moveToEdit = () => {
-      navigation.push({pathname: "../editPatient", params: {
+      navigation.push({pathname: "/patients/editPatient", params: {
           id: patient.id,
           name: patient.full_name,
         }})
@@ -54,7 +54,7 @@ export const PatientCard = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.push({pathname: "../patientDetails", params: {
+        navigation.push({pathname: "/patients/patientDetails", params: {
           id: patient.id,
           name: patient.full_name,
         }})

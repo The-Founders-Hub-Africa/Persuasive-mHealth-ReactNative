@@ -194,12 +194,13 @@ const NewAppointmentsScreen = () => {
                   onValueChange={onChange}
                   style={formStyles.inputText}>
                   <Picker.Item label="Select Patient" value="" />
-                  {patients.map((patient, index) => (
+                    {patients.map((patient, index) => (
                     <Picker.Item
+                      key={patient.id || index}
                       label={patient.full_name}
                       value={patient.id}
                     />
-                  ))}
+                    ))}
 
                   {/* <Picker.Item label="Offline" value="offline" />
                   <Picker.Item label="Online" value="online" /> */}

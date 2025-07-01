@@ -79,7 +79,7 @@ const AppointmentCard = ({
   // };
 
   const moveToEdit = () => {
-      navigation.push({pathname: "../editAppointment", params: {
+      navigation.push({pathname: "/appointments/editAppointment", params: {
           id: appointment.id,
           name: appointment.patient_name,
         }})
@@ -90,7 +90,7 @@ const AppointmentCard = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.push({pathname:"../appointmentDetails", params: {
+        navigation.push({pathname:"/appointments/appointmentDetails", params: {
               id: appointment.id,
               name: appointment.patient_name,
             }})

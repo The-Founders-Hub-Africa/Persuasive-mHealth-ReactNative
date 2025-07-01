@@ -149,6 +149,7 @@ const MessageDetailsScreen = () => {
                 case "text":
                   return (
                     <View
+                      key={`text-${message.id}-${index}`}
                       style={[
                         styles.messageText,
                         {
@@ -193,7 +194,7 @@ const MessageDetailsScreen = () => {
                 case "image":
                   return (
                     <View
-                      
+                      key={`image-${message.id}-${index}`}
                       style={[
                         styles.messageText,
                         {
@@ -237,8 +238,7 @@ const MessageDetailsScreen = () => {
                         {message.timestamp}
                       </Text>
                       <TouchableOpacity
-                        key={index}
-                        // onPress={() => setSelectedImage("")}>
+                        key={`image-touchable-${message.id}-${index}`}
                         onPress={() => setSelectedImage(image[message.id])}
                       >
                         <Image
@@ -248,27 +248,6 @@ const MessageDetailsScreen = () => {
                           style={styles.image}
                         />
                       </TouchableOpacity>
-
-                      {/* <Modal
-                        visible={!!selectedImage}
-                        transparent={true}
-                        animationType="fade"
-                        onRequestClose={() => setSelectedImage(null)}
-                      >
-                        <View style={styles.modalContainer}>
-                          <TouchableOpacity
-                            style={styles.closeButton}
-                            onPress={() => setSelectedImage(null)}
-                          >
-                            <Text style={styles.closeText}>Close</Text>
-                          </TouchableOpacity>
-                          <Image
-                            source={{ uri: selectedImage }}
-                            style={styles.fullScreenImage}
-                            resizeMode="contain"
-                          />
-                        </View>
-                      </Modal> */}
 
                       <GestureHandlerRootView style={{ flex: 1 }}>
                         <Modal
@@ -290,7 +269,7 @@ const MessageDetailsScreen = () => {
                               onHandlerStateChange={onPinchStateChange}
                             >
                               <Animated.Image
-                                source={{ uri: selectedImage?selectedImage : "" }}
+                                source={{ uri: selectedImage ? selectedImage : "" }}
                                 style={[
                                   styles.fullScreenImage,
                                   { transform: [{ scale: 1 }] },
@@ -301,19 +280,12 @@ const MessageDetailsScreen = () => {
                           </View>
                         </Modal>
                       </GestureHandlerRootView>
-
-                      {/* <Modal visible={!!selectedImage} transparent={true}>
-                        <ImageViewer
-                          imageUrls={[{ url: selectedImage }]}
-                          enableSwipeDown={true}
-                          onSwipeDown={() => setSelectedImage(null)}
-                        />
-                      </Modal> */}
                     </View>
                   );
                 case "video":
                   return (
                     <View
+                      key={`video-${message.id}-${index}`}
                       style={[
                         styles.messageText,
                         {
@@ -324,7 +296,6 @@ const MessageDetailsScreen = () => {
                         },
                       ]}
                     >
-
                       <Text
                         style={
                           message.context != "medical_practitioner"
@@ -357,19 +328,18 @@ const MessageDetailsScreen = () => {
                       >
                         {message.timestamp}
                       </Text>
-                      <Text>{video[message.id]? null : "Loading Video"}</Text>
+                      <Text>{video[message.id] ? null : "Loading Video"}</Text>
                       <View>
                         {video[message.id] ? (
-                          <VideoScreen videoSource={video[message.id]} />
-                        ) : (
-                          null
-                        )}
+                          <VideoScreen key={`video-screen-${message.id}-${index}`} videoSource={video[message.id]} />
+                        ) : null}
                       </View>
                     </View>
                   );
                 case "audio":
                   return (
                     <View
+                      key={`audio-${message.id}-${index}`}
                       style={[
                         styles.messageText,
                         {
@@ -412,13 +382,11 @@ const MessageDetailsScreen = () => {
                       >
                         {message.timestamp}
                       </Text>
-                      <Text>{audio[message.id]? null : "Loading Audio"}</Text>
+                      <Text>{audio[message.id] ? null : "Loading Audio"}</Text>
                       <View>
                         {audio[message.id] != undefined ? (
-                          <AudioScreen audioSource={audio[message.id]} />
-                        ) : (
-                          null
-                        )}
+                          <AudioScreen key={`audio-screen-${message.id}-${index}`} audioSource={audio[message.id]} />
+                        ) : null}
                       </View>
                     </View>
                   );

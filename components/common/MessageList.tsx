@@ -22,7 +22,7 @@ const MessageCard = ({ message }: { message: MessageProps }) => {
   const navigation = useRouter()
   return (
     <TouchableOpacity
-      onPress={() => navigation.push({pathname:"../messageDetails", params: { id: message.id,name:message.full_name }})}
+      onPress={() => navigation.push({pathname:"/messages/messageDetails", params: { id: message.id,name:message.full_name }})}
       style={{
       marginBottom: 24,
       }}>

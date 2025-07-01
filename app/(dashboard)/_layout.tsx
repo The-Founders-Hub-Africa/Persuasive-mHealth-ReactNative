@@ -9,6 +9,7 @@ export default function TabLayout() {
       <Tabs.Screen name='(home)'
       options={{
           title: 'Home',
+          popToTopOnBlur:true,
           tabBarIcon: ({ color }) => <Ionicons size={28} name="home-outline" color={color} />,
 
         }}
@@ -17,6 +18,7 @@ export default function TabLayout() {
        <Tabs.Screen name='patients'
           options={{
           title: 'Patients',
+          popToTopOnBlur:true,
           tabBarIcon: ({ color }) => <Ionicons size={28} name="people-outline" color={color} />
         }}
       />
@@ -24,6 +26,7 @@ export default function TabLayout() {
        <Tabs.Screen name='appointments'
       options={{
           title: 'Appointments',
+          popToTopOnBlur:true,
           tabBarIcon: ({ color }) => <Ionicons size={28} name="calendar-outline" color={color} />,
 
         }}
@@ -32,6 +35,7 @@ export default function TabLayout() {
        <Tabs.Screen name='messages'
       options={{
           title: 'Messages',
+          popToTopOnBlur:true,
           tabBarIcon: ({ color }) => <Ionicons size={28} name="chatbubble-outline" color={color} />,
 
         }}

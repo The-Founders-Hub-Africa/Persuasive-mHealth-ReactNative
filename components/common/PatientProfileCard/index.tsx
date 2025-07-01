@@ -4,8 +4,10 @@ import theme from "@/styles/theme";
 import typography from "@/styles/typography";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { PatientProps } from "@/types";
+import { useRouter } from "expo-router";
 
 const PatientProfileCard = ({ patient }: { patient: PatientProps }) => {
+  const navigation = useRouter();
   return (
     <View style={styles.container}>
       {/* Top */}
@@ -59,6 +61,17 @@ const PatientProfileCard = ({ patient }: { patient: PatientProps }) => {
           </Text>
 
           <TouchableOpacity
+          onPress={() => {
+            // Navigate to messages screen with patient details
+            navigation.push({
+                pathname: "/messages/messageDetails",
+                params: {
+                  id: patient.id,
+                  name: patient.full_name,
+                },
+              }
+            );
+          }}
             style={[
               typography.textSmall_Medium,
               {
