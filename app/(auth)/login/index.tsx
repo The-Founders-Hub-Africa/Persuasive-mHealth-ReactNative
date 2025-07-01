@@ -103,7 +103,14 @@ const navigation = useRouter();
         })
       ); 
 
-    
+      if(res.data.user.full_name == 'Not Set') {
+        navigation.navigate("/profileSetup");
+      }else{
+        navigation.navigate("/home");
+      }
+
+
+
     } else if (res.error) {
       dispatch(addAlert({ ...res.error, page: "login" }));
     }

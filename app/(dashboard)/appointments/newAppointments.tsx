@@ -115,7 +115,7 @@ const NewAppointmentsScreen = () => {
       symptoms: "",
       notes: "",
       // document: null,
-      date: "",
+      date: new Date().toISOString().split("T")[0], // Default to today's date
       time: "",
       mode: "",
       medical_practitioner: user.id,

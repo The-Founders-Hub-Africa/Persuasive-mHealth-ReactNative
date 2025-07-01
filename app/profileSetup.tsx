@@ -113,7 +113,6 @@ export default function ProfileSetupScreen() {
 
     let res = await UserProfile(data_);
     if (res.success) {
-      setIsSubmitting(false);
       dispatch(
         loginUser({
           ...res.data.user,
@@ -124,7 +123,13 @@ export default function ProfileSetupScreen() {
       );
       // navigation.navigate("Home");
       // lets see if this works
-      navigation.navigate("/home");
+      if(res.data.user.full_name != 'Not Set') {
+        navigation.navigate("/home");
+      }
+
+      setIsSubmitting(false);
+
+      
     } else {
       setIsSubmitting(false)
       let err = {
