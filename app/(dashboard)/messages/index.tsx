@@ -9,13 +9,15 @@ import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { addPatientAndMessage } from "@/integrations/features/patient/patientAndMessageSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { useFocusEffect, useRouter } from "expo-router";
+import { set } from "react-hook-form";
 // import Alert_System from "@/src/integrations/features/alert/Alert";
 
-const MessagesScreen = ({ canSearch }: { canSearch: boolean }) => {
+const MessagesScreen = () => {
   const [search, setSearch] = useState("");  
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
   const patientAndMessages = useAppSelector(state => state.patientandmessage);
+  const canSearch  = useAppSelector(state => state.board.canSearch);
   const [patientandmessage, { isLoading }] = usePatientMutation();
   // const [skip, setSkip] = useState(true)
   const init = {
@@ -28,6 +30,7 @@ const MessagesScreen = ({ canSearch }: { canSearch: boolean }) => {
     id: 0,
   };
   const [finalData, setFinalData] = useState([init]);
+  const [messagesData, setMessagesData] = useState([init]);
   // const { data:patients,error,isError }  = usePatientGetQuery({action:'get_all_last',token:user.usertoken},{skip})
   // useEffect(() => {
   //   if (patients) {
@@ -40,6 +43,20 @@ const MessagesScreen = ({ canSearch }: { canSearch: boolean }) => {
 
       const navigation  = useRouter()
       const [loading, setLoading] = useState(true);
+
+      useEffect(() => {
+
+        if (search) {
+          const filteredData = messagesData.filter(item =>
+            item.full_name.toLowerCase().includes(search.toLowerCase())
+          );
+          setFinalData(filteredData);
+        } else {
+          setFinalData(messagesData);
+        }
+
+      }, [search]);
+
     
       useEffect(() => {
     
@@ -95,6 +112,7 @@ const MessagesScreen = ({ canSearch }: { canSearch: boolean }) => {
           data.push(patientData);
         }
         data = data.slice(1);
+        setMessagesData(data);
         setFinalData(data);
       }
     }

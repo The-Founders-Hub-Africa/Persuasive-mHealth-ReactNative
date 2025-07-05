@@ -5,7 +5,8 @@ const initialData = {
   boarded: false,
   registered: false,
   navigate:false,
-  old: null
+  old: null,
+  canSearch: false,
 }
 
 export const get_initial_board_data = async () => {
@@ -50,9 +51,12 @@ export const boardUserSlice = createSlice({
       state.navigate = true
       writeToAsyncStorage("board", state)
     },
+    setCanSearch: (state) =>{
+      state.canSearch = !state.canSearch
+    }
   },
 });
 
-export const { boardUser,userRegistered,loadData,addOld,clearOld } = boardUserSlice.actions;
+export const { boardUser,userRegistered,loadData,addOld,clearOld,setCanSearch } = boardUserSlice.actions;
 
 export default boardUserSlice.reducer;
