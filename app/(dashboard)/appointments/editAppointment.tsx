@@ -123,7 +123,6 @@ const EditAppointmentScreen = () => {
         img: fileDetails,
       },
     };
-    // console.log(data_)
     let res = await Appointments(data_);
     if (res.success) {
       // reset form data here
@@ -141,32 +140,8 @@ const EditAppointmentScreen = () => {
         page: "edit_appointment_page",
       };
       dispatch(addAlert(err));
-      // console.log('Error occurred')
     }
   };
-
-  // const handleImageUpload = async () => {
-  //   let result = await ImagePicker.launchImageLibraryAsync({
-  //     mediaTypes: ["images", "videos"],
-  //     allowsEditing: true,
-  //     aspect: [4, 3],
-  //     quality: 1,
-  //   });
-
-  //   if (!result.canceled) {
-  //     let returndata = result.assets[0];
-  //     if (returndata.mimeType && returndata.fileName) {
-  //       const uri = returndata.uri || null;
-  //       setfileDetails({
-  //         type: returndata.mimeType,
-  //         filename: returndata.fileName,
-  //       });
-  //       setValue("document", uri);
-  //     }
-  //   } else {
-  //     console.log("Image Picker Error: ---");
-  //   }
-  // };
 
   return (
     <ScrollView>
@@ -279,60 +254,6 @@ const EditAppointmentScreen = () => {
             <Text style={globalStyles.errorText}>{errors.notes.message}</Text>
           )}
         </View>
-
-        {/* Upload Document */}
-        {/* <View style={formStyles.inputGroup}>
-          <Text style={formStyles.label}>Upload Document</Text>
-          <TouchableOpacity
-            style={styles.profileImageCntr}
-            onPress={handleImageUpload}>
-            <Controller
-              control={control}
-              name="document"
-              render={({ field: { value } }) =>
-                value ? (
-                  <Image source={{ uri: value }} style={styles.profileImage} />
-                ) : (
-                  <View style={{ gap: 20 }}>
-                    <FontAwesome5
-                      name="images"
-                      size={70}
-                      color="black"
-                      style={[
-                        {
-                          color: theme.colors["purple-700"],
-                          textAlign: "center",
-                        },
-                      ]}
-                    />
-
-                    <View style={{ gap: 4 }}>
-                      <Text style={[typography.textBase_Medium]}>
-                        Drop your files here or{" "}
-                        <Text
-                          style={{
-                            color: theme.colors["purple-700"],
-                          }}>
-                          browse
-                        </Text>
-                      </Text>
-                      <Text
-                        style={[
-                          typography.textSmall_Medium,
-                          {
-                            color: theme.colors["neutral-500"],
-                            textAlign: "center",
-                          },
-                        ]}>
-                        Maximum size: 50MB
-                      </Text>
-                    </View>
-                  </View>
-                )
-              }
-            />
-          </TouchableOpacity>
-        </View> */}
 
         {/* Date Picker */}
         <View style={formStyles.inputGroup}>

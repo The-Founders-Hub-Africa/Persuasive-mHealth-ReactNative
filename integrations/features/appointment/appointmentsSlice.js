@@ -45,13 +45,8 @@ export const appointmentsSlice = createSlice({
         
       },
     addSingleAppointment: (state, action) => {
-      // console.log(action.payload)
-      // let status = action.payload.status
       let filtered = state.data.filter(data => data.id != action.payload.id)
       filtered = [...filtered, action.payload]
-      // if (status != 'cancelled') {
-      //   filtered = [...filtered, action.payload]
-      // }
       filtered.sort((a, b) => {
         const dateA = new Date(`${convertDate(a.date)}T${a.time}`);
         const dateB = new Date(`${convertDate(b.date)}T${b.time}`);

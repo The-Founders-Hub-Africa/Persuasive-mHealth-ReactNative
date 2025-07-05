@@ -61,42 +61,8 @@ const AppointmentCalendar = () => {
         enableSwipeMonths
         onDayPress={(day: any) => {
 
-          // remember to set nav
-          console.log("selected day", day);
         }}
       />
-
-      {/* <View
-        style={{
-          flexDirection: "row",
-          gap: 8,
-        }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}>
-          <Entypo
-            name="dot-single"
-            size={36}
-            color={theme.colors["purple-700"]}
-          />
-          <Text>Appointments</Text>
-        </View> */}
-
-        {/* <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}>
-          <Entypo
-            name="dot-single"
-            size={36}
-            color={theme.colors["yellow-600"]}
-          />
-          <Text>Surgeries</Text>
-        </View> 
-    </View> */}
     </View>
   );
 };

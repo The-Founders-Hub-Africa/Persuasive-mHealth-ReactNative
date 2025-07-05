@@ -109,14 +109,10 @@ const fileToBase64 = (file) => {
 const createForm = async (data, blob_name) => {
   let needed = data.data;
   let formdata = new FormData();
-  console.log("needed", needed);
-  console.log("blob_name", blob_name);
   for (const [key, value] of Object.entries(needed.formdata)) {
     if (key == blob_name && value) {
       let first_four = value.slice(0, 4);
       if (first_four !== "http") {
-        console.log("value", value);
-        console.log('key', key);
         formdata.append(key,{uri: value,
            type: needed.img.type, 
           name: needed.img.filename});
@@ -133,9 +129,7 @@ const createForm = async (data, blob_name) => {
 };
 
 export const UserProfile = async (data) => {
-  console.log("inside user profile", data);
   let formdata = await createForm(data, "image");
-  console.log("formdata", formdata);
   return axios
     .post(user_url, formdata, {
       headers: {
@@ -144,7 +138,6 @@ export const UserProfile = async (data) => {
       },
     })
     .then((res) => {
-      console.log("res", res);
       return {
         data: res.data,
         success: true,
@@ -152,7 +145,6 @@ export const UserProfile = async (data) => {
       };
     })
     .catch((err) => {
-      console.log("err", err[0]);
       return {
         type: "Error",
         success: false,
@@ -205,7 +197,6 @@ export const Patients = async (data) => {
       };
     })
     .catch((err) => {
-      // console.log('patient err',err.response.data)
       return {
         type: "Error",
         success: false,
@@ -217,7 +208,6 @@ export const Patients = async (data) => {
 
 export const axiosGetMediaFile = async (file_id, token) => {
   const imageUrl = `${baseUrl}/platforms/get_media/${file_id}`;
-  console.log("url", imageUrl);
   return axios
     .get(imageUrl, {
       responseType: "blob",
@@ -244,7 +234,6 @@ export const axiosGetMediaFile = async (file_id, token) => {
 export const axiosGetNgrokMediaFile = async (url, file_id, token) => {
   // const imageUrl = `${url}/platforms/get_media/${file_id}`;
   const imageUrl = `${url}`;
-  console.log("url_", imageUrl);
   return axios
     .get(imageUrl, {
       // responseType: 'blob',
@@ -262,7 +251,6 @@ export const axiosGetNgrokMediaFile = async (url, file_id, token) => {
       };
     })
     .catch((err) => {
-      console.log("err", err);
       return {
         success: false,
         data: err.response?.data || err.message,

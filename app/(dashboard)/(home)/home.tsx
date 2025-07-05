@@ -33,7 +33,6 @@ const HomeScreen = () => {
   useEffect(() => {
 
     if(!user.logedin && !loading){
-        console.log('user not logged in reporting from home screen')
         navigation.navigate("/login");
       }
 
@@ -79,7 +78,6 @@ const HomeScreen = () => {
               token: user.usertoken
             }
             if (user.logedin){
-            console.log(data.token)
           appointmentApi(data).then(data => {
             if (data.error) {
               dispatch(addAlert({ ...data.error, page: "Home_Screen" }))

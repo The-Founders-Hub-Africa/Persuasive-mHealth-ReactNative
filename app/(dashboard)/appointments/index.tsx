@@ -35,7 +35,6 @@ const AppointmentsScreen = () => {
       }
   
       if(!user.logedin && !loading){
-          console.log('user not logged in reporting from home screen')
           navigation.replace("/login");
         }
   
@@ -60,8 +59,6 @@ const AppointmentsScreen = () => {
 
       if (data.data) {
         dispatch(addAppointments({ data: data.data, save: true }));
-        console.log("Appointments data fetched successfully");
-        console.log(data.data);
       }
     });
   }, []);

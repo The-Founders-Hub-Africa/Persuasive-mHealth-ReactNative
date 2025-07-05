@@ -133,66 +133,6 @@ export default function NewPatientScreen() {
     }
   };
 
-  // const handleContinue = async (data: FormData) => {
-  //   console.log(data.date_of_birth);
-  //   let data_ = {
-  //     token: user.usertoken,
-  //     data: {
-  //       formdata: { ...data, date_of_birth: convertDate2(data.date_of_birth) },
-
-  //       img: fileDetails,
-  //     },
-  //   };
-
-  //   console.log(data_);
-  //   setIsSubmitting(true);
-  //   let res = await Patients(data_);
-  //   if (res.success) {
-  //     // reset form data here
-
-  //     //
-
-  //     setIsSubmitting(false);
-  //     dispatch(addSinglePatient(res.data.patient));
-  //     dispatch(addPatientCount({ gender: res.data.patient.gender }));
-  //     setShowModal(true);
-  //     navigation.navigate("Patients");
-  //   } else {
-  //     setIsSubmitting(false);
-  //     let err = {
-  //       status: res.status,
-  //       data: res.data,
-  //       page: "new_patient_page",
-  //     };
-  //     dispatch(addAlert(err));
-  //   }
-  // };
-
-  // const handleImageUpload = async () => {
-  //   let result = await ImagePicker.launchImageLibraryAsync({
-  //     mediaTypes: ["images", "videos"],
-  //     allowsEditing: true,
-  //     aspect: [4, 3],
-  //     quality: 1,
-  //   });
-
-  //   if (!result.canceled) {
-  //     let returndata = result.assets[0];
-  //     if (returndata.mimeType && returndata.fileName) {
-  //       const uri = returndata.uri || null;
-  //       setfileDetails({
-  //         type: returndata.mimeType,
-  //         filename: returndata.fileName,
-  //       });
-  //       if (uri) {
-  //         setValue("document", uri);
-  //       }
-  //     }
-  //   } else {
-  //     console.log("Image Picker Error: ---");
-  //   }
-  // };
-
   return (
     <ScrollView>
       <View

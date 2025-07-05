@@ -18,13 +18,7 @@ export const whatsappMessageSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     addwhatsappMessage: (state, action) => {
-      console.log('from state')
-      state.data = [...action.payload]
-      // console.log(action.payload)
-      // state = [...action.payload]
-      
-      // console.log(state)
-        
+      state.data = [...action.payload]  
     },
     clearwhatsappMessage :state=>{
       state = initialData
@@ -34,8 +28,6 @@ export const whatsappMessageSlice = createSlice({
  
 });
 
-// export const getuser = (state)=>state
-// export const getuserToken = (state)=>state.token
 export const { addwhatsappMessage,clearwhatsappMessage} = whatsappMessageSlice.actions;
 
 export default whatsappMessageSlice.reducer;

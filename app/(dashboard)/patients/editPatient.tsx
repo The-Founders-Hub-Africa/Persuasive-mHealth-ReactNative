@@ -133,7 +133,6 @@ export default function EditPatientScreen() {
         img: fileDetails,
       },
     };
-    // console.log(data_)
     let res = await Patients(data_);
     if (res.success) {
       // reset form data here
@@ -151,7 +150,6 @@ export default function EditPatientScreen() {
         page: "edit_patient_page",
       };
       dispatch(addAlert(err));
-      // console.log('Error occurred')
     }
   };
 

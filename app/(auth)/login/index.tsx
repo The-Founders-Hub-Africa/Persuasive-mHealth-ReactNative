@@ -48,7 +48,6 @@ const navigation = useRouter();
   const [login, { isLoading }] = useLoginMutation();
   
   useEffect(() => {
-    console.log("LoginScreen ran");
     if (user.logedin && !loading  && !isLoading) {
       if (user.verified_number && user.full_name != 'Not Set') {
         navigation.navigate("/home");

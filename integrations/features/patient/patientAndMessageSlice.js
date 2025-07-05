@@ -30,14 +30,10 @@ export const patientAndMessageSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     addPatientAndMessage: (state, action) => {
-      console.log(action.payload)
-      console.log('dispatched')
       let save = action.payload.save
       delete action.payload.save
       state.messages = action.payload.messages
       state.patients = action.payload.patients
-      console.log(save)
-      console.log(action.payload)
       save ? writeToAsyncStorage("patientandmessage", action.payload):null
     }
   },

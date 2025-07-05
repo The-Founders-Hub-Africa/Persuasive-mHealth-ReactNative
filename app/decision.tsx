@@ -1,14 +1,12 @@
 import React, { useEffect} from "react";
 import { Image, View } from "react-native";
-import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
+import {  useAppSelector } from "@/integrations/hooks";
 import styles from "@/styles/splashScreen";
 import { useRouter } from "expo-router";
 
 
 export default function DecisionScreen() {
   const navigation = useRouter();
- console.log('Decision Screen')
-  const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
    const board = useAppSelector(state => state.board);
 

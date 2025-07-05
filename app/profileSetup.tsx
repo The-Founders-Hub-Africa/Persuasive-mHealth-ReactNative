@@ -6,8 +6,6 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Modal,
-  Alert,
 } from "react-native";
 import {
   Feather,
@@ -20,11 +18,10 @@ import { Picker } from "@react-native-picker/picker";
 import { useForm, Controller } from "react-hook-form";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as ImagePicker from "expo-image-picker";
-import theme, { calendarTheme } from "@/styles/theme";
+import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
 import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
-import modalStyles from "@/styles/modalStyles";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { convertDate, UserProfile } from "@/integrations/axios_store";
 import { loginUser } from "@/integrations/features/user/usersSlice";
@@ -87,20 +84,6 @@ export default function ProfileSetupScreen() {
     }
   }, [user]);
 
-  // const requestPermission = async () => {
-  //   const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-  //   if (status !== "granted") {
-  //     Alert.alert("Permission to access camera roll is required!");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   requestPermission();
-  // }, []);
-
-  // const handleContinue = async (data: FormData) => {
-  //   navigation.navigate("Dashboard", { screen: "Home" });
-  // };
 
   const handleContinue = async (data: FormData) => {
     setIsSubmitting(true);
@@ -121,8 +104,7 @@ export default function ProfileSetupScreen() {
           save: true,
         })
       );
-      // navigation.navigate("Home");
-      // lets see if this works
+    
       if(res.data.user.full_name != 'Not Set') {
         navigation.navigate("/home");
       }
@@ -138,18 +120,8 @@ export default function ProfileSetupScreen() {
         page: "editprofile",
       };
       dispatch(addAlert(err));
-      // console.log('Error occurred')
     }
 
-    // let res = await editUser(data_);
-    // if (res.data) {
-    //   // console.log(res.data)
-    //   // setuserlogged(true)
-    // } else if (res.error) {
-    //   console.log("error");
-    // }
-
-    // navigation.navigate("Dashboard", { screen: "Home" });
   };
 
   const handleImageUpload = async () => {
@@ -171,25 +143,7 @@ export default function ProfileSetupScreen() {
         setValue("image", uri);
       }
     } else {
-      console.log("Image Picker Error: ---");
     }
-    // launchImageLibrary(
-    //   {
-    //     mediaType: "photo",
-    //     includeBase64: false,
-    //     quality: 1,
-    //   },
-    //   response => {
-    //     if (response.didCancel) {
-    //       console.log("User cancelled image picker");
-    //     } else if (response.errorMessage) {
-    //       console.log("Image Picker Error: ", response.errorMessage);
-    //     } else if (response.assets && response.assets.length > 0) {
-    //       const uri = response.assets[0].uri || null;
-    //       setValue("image", uri); // Update the form state with image URI
-    //     }
-    //   }
-    // );
   };
 
   return (

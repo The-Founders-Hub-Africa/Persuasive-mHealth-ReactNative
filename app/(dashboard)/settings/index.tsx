@@ -47,7 +47,6 @@ const SettingsScreen = () => {
         }
     
         if(!user.logedin && !loading){
-            console.log('user not logged in reporting from home screen')
             navigation.replace("/login");
           }
     

@@ -48,7 +48,7 @@ useEffect(() => {
           durationMillis: status.durationMillis
         });
       }
-      // console.log('didjustFinish', status.didJustFinish)
+
       if (status.durationMillis === status.positionMillis) {
         setIsPlaying(false);
         setDidJustFinish(true);
@@ -101,7 +101,6 @@ useEffect(() => {
     setLoading(true);
     const status = await sound.getStatusAsync();
     if (status.isPlaying) {
-      console.log('Pausing Sound');
       setLoading(false);
       await sound.pauseAsync();
       setIsPlaying(false);
@@ -113,10 +112,8 @@ useEffect(() => {
       setLoading(true);
       await sound.replayAsync();
       setDidJustFinish(false);
-      // setIsPlaying(true);
     }
   } else {
-    console.log('Loading and Playing Sound');
     setLoading(true);
     setIsPlaying(false);
     const { sound: newSound } = await Audio.Sound.createAsync(
@@ -133,11 +130,8 @@ useEffect(() => {
 
 
   async function preLoad() {
-    console.log('Loading Sound from preLoad');
-    // console.log('Loading Sound from playSound');
   const { sound } = await Audio.Sound.createAsync( 
         {uri: audioSource}
-        // 'https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3' 
     );
 
     setSound(sound);
@@ -165,12 +159,10 @@ useEffect(() => {
   }
   }, [])
  
-  // console.log('sound out',sound)
       
   useEffect(() => {
     return sound
       ? () => {
-          console.log('Unloading Sound');
            sound.unloadAsync(); 
         }
       : undefined;

@@ -131,7 +131,7 @@ const NewAppointmentsScreen = () => {
         img: fileDetails,
       },
     };
-    // console.log(data_)
+    
     let res = await Appointments(data_);
     if (res.success) {
       // reset form data here
@@ -139,8 +139,6 @@ const NewAppointmentsScreen = () => {
       //
       setIsSubmitting(false)
       dispatch(addSingleAppointment(res.data.event));
-      console.log('Appointment created successfully')
-      console.log(res.data);
       setShowModal(true);
       navigation.navigate("/appointments");
     } else {
@@ -151,32 +149,8 @@ const NewAppointmentsScreen = () => {
         page: "newappointment_page",
       };
       dispatch(addAlert(err));
-      // console.log('Error occurred')
     }
   };
-
-  // const handleImageUpload = async () => {
-  //   let result = await ImagePicker.launchImageLibraryAsync({
-  //     mediaTypes: ["images", "videos"],
-  //     allowsEditing: true,
-  //     aspect: [4, 3],
-  //     quality: 1,
-  //   });
-
-  //   if (!result.canceled) {
-  //     let returndata = result.assets[0];
-  //     if (returndata.mimeType && returndata.fileName) {
-  //       const uri = returndata.uri || null;
-  //       setfileDetails({
-  //         type: returndata.mimeType,
-  //         filename: returndata.fileName,
-  //       });
-  //       setValue("document", uri);
-  //     }
-  //   } else {
-  //     console.log("Image Picker Error: ---");
-  //   }
-  // };
 
   return (
     <ScrollView>

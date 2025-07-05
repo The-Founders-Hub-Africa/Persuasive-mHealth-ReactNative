@@ -31,15 +31,6 @@ const MessagesScreen = () => {
   };
   const [finalData, setFinalData] = useState([init]);
   const [messagesData, setMessagesData] = useState([init]);
-  // const { data:patients,error,isError }  = usePatientGetQuery({action:'get_all_last',token:user.usertoken},{skip})
-  // useEffect(() => {
-  //   if (patients) {
-  //     console.log(patients)
-  //     console.log(error)
-  //     // setFinalData(article.data)
-  //   }
-
-  // }, [patients,error])
 
       const navigation  = useRouter()
       const [loading, setLoading] = useState(true);
@@ -65,7 +56,6 @@ const MessagesScreen = () => {
         }
     
         if(!user.logedin && !loading){
-            console.log('user not logged in reporting from home screen')
             navigation.replace("/login");
           }
     
@@ -117,7 +107,6 @@ const MessagesScreen = () => {
       }
     }
 
-    // console.log(finalData)
   }, [patientAndMessages]);
 
   return (

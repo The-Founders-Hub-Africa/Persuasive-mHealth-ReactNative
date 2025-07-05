@@ -38,7 +38,6 @@ export const getMediaFiles = async (data, video_state, set_video,
     }
 
   data.forEach(async message => {
-      console.log('helllo from media files')
       if (message.record_type !== 'text') {
      
         let source = `${baseUrl}/platforms/get_media/${message.content}`;
@@ -46,7 +45,6 @@ export const getMediaFiles = async (data, video_state, set_video,
            
         const response = await axiosGetMediaFile(message.content,token)
           if (response.success) {
-              console.log('data',response.data)
                 const blob = new Blob([response.data], { type: response.data.type, lastModified: Date.now() });
                 const base64Data = await blobToBase64(blob);
                 source = base64Data;         

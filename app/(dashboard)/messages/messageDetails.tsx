@@ -56,9 +56,6 @@ const MessageDetailsScreen = () => {
   const [WhatsappMessage, { isLoading }] = useWhatsappRecordsMutation();
 
   useEffect(() => {
-    // axiosGetNgrokMediaFile(baseUrl,'1374851797212716',user.usertoken).then(response => {
-    //   console.log('ngrok',response)
-    // })
 
     let data = {
       data: { action: "get_patient_records", data: { patient_id: id } },

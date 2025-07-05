@@ -52,7 +52,6 @@ export const patientsSlice = createSlice({
     },
 
     addSinglePatient: (state, action) => {
-          // console.log(action.payload)
           let filtered = state.data.filter(data => data.id != action.payload.id)
           filtered = [...filtered, action.payload]
             state.data = filtered
@@ -69,10 +68,6 @@ export const patientsSlice = createSlice({
  
 });
 
-// export const getPatientById = (patients, id) => states.find(patient => patient.id === id);
-// export const getpatient = (patients,id)=>patients.filter(patient=>patient.id===id)
-// export const getuserToken = (state)=>state.token
-// export const getPatientById = (state)=console.log(state)
 export const { addPatients,addSinglePatient,clearPatients} = patientsSlice.actions;
 
 export default patientsSlice.reducer;

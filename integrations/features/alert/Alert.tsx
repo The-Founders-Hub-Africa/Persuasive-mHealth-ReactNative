@@ -16,14 +16,12 @@ const Alert_System = () => {
     
     useEffect(() => {
       if (alert.status_code > 0) {
-        console.log(alert.status_code)
         if(alert.status_code === 401){
           dispatch(logoutUser())
           navigation.replace('/login')
         }
         // let type = alert.status_code === 200 ? 'success' : 'error'
         for (const message of alert.message) {
-          console.log('message from alert', message)
           if (alert.status_code === 200) {
             
             Toast.success(message)
@@ -32,7 +30,6 @@ const Alert_System = () => {
           }
             
         }
-        console.log('alert_system',alert)
         dispatch(clearAlert())
       }
     }, [alert])

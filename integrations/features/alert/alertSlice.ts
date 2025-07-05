@@ -18,7 +18,6 @@ export const alertSlice = createSlice({
   reducers: {
     addAlert: (state, action) => {
       const data = get_message_and_code(action.payload)
-      console.log(data)
         state.status_code = data.status_code
         state.message = [...state.message,...data.message]
     },

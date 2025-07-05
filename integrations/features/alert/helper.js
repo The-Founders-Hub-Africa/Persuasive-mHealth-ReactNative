@@ -1,5 +1,5 @@
 export const get_message_and_code = (data) => {
-    console.log(data)
+    
     let result = {
         status_code: data.status,
         message: ['An error occured']
