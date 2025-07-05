@@ -45,13 +45,13 @@ const Greetings = () => {
           alignItems: "center",
           gap: 16,
         }}>
-        <Pressable onPress={() => navigation.navigate("../notifications")}>
+        {/* <Pressable onPress={() => navigation.navigate("../notifications")}>
           <Ionicons
             name="notifications-outline"
             size={24}
             color={theme.colors["neutral-700"]}
           />
-        </Pressable>
+        </Pressable> */}
 
       <Pressable onPress={() => navigation.navigate("./viewProfile")}>
         <Image

@@ -174,7 +174,7 @@ const SettingsScreen = () => {
               />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.groupSectionLink}
             onPress={() => navigation.navigate("./settings/notificationSettings")}>
             <View style={styles.groupSectionLeft}>
@@ -194,7 +194,7 @@ const SettingsScreen = () => {
                 color={theme.colors["neutral-500"]}
               />
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         {/* Agreement */}
