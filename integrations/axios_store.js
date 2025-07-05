@@ -87,16 +87,39 @@ const base64ToBlob = (base64, type) => {
   return new Blob([new Uint8Array(array)], { type });
 };
 
-const createForm = (data, blob_name) => {
+const fileToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
+  const getBase64Image = async (uri) => {
+    let base64Image = await fetch(uri)
+      .then((response) => response.blob())
+      .catch((error) => {
+        console.error("Error fetching image:", error);
+        return null;
+      });
+    return base64Image;
+  };
+
+const createForm = async (data, blob_name) => {
   let needed = data.data;
   let formdata = new FormData();
-
+  console.log("needed", needed);
+  console.log("blob_name", blob_name);
   for (const [key, value] of Object.entries(needed.formdata)) {
     if (key == blob_name && value) {
       let first_four = value.slice(0, 4);
       if (first_four !== "http") {
-        let blob = base64ToBlob(value, needed.img.type);
-        formdata.append(key, blob, needed.img.filename);
+        console.log("value", value);
+        console.log('key', key);
+        formdata.append(key,{uri: value,
+           type: needed.img.type, 
+          name: needed.img.filename});
       }
 
       // formdata.append(key, value,needed.img.filename)
@@ -110,7 +133,8 @@ const createForm = (data, blob_name) => {
 };
 
 export const UserProfile = async (data) => {
-  let formdata = createForm(data, "image");
+  console.log("inside user profile", data);
+  let formdata = await createForm(data, "image");
   console.log("formdata", formdata);
   return axios
     .post(user_url, formdata, {
@@ -120,6 +144,7 @@ export const UserProfile = async (data) => {
       },
     })
     .then((res) => {
+      console.log("res", res);
       return {
         data: res.data,
         success: true,
@@ -127,6 +152,7 @@ export const UserProfile = async (data) => {
       };
     })
     .catch((err) => {
+      console.log("err", err[0]);
       return {
         type: "Error",
         success: false,
@@ -137,7 +163,7 @@ export const UserProfile = async (data) => {
 };
 
 export const Appointments = async (data) => {
-  let formdata = createForm(data, "document");
+  let formdata = await createForm(data, "document");
   return axios
     .post(appointments_url, formdata, {
       headers: {
@@ -163,7 +189,7 @@ export const Appointments = async (data) => {
 };
 
 export const Patients = async (data) => {
-  let formdata = createForm(data, "document");
+  let formdata = await createForm(data, "document");
   return axios
     .post(patient_url, formdata, {
       headers: {

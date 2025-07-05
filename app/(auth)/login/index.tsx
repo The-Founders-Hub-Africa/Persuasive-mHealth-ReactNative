@@ -58,7 +58,7 @@ const navigation = useRouter();
         navigation.navigate("/profileSetup");
       }
     }
-  }, [loading,isLoading,user]);
+  }, [loading,user]);
 
 
   useEffect(() => {

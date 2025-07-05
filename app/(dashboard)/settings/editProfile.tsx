@@ -123,9 +123,12 @@ const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
         img: imageDetails,
       },
     };
-    // console.log(data_)
+    
+    console.log("Edit Profile Data: ");
     let res = await UserProfile(data_);
+
     if (res.success) {
+    console.log("Edit Profile Response: ");
       dispatch(
         loginUser({
           ...res.data.user,
@@ -151,6 +154,7 @@ const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
  
 
   const handleImageUpload = async () => {
+    console.log("Image Picker Opened");
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images"],
       allowsEditing: true,
@@ -161,12 +165,14 @@ const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     if (!result.canceled) {
       let returndata = result.assets[0];
       if (returndata.mimeType && returndata.fileName) {
+        console.log("Image Picker Result: ", returndata);
         const uri = returndata.uri || null;
         setimageDetails({
           type: returndata.mimeType,
           filename: returndata.fileName,
         });
         setValue("image", uri);
+        console.log("Image URI: ", uri)
       }
     } else {
       console.log("Image Picker Error: ---");
