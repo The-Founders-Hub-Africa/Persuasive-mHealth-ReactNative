@@ -13,7 +13,10 @@ import theme from "@/styles/theme";
 import globalStyles from "@/styles/global";
 import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useForgotPasswordMutation } from "@/integrations/features/apis/apiSlice";
+import { useAppDispatch } from "@/integrations/hooks";
+import { addAlert } from "@/integrations/features/alert/alertSlice";
 
 type FormData = {
   password: string;
@@ -22,8 +25,12 @@ type FormData = {
 
 export default function ResetPasswordScreen() {
    const navigation = useRouter();
-  
+   const { otp,user_id } = useLocalSearchParams<{otp?:string,user_id?:string}>();
+  const dispatch = useAppDispatch();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
+  
   const {
     control,
     handleSubmit,
@@ -37,7 +44,34 @@ export default function ResetPasswordScreen() {
 
   const onSubmit = (data: FormData) => {
     if (data.password && data.confirmPassword === data.password) {
-      navigation.navigate("../login");
+      setIsSubmitting(true);
+      // Simulate an API call to reset password
+      let data_ = {
+        action: "reset_password",
+        otp: otp,
+        user_id: user_id,
+        new_password: data.password,
+      };
+
+      forgotPassword(data_).then(data => {
+          if (data.error) {
+            dispatch(addAlert({ ...data.error, page: "reset password page" }));
+          }
+          if (data.data) {
+            setIsSubmitting(false);
+            dispatch(addAlert({
+              type: "success",
+              message: "Password reset successfully",
+              status: 200,
+              page: "reset password page"
+            }));
+            navigation.navigate("/login");
+          }
+
+          setIsSubmitting(false);
+        }
+                )
+
     } else {
       Alert.alert("Please fill all fields");
     }
@@ -66,7 +100,6 @@ export default function ResetPasswordScreen() {
           ]}>
           Your new password must be different from previously used passwords..
         </Text>
-
         {/* Password Input */}
         <View style={formStyles.inputGroup}>
           <Text style={formStyles.label}>Password</Text>

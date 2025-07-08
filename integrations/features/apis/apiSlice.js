@@ -49,6 +49,13 @@ export const mediAppApi = createApi({
             }),
         }),
         
+        forgotPassword: builder.mutation({
+            query: data => ({
+                url: "/forgotpassword",
+                method: "POST",
+                body: data
+            }),
+        }),
 
         logout: builder.mutation({
             query: token => ({
@@ -58,15 +65,7 @@ export const mediAppApi = createApi({
             }),
         }),
 
-        // 
-
-        // getOTP: builder.mutation({
-        //     query: token =>({
-        //         url: `/otp`,
-        //         headers: { "Authorization": `Token ${token}` },
-        //         method: "POST",
-        //     }),
-        // }), 
+    
         OTP: builder.mutation({
             query: data => ({
                 url: `/otp`,
@@ -130,7 +129,6 @@ export const {
     useLogoutMutation, useOTPMutation,
     useAppointmentsMutation,
     usePatientMutation, useWhatsappRecordsMutation,
-    useChangePasswordMutation
-    
-    } = mediAppApi
-              
+    useChangePasswordMutation,
+    useForgotPasswordMutation
+} = mediAppApi

@@ -1,0 +1,12 @@
+[
+    {
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.casper_emeka.persuasivemhealth",
+            "sha256_cert_fingerprints": [
+                "54:88:9D:3D:18:D0:CB:A4:B4:1C:CB:0E:4E:64:91:F7:3C:63:8F:A8:4A:44:DA:2D:DC:D2:F4:39:3A:A5:4B:71"
+            ]
+        }
+    }
+]

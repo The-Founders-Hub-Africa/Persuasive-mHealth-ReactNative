@@ -16,6 +16,10 @@ import globalStyles from "@/styles/global";
 import typography from "@/styles/typography";
 import formStyles from "@/styles/formStyles";
 import { useRouter } from "expo-router";
+import * as Linking from "expo-linking";
+import { useForgotPasswordMutation } from "@/integrations/features/apis/apiSlice";
+import { addAlert } from "@/integrations/features/alert/alertSlice";
+import { useAppDispatch } from "@/integrations/hooks";
 
 type FormData = {
   email: string;
@@ -24,9 +28,11 @@ type FormData = {
 export default function ForgotPasswordScreen() {
   
   const navigation = useRouter();
-  
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+  const dispatch = useAppDispatch();
+  
   const {
     control,
     handleSubmit,
@@ -40,17 +46,27 @@ export default function ForgotPasswordScreen() {
   const onSubmit = (data: FormData) => {
     if (data.email) {
       setIsSubmitting(true);
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setEmailSent(true);
-      }, 3000);
-    } else {
-      Alert.alert("Please fill all fields");
-    }
+      // Simulate an API call to send reset password email
+      let data_ = { 'action': 'send_app_link', 'email': data.email };
+          forgotPassword(data_).then(data => {
+            if (data.error) {
+              dispatch(addAlert({ ...data.error, page: "forgot password page" }));
+              
+                }
+            if (data.data) { 
+               setIsSubmitting(false);
+               setEmailSent(true);
+            }
+    
+            setIsSubmitting(false);
+          }
+          )
+        }
   };
 
   const handleOpenEmailApp = () => {
-    navigation.navigate("./resetPassword");
+    // navigation.navigate("./resetPassword");
+    Linking.openURL("mailto:");
   };
 
   return (
