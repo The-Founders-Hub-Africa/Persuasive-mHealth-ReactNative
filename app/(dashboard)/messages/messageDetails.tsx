@@ -72,8 +72,7 @@ const MessageDetailsScreen = () => {
           audio,
           setAudio,
           image,
-          setImage,
-          user.usertoken
+          setImage
         );
       }
       if (response.error) {
@@ -102,8 +101,7 @@ const MessageDetailsScreen = () => {
             audio,
             setAudio,
             image,
-            setImage,
-            user.usertoken
+            setImage
           );
         }
         }

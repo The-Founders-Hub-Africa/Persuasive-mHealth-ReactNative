@@ -9,7 +9,8 @@ const initialData = {data:[{
     patient: 4, record_format: "",
     record_id: "",
     record_type: "",
-    timestamp: ""
+    timestamp: "",
+    image:'',audio:'',video:''
   }]}
 
 export const whatsappMessageSlice = createSlice({

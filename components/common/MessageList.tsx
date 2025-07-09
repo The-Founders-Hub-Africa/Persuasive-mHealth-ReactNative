@@ -54,7 +54,6 @@ const MessageCard = ({ message }: { message: MessageProps }) => {
         <Text style={typography.textBase_Regular}>
         {message.record_type == 'text' ? message.content.slice(0, 35) : message.record_type}
         {message.record_type == 'text' ? '....' : ''}
-        ...
         </Text>
       </View>
       </View>

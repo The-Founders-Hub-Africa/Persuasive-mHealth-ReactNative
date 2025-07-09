@@ -28,34 +28,22 @@ const blobToBase64 = (blob) => {
 
 export const getMediaFiles = async (data, video_state, set_video,
                                 audio_state, set_audio,
-                                image_state, set_image,
-                                token) => {
+                                image_state, set_image) => {
                                                             
     let setters = {
         video: [set_video, video_state],
         audio: [set_audio, audio_state],
         image: [set_image, image_state]
     }
-
+  
   data.forEach(async message => {
       if (message.record_type !== 'text') {
-     
-        let source = `${baseUrl}/platforms/get_media/${message.content}`;
-        if (message.record_type == 'image') {
-           
-        const response = await axiosGetMediaFile(message.content,token)
-          if (response.success) {
-                const blob = new Blob([response.data], { type: response.data.type, lastModified: Date.now() });
-                const base64Data = await blobToBase64(blob);
-                source = base64Data;         
-      }
-        } 
+        let source = message[message.record_type]
 
         setters[message.record_type][0](prevState => ({
                     ...prevState,
                     [message.id]: source
               }))
-        
-        }
+      }
     });
 }
