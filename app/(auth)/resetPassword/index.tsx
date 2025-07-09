@@ -73,7 +73,7 @@ export default function ResetPasswordScreen() {
                 )
 
     } else {
-      Alert.alert("Please fill all fields");
+      
     }
   };
 

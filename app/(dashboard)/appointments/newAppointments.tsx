@@ -56,7 +56,6 @@ const NewAppointmentsScreen = () => {
     };
   
     const handleConfirm = (date:string) => {
-      console.warn("A date has been picked: ", date);
       hideDatePicker();
     };
   

@@ -66,18 +66,6 @@ const navigation = useRouter();
       }
     }, [user]);
 
-  // const onSubmit = (data: FormData) => {
-  //   if (data.phone_number && data.password) {
-  //     navigation.navigate("Dashboard");
-  //   } else {
-  //     Alert.alert("Please fill all fields");
-  //   }
-  // };
-
-  // const onSubmit = async (formdata: FormData) => {
-  //   navigation.navigate("Dashboard");
-  // };
-  
   const onSubmit = async (formdata: FormData) => {
     if (!formdata.phone_number && !formdata.password) {
       // remember to dispatch alert

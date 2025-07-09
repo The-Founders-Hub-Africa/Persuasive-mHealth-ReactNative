@@ -100,7 +100,6 @@ const fileToBase64 = (file) => {
     let base64Image = await fetch(uri)
       .then((response) => response.blob())
       .catch((error) => {
-        console.error("Error fetching image:", error);
         return null;
       });
     return base64Image;

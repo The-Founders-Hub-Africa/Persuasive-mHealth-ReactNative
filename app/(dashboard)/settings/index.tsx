@@ -292,9 +292,7 @@ const SettingsScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity style={styles.groupSectionLink}   onPress={() => {
               const url = `https://wa.me/${user.api_number}`; // Replace with your WhatsApp link
-              Linking.openURL(url).catch(err =>
-              console.error("Failed to open URL:", err)
-              );
+              Linking.openURL(url);
             }}>
             
             <View style={styles.groupSectionLeft}>

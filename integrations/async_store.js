@@ -6,7 +6,6 @@ export const writeToAsyncStorage = async (key, value) => {
         const jsonValue = JSON.stringify(value);
         await AsyncStorage.setItem(key, jsonValue);
     } catch (error) {
-        console.error('Error writing value to AsyncStorage', error);
         return error;
     }
 };
@@ -19,7 +18,6 @@ export const readFromAsyncStorage = async (key) => {
         }
         return null
     } catch (error) {
-        console.error('Error reading value from AsyncStorage', error);
         return error;
     }
 };

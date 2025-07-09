@@ -95,11 +95,14 @@ export default function NewPatientScreen() {
   const requestPermission = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      Alert.alert(
-        "Permission Denied",
-        "Permission to access camera roll is required!"
-      );
-    }
+      dispatch(
+        addAlert({
+          type: "error",
+          message: "Permission to access camera roll is required!",
+          status: 403,
+          page: "new_patient_page",
+        })
+      );    }
   };
 
   useEffect(() => {
@@ -126,8 +129,14 @@ export default function NewPatientScreen() {
         dispatch(addAlert({ status: response.status, data: response.data }));
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      Alert.alert("Submission Failed", "An error occurred. Please try again.");
+      dispatch(
+        addAlert({
+          type: "error",
+          message: "Failed to create patient. Please try again.",
+          status: 500,
+          page: "new_patient_page",
+        })
+      );
     } finally {
       setIsSubmitting(false);
     }

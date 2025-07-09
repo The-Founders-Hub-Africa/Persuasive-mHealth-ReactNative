@@ -62,7 +62,6 @@ export default function EditPatientScreen() {
     };
   
     const handleConfirm = (date:string) => {
-      console.warn("A date has been picked: ", date);
       hideDatePicker();
     };
   
@@ -109,7 +108,14 @@ export default function EditPatientScreen() {
   const requestPermission = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      Alert.alert("Permission to access camera roll is required!");
+      dispatch(
+        addAlert({
+          type: "error",
+          message: "Permission to access camera roll is required!",
+          status: 403,
+          page: "edit_patient_page",
+        })
+      );
     }
   };
 

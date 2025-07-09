@@ -28,7 +28,6 @@ export default function SplashScreen() {
          <View style={styles.container}>
         <Image
           source={require("../assets/images/whiteLogo.png")}
-          onError={(error) => console.error("Image loading error:", error.nativeEvent.error)}
           style={styles.logo}
         />
         </View>          
