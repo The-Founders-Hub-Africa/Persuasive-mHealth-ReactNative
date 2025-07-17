@@ -152,14 +152,14 @@ export default function ProfileSetupScreen() {
         <Text
           style={[
             typography.text2XL_SemiBold,
-            { textAlign: "left", marginBottom: 8 },
+            { textAlign: "center", marginBottom: 8 },
           ]}>
           Set up Profile
         </Text>
         <Text
           style={[
             typography.textBase_Regular,
-            { textAlign: "left", marginBottom: 24 },
+            { textAlign: "center", marginBottom: 24 },
           ]}>
           Update your profile to get started
         </Text>
@@ -189,6 +189,7 @@ export default function ProfileSetupScreen() {
             typography.textXL_Medium,
             {
               marginBottom: 8,
+              textAlign: "center",
             },
           ]}>
           Personal Information
@@ -295,6 +296,7 @@ export default function ProfileSetupScreen() {
             {
               marginTop: 12,
               marginBottom: 8,
+              textAlign: "center",
             },
           ]}>
           Other Information
