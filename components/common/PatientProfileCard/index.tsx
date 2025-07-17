@@ -23,7 +23,6 @@ const PatientProfileCard = ({ patient }: { patient: PatientProps }) => {
       {/* Top */}
       <View style={styles.section}>
         <Image source={patient.image} style={styles.avatar} />
-
         <View
           style={{
             gap: 12,
@@ -34,7 +33,6 @@ const PatientProfileCard = ({ patient }: { patient: PatientProps }) => {
             maxWidth: "100%",
           }}>
           <Text style={typography.textLG_Medium}>{patient.full_name}</Text>
-
           <Text
             style={[
               typography.textSmall_Regular,
@@ -50,10 +48,8 @@ const PatientProfileCard = ({ patient }: { patient: PatientProps }) => {
               size={16}
               color={theme.colors["neutral-700"]}
             />
-
             {patient.address}
           </Text>
-
           <Text
             style={[
               typography.textSmall_Regular,
@@ -69,56 +65,38 @@ const PatientProfileCard = ({ patient }: { patient: PatientProps }) => {
             ]}>
             {patient.whatsapp_number}
           </Text>
-
-          <TouchableOpacity
-            onPress={() => {
-              // Navigate to messages screen with patient details
-              navigation.push({
-                pathname: "/messages/messageDetails",
-                params: {
-                  id: patient.id,
-                  name: patient.full_name,
-                },
-              });
-            }}
-            style={[
-              typography.textSmall_Medium,
-              {
-                borderBottomWidth: 1,
-                borderColor: theme.colors["purple-600"],
-                paddingBottom: 4,
-                alignSelf: "flex-start", // Prevents unnecessary stretching
-                width: "auto",
-              },
-            ]}>
-            <Text
-              style={{
-                color: theme.colors["purple-600"],
-              }}>
-              View Messages
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.whatsappButton}
-            onPress={() => {
-              const url = `https://wa.me/${user.api_number}`; // Replace with your WhatsApp link
-              Linking.openURL(url);
-            }}>
-            <View style={styles.whatsappButtonLeft}>
-              <View>
-                <Image
-                  source={require("@/assets/images/whatsapp.png")}
-                  style={{
-                    width: 16,
-                    height: 16,
-                  }}
-                />
-              </View>
-              <Text>Add Record</Text>
-            </View>
-          </TouchableOpacity>
         </View>
+        
+      </View>
+      {/* Buttons below section */}
+      <View style={styles.buttonRow}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push({
+              pathname: "/messages/messageDetails",
+              params: {
+                id: patient.id,
+                name: patient.full_name,
+              },
+            });
+          }}
+          style={styles.actionButton}>
+          <Text style={styles.actionButtonText}>View Messages</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.actionButton, styles.whatsappButton]}
+          onPress={() => {
+            const url = `https://wa.me/${user.api_number}`;
+            Linking.openURL(url);
+          }}>
+          <View style={styles.whatsappButtonLeft}>
+            <Image
+              source={require("@/assets/images/whatsapp.png")}
+              style={{ width: 16, height: 16 }}
+            />
+            <Text style={styles.actionButtonText}>Add Record</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -162,7 +140,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   input: {
     backgroundColor: theme.colors["purple-50"],
     paddingVertical: 12,
@@ -182,22 +159,36 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     height: 150,
   },
-
-  whatsappButton: {
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 16,
+    marginTop: 16,
+    width: "100%",
+  },
+  actionButton: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    gap: 16,
-    borderWidth: 1,
-    borderColor: theme.colors["purple-200"],
-    borderRadius: 10,
-    padding: 16,
-    width: "100%",
+    justifyContent: "center",
+    backgroundColor: theme.colors["purple-600"],
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    minWidth: 120,
+    gap: 8,
+  },
+  actionButtonText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  whatsappButton: {
+    backgroundColor: theme.colors["green-300"] || "#25D366",
   },
   whatsappButtonLeft: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    gap: 16,
+    gap: 8,
   },
 });
