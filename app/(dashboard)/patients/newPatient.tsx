@@ -161,7 +161,7 @@ export default function NewPatientScreen() {
               },
             ]}
           >
-            Personal Information
+            General Information
           </Text>
 
           {/* Full Name */}
@@ -339,7 +339,7 @@ export default function NewPatientScreen() {
               },
             ]}
           >
-            Other Information
+            Additional Information
           </Text>
 
           {/* Date of Birth */}

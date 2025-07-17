@@ -176,7 +176,7 @@ export default function EditPatientScreen() {
                 marginBottom: 8,
               },
             ]}>
-            Personal Information
+            General Information
           </Text>
 
           {/* Full Name */}
@@ -352,7 +352,7 @@ export default function EditPatientScreen() {
                 marginBottom: 8,
               },
             ]}>
-            Other Information
+            Additional Information
           </Text>
 
           {/* Date of Birth */}
