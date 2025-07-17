@@ -501,9 +501,9 @@ export default function EditPatientScreen() {
             )}
           </View>
 
-          {/* Kin Number */}
+          {/* Next of Kin Number */}
           <View style={formStyles.inputGroup}>
-            <Text style={formStyles.label}>Kin Number</Text>
+            <Text style={formStyles.label}>Next of Kin Number</Text>
             <Controller
               control={control}
               name="kin_number"
