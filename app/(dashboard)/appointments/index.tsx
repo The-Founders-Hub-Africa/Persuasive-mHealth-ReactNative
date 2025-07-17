@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import globalStyles from "@/styles/global";
 import Tabs from "@/components/common/Tabs";
@@ -189,13 +189,19 @@ const AppointmentsList = ({
         gap: 4,
         width: "100%",
       }}>
-      {appointmentsData.map(appointment => (
-        <AppointmentCard
-          key={appointment.id}
-          appointment={appointment}
-          appointmentPage={true}
-        />
-      ))}
+      {appointmentsData.length === 0 ? (
+        <View style={{ alignItems: "center", marginTop: 32 }}>
+          <Text style={{ color: "#888" }}>No appointments to show yet.</Text>
+        </View>
+      ) : (
+        appointmentsData.map(appointment => (
+          <AppointmentCard
+            key={appointment.id}
+            appointment={appointment}
+            appointmentPage={true}
+          />
+        ))
+      )}
     </View>
   );
 };
