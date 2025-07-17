@@ -122,7 +122,7 @@ export default function OTPVerificationScreen() {
           style={[
             typography.text2XL_SemiBold,
             {
-              textAlign: "left",
+              textAlign: "center",
               marginBottom: 8,
             },
           ]}>
