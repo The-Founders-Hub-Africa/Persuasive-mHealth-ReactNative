@@ -112,11 +112,16 @@ const SettingsScreen = () => {
           }}>
           <View style={styles.profileContainer}>
             <View style={styles.section}>
-              <Image
-                source={require("@/assets/images/avatar.png")}
-                style={styles.avatar}
-              />
-
+              {user.image ? (
+                <Image source={{ uri: user.image }} style={styles.avatar} />
+              ) : (
+                <FontAwesome
+                  name="user"
+                  size={62}
+                  color={theme.colors["purple-100"]}
+                  style={styles.avatar}
+                />
+              )}
               <View>
                 <Text style={typography.textLG_Medium}>{user.full_name}</Text>
                 <Text style={typography.textBase_Regular}>
