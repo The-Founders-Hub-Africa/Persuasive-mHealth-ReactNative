@@ -1,13 +1,23 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import React from "react";
 import theme from "@/styles/theme";
 import typography from "@/styles/typography";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { PatientProps } from "@/types";
 import { useRouter } from "expo-router";
+import { useAppSelector } from "@/integrations/hooks";
 
 const PatientProfileCard = ({ patient }: { patient: PatientProps }) => {
   const navigation = useRouter();
+  const user = useAppSelector(state => state.user);
+
   return (
     <View style={styles.container}>
       {/* Top */}
@@ -61,17 +71,16 @@ const PatientProfileCard = ({ patient }: { patient: PatientProps }) => {
           </Text>
 
           <TouchableOpacity
-          onPress={() => {
-            // Navigate to messages screen with patient details
-            navigation.push({
+            onPress={() => {
+              // Navigate to messages screen with patient details
+              navigation.push({
                 pathname: "/messages/messageDetails",
                 params: {
                   id: patient.id,
                   name: patient.full_name,
                 },
-              }
-            );
-          }}
+              });
+            }}
             style={[
               typography.textSmall_Medium,
               {
@@ -88,6 +97,26 @@ const PatientProfileCard = ({ patient }: { patient: PatientProps }) => {
               }}>
               View Messages
             </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.whatsappButton}
+            onPress={() => {
+              const url = `https://wa.me/${user.api_number}`; // Replace with your WhatsApp link
+              Linking.openURL(url);
+            }}>
+            <View style={styles.whatsappButtonLeft}>
+              <View>
+                <Image
+                  source={require("@/assets/images/whatsapp.png")}
+                  style={{
+                    width: 16,
+                    height: 16,
+                  }}
+                />
+              </View>
+              <Text>Add Record</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -152,5 +181,23 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
     lineHeight: 22,
     height: 150,
+  },
+
+  whatsappButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 16,
+    borderWidth: 1,
+    borderColor: theme.colors["purple-200"],
+    borderRadius: 10,
+    padding: 16,
+    width: "100%",
+  },
+  whatsappButtonLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 16,
   },
 });
