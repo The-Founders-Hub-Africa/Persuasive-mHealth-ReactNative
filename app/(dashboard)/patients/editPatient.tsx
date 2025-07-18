@@ -176,7 +176,7 @@ export default function EditPatientScreen() {
                 marginBottom: 8,
               },
             ]}>
-            Personal Information
+            General Information
           </Text>
 
           {/* Full Name */}
@@ -352,7 +352,7 @@ export default function EditPatientScreen() {
                 marginBottom: 8,
               },
             ]}>
-            Other Information
+            Additional Information
           </Text>
 
           {/* Date of Birth */}
@@ -501,9 +501,9 @@ export default function EditPatientScreen() {
             )}
           </View>
 
-          {/* Kin Number */}
+          {/* Next of Kin Number */}
           <View style={formStyles.inputGroup}>
-            <Text style={formStyles.label}>Kin Number</Text>
+            <Text style={formStyles.label}>Next of Kin Number</Text>
             <Controller
               control={control}
               name="kin_number"

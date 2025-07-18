@@ -129,9 +129,13 @@ const MessagesScreen = () => {
         )}
 
         {/* Messages */}
-        <Text>
+        {finalData.length === 0 ? (
+          <Text style={{ textAlign: "center", marginTop: 32, color: "#888" }}>
+            No messages to show yet.
+          </Text>
+        ) : (
           <MessageList messagesData={finalData} />
-        </Text>
+        )}
       </View>
     </ScrollView>
   );
