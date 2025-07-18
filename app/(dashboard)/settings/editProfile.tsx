@@ -17,6 +17,7 @@ import {
   SimpleLineIcons,
 } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
+import { AREAS_OF_SPECIALIZATION } from "@/app/profileSetup";
 import { useForm, Controller } from "react-hook-form";
 import * as ImagePicker from "expo-image-picker";
 // import { launchImageLibrary } from "react-native-image-picker";
@@ -47,10 +48,10 @@ type FormData = {
 };
 
 export default function EditProfileScreen() {
-
   const [calendarVisible, setCalendarVisible] = useState(false);
   const [imageDetails, setimageDetails] = useState({ type: "", filename: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [otherSpecialization, setOtherSpecialization] = useState("");
 
 const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -122,10 +123,17 @@ const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const handleContinue = async (data: FormData) => {
     setIsSubmitting(true)
+    // If otherSpecialization is set, use it as the specialization value
+    const formdata = {
+      ...data,
+      specialization: otherSpecialization
+        ? otherSpecialization
+        : data.specialization,
+    };
     let data_ = {
       token: user.usertoken,
       data: {
-        formdata: data,
+        formdata,
         img: imageDetails,
       },
     };
@@ -384,13 +392,38 @@ const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
               name="specialization"
               rules={{ required: "Specialization is required" }}
               render={({ field: { onChange, value } }) => (
-                <View style={formStyles.inputDropdownCntr}>
-                  <Picker selectedValue={value} onValueChange={onChange}>
-                    <Picker.Item label="Cardiology" value="Cardiology" />
-                    <Picker.Item label="Neurology" value="Neurology" />
-                    <Picker.Item label="Dermatology" value="Dermatology" />
-                  </Picker>
-                </View>
+                <>
+                  <View style={formStyles.inputDropdownCntr}>
+                    <Picker
+                      selectedValue={value}
+                      onValueChange={val => {
+                        onChange(val);
+                        if (val !== "other") setOtherSpecialization("");
+                      }}>
+                      <Picker.Item label="Select one" value="" />
+                      {AREAS_OF_SPECIALIZATION.map(opt => (
+                        <Picker.Item
+                          key={opt.name}
+                          label={opt.label}
+                          value={opt.name}
+                        />
+                      ))}
+                    </Picker>
+                  </View>
+                  {value === "other" && (
+                    <View style={{ marginTop: 8 }}>
+                      <TextInput
+                        style={formStyles.inputText}
+                        placeholder="Enter your specialization"
+                        value={otherSpecialization}
+                        onChangeText={text => {
+                          setOtherSpecialization(text);
+                          onChange(text);
+                        }}
+                      />
+                    </View>
+                  )}
+                </>
               )}
             />
             {errors.specialization && (

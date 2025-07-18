@@ -48,6 +48,7 @@ export default function ProfileSetupScreen() {
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
   const [loading, setLoading] = useState(true);
+  const [otherSpecialization, setOtherSpecialization] = useState("");
 
   const {
     control,
@@ -87,9 +88,17 @@ export default function ProfileSetupScreen() {
 
   const handleContinue = async (data: FormData) => {
     setIsSubmitting(true);
-    const data_ = {token: user.usertoken,
+    // If otherSpecialization is set, use it as the specialization value
+    const formdata = {
+      ...data,
+      specialization: otherSpecialization
+        ? otherSpecialization
+        : data.specialization,
+    };
+    const data_ = {
+      token: user.usertoken,
       data: {
-        formdata: data,
+        formdata,
         img: imageDetails,
       },
     };
@@ -310,14 +319,38 @@ export default function ProfileSetupScreen() {
             name="specialization"
             rules={{ required: "Specialization is required" }}
             render={({ field: { onChange, value } }) => (
-              <View style={formStyles.inputDropdownCntr}>
-                <Picker selectedValue={value} onValueChange={onChange}>
-                  <Picker.Item label="Select one" value="" />
-                  <Picker.Item label="Cardiology" value="Cardiology" />
-                  <Picker.Item label="Neurology" value="Neurology" />
-                  <Picker.Item label="Dermatology" value="Dermatology" />
-                </Picker>
-              </View>
+              <>
+                <View style={formStyles.inputDropdownCntr}>
+                  <Picker
+                    selectedValue={value}
+                    onValueChange={val => {
+                      onChange(val);
+                      if (val !== "other") setOtherSpecialization("");
+                    }}>
+                    <Picker.Item label="Select one" value="" />
+                    {AREAS_OF_SPECIALIZATION.map(opt => (
+                      <Picker.Item
+                        key={opt.name}
+                        label={opt.label}
+                        value={opt.name}
+                      />
+                    ))}
+                  </Picker>
+                </View>
+                {value === "other" && (
+                  <View style={{ marginTop: 8 }}>
+                    <TextInput
+                      style={formStyles.inputText}
+                      placeholder="Enter your specialization"
+                      value={otherSpecialization}
+                      onChangeText={text => {
+                        setOtherSpecialization(text);
+                        onChange(text);
+                      }}
+                    />
+                  </View>
+                )}
+              </>
             )}
           />
           {errors.specialization && (
@@ -435,3 +468,27 @@ export default function ProfileSetupScreen() {
     </ScrollView>
   );
 }
+
+export const AREAS_OF_SPECIALIZATION = [
+  { name: "anesthesiology", label: "Anesthesiology" },
+  { name: "cardiology", label: "Cardiology" },
+  { name: "dermatology", label: "Dermatology" },
+  { name: "emergency_medicine", label: "Emergency Medicine" },
+  { name: "endocrinology", label: "Endocrinology" },
+  { name: "family_medicine", label: "Family Medicine" },
+  { name: "gastroenterology", label: "Gastroenterology" },
+  { name: "general_surgery", label: "General Surgery" },
+  { name: "geriatrics", label: "Geriatrics" },
+  { name: "hematology", label: "Hematology" },
+  { name: "infectious_disease", label: "Infectious Disease" },
+  { name: "internal_medicine", label: "Internal Medicine" },
+  { name: "nephrology", label: "Nephrology" },
+  { name: "neurology", label: "Neurology" },
+  { name: "obstetrics_gynecology", label: "Obstetrics & Gynecology" },
+  { name: "oncology", label: "Oncology" },
+  { name: "orthopedics", label: "Orthopedics" },
+  { name: "pediatrics", label: "Pediatrics" },
+  { name: "psychiatry", label: "Psychiatry" },
+  { name: "radiology", label: "Radiology" },
+  { name: "other", label: "Other" },
+];
