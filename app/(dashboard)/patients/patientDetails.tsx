@@ -9,14 +9,16 @@ import Tabs from "@/components/common/Tabs";
 import PersonalData from "@/components/patients/PersonalData";
 import { useLocalSearchParams } from "expo-router";
 const PatientDetailsScreen = () => {
-
-    let id = 0
-    let patientName = ''
-      let {id:id_,name} = useLocalSearchParams<{id?:string,name?:string}>();
-      if(id_ && name){
-        id = parseInt(id_)
-        patientName = name
-        }
+  let id = 0;
+  let patientName = "";
+  let { id: id_, name } = useLocalSearchParams<{
+    id?: string;
+    name?: string;
+  }>();
+  if (id_ && name) {
+    id = parseInt(id_);
+    patientName = name;
+  }
   const [patient] = useAppSelector(state =>
     state.patients.data.filter(data => data.id === id)
   );
@@ -28,6 +30,26 @@ const PatientDetailsScreen = () => {
     },
     {
       title: "Medical History",
+      component: <Text>Coming soon!</Text>,
+    },
+    {
+      title: "Medications",
+      component: <Text>Coming soon!</Text>,
+    },
+    {
+      title: "X-rays",
+      component: <Text>Coming soon!</Text>,
+    },
+    {
+      title: "Doccuments",
+      component: <Text>Coming soon!</Text>,
+    },
+    {
+      title: "Perscriptions",
+      component: <Text>Coming soon!</Text>,
+    },
+    {
+      title: "",
       component: <Text>Coming soon!</Text>,
     },
   ];
