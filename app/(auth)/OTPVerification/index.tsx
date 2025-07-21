@@ -21,7 +21,7 @@ import {
   logoutUser,
 } from "@/integrations/features/user/usersSlice";
 import ModalPopup from "@/components/common/ModalPopup";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 // import Alert_System from "@/src/integrations/features/alert/Alert";
 
 type FormData = {
@@ -35,7 +35,8 @@ type FormData = {
 
 export default function OTPVerificationScreen() {
   const navigation = useRouter();
-  const [otpSent, setOtpSent] = useState(false);
+  let { otpStatus } = useLocalSearchParams<{ otpStatus?: string }>();
+  const [otpSent, setOtpSent] = useState(otpStatus === "sent" || false);
   const [showModal, setShowModal] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
   const inputRefs = useRef<(TextInput | null)[]>([]);

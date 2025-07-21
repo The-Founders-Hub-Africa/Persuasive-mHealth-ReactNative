@@ -15,10 +15,10 @@ export default function DecisionScreen() {
     if (user.logedin) {
       if (user.verified_number && user.full_name != 'Not Set') {
         navigation.replace("/home")
-      } else if (user.full_name == 'Not Set') {
+      } else if ( user.verified_number && user.full_name == 'Not Set') {
         navigation.replace("/profileSetup")
-      }else {
-        navigation.replace("/OTPVerification")
+      }else  {
+        navigation.replace({ pathname: "/OTPVerification", params: { otpStatus: 'sent' } })
       }
     } else {
 

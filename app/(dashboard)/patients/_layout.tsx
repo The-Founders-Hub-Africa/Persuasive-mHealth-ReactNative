@@ -1,7 +1,7 @@
 import theme from '@/styles/theme';
 import { Feather } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
-import { TouchableOpacity } from 'react-native';
+import { Pressable } from 'react-native';
 
 export default function PatientsLayout() {
       const navigation = useRouter();
@@ -10,13 +10,13 @@ export default function PatientsLayout() {
         <Stack screenOptions={{ headerShown: true }} >
         <Stack.Screen name="index"  options={{ title: 'Patients',
             headerRight:() => (
-            <TouchableOpacity onPress={()=>navigation.navigate("/patients/newPatient")}>
+            <Pressable onPressIn={()=>navigation.navigate("/patients/newPatient")}>
               <Feather
                 name="plus"
                 size={24}
                 color={theme.colors["neutral-700"]}
               />
-            </TouchableOpacity>
+            </Pressable>
           ),
 
          }}/>

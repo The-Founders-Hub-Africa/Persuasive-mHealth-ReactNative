@@ -77,6 +77,11 @@ export default function ProfileSetupScreen() {
     if (!user.logedin && !loading) {
       navigation.navigate('/login');
     }
+
+    if(!user.verified_number && !loading){
+      navigation.navigate('/OTPVerification');
+    }
+
   }, [loading]);
 
   useEffect(() => {

@@ -13,7 +13,7 @@ import globalStyles from "@/styles/global";
 import theme from "@/styles/theme";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { logoutUser } from "@/integrations/features/user/usersSlice";
-import { useLogoutMutation } from "@/integrations/features/apis/apiSlice";
+import { baseUrl, useLogoutMutation } from "@/integrations/features/apis/apiSlice";
 import typography from "@/styles/typography";
 import { Ionicons } from "@expo/vector-icons";
 import formStyles from "@/styles/formStyles";
@@ -113,7 +113,7 @@ const SettingsScreen = () => {
           <View style={styles.profileContainer}>
             <View style={styles.section}>
               {user.image ? (
-                <Image source={{ uri: user.image }} style={styles.avatar} />
+                <Image source={{ uri: `${baseUrl}${user.image}`  }} style={styles.avatar} />
               ) : (
                 <FontAwesome
                   name="user"
