@@ -52,31 +52,30 @@ export default function EditPatientScreen() {
   const [showModal, setShowModal] = useState(false);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  
-    const showDatePicker = () => {
-      setDatePickerVisibility(true);
-    };
-  
-    const hideDatePicker = () => {
-      setDatePickerVisibility(false);
-    };
-  
-    const handleConfirm = (date:string) => {
-      hideDatePicker();
-    };
-  
-    const navigation = useRouter();
-    let id = 0
-    let {id:id_} = useLocalSearchParams<{id?:string}>();
-    if(id_){
-      id = parseInt(id_)
-      }
-    
-  
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date: string) => {
+    hideDatePicker();
+  };
+
+  const navigation = useRouter();
+  let id = 0;
+  let { id: id_ } = useLocalSearchParams<{ id?: string }>();
+  if (id_) {
+    id = parseInt(id_);
+  }
+
   const dispatch = useAppDispatch();
-  const user = useAppSelector(state => state.user);
-  const [patient] = useAppSelector(state =>
-    state.patients.data.filter(data => data.id === id)
+  const user = useAppSelector((state) => state.user);
+  const [patient] = useAppSelector((state) =>
+    state.patients.data.filter((data) => data.id === id)
   );
 
   const {
@@ -124,7 +123,7 @@ export default function EditPatientScreen() {
   }, []);
 
   const handleContinue = async (data: FormData) => {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     let newData = {
       ...data,
       medical_practitioner: user.id,
@@ -144,12 +143,12 @@ export default function EditPatientScreen() {
       // reset form data here
 
       //
-      setIsSubmitting(false)
+      setIsSubmitting(false);
       dispatch(addSinglePatient(res.data.patient));
       setShowModal(true);
       navigation.navigate("../patients");
     } else {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
       let err = {
         status: res.status,
         data: res.data,
@@ -159,14 +158,14 @@ export default function EditPatientScreen() {
     }
   };
 
-
   return (
     <ScrollView>
       <View
         style={[
           globalStyles.dashboardContainer,
           { gap: 24, flex: 1, width: "100%" },
-        ]}>
+        ]}
+      >
         {/* Personal Information */}
         <View style={{ width: "100%" }}>
           <Text
@@ -175,7 +174,8 @@ export default function EditPatientScreen() {
               {
                 marginBottom: 8,
               },
-            ]}>
+            ]}
+          >
             General Information
           </Text>
 
@@ -262,7 +262,8 @@ export default function EditPatientScreen() {
                     paddingVertical: 2,
                     paddingHorizontal: 12,
                     width: "100%",
-                  }}>
+                  }}
+                >
                   <EvilIcons
                     name="location"
                     size={24}
@@ -313,7 +314,8 @@ export default function EditPatientScreen() {
                     paddingVertical: 2,
                     paddingHorizontal: 12,
                     width: "100%",
-                  }}>
+                  }}
+                >
                   <EvilIcons
                     name="location"
                     size={24}
@@ -327,7 +329,7 @@ export default function EditPatientScreen() {
                       formStyles.inputText,
                       { height: 150, textAlignVertical: "top" },
                     ]}
-                    placeholder="Tell us about yourself..."
+                    placeholder="About Patient..."
                     placeholderTextColor={theme.colors["disabled-text"]}
                     value={value}
                     onChangeText={onChange}
@@ -351,7 +353,8 @@ export default function EditPatientScreen() {
               {
                 marginBottom: 8,
               },
-            ]}>
+            ]}
+          >
             Additional Information
           </Text>
 
@@ -376,24 +379,22 @@ export default function EditPatientScreen() {
             </TouchableOpacity>
           </View>
 
-         {/* Date Picker Modal */}
+          {/* Date Picker Modal */}
           {calendarVisible && (
-             <View>
-          <DateTimePicker
-            value={new Date(getValues("date_of_birth"))}
-            mode="date"
-            display="default"
-            onChange={(event, date) => {
-              setCalendarVisible(false);
-              if (date) {
-                setValue("date_of_birth", date.toISOString().split("T")[0]); // Format date to YYYY-MM-DD 
-              }
-            }}
-          />
-        </View>
+            <View>
+              <DateTimePicker
+                value={new Date(getValues("date_of_birth"))}
+                mode="date"
+                display="default"
+                onChange={(event, date) => {
+                  setCalendarVisible(false);
+                  if (date) {
+                    setValue("date_of_birth", date.toISOString().split("T")[0]); // Format date to YYYY-MM-DD
+                  }
+                }}
+              />
+            </View>
           )}
-          
-
 
           {/* Genotype */}
           <View style={formStyles.inputGroup}>
@@ -431,7 +432,8 @@ export default function EditPatientScreen() {
                 <View style={formStyles.genderCntr}>
                   <TouchableOpacity
                     onPress={() => onChange("male")}
-                    style={[formStyles.inputCntr, formStyles.genderOptionMale]}>
+                    style={[formStyles.inputCntr, formStyles.genderOptionMale]}
+                  >
                     <MaterialIcons
                       name={
                         value === "male"
@@ -448,7 +450,8 @@ export default function EditPatientScreen() {
                     style={[
                       formStyles.inputCntr,
                       formStyles.genderOptionFemale,
-                    ]}>
+                    ]}
+                  >
                     <MaterialIcons
                       name={
                         value === "female"
@@ -507,7 +510,7 @@ export default function EditPatientScreen() {
             <Controller
               control={control}
               name="kin_number"
-              rules={{ required: "Kin number is required" }}
+              rules={{ required: "Next of kin number is required" }}
               render={({ field: { onChange, value } }) => (
                 <View style={formStyles.inputCntr}>
                   <TextInput
@@ -648,13 +651,15 @@ export default function EditPatientScreen() {
                 ? theme.colors["disabled-bg"]
                 : theme.colors["purple-700"],
             },
-          ]}>
+          ]}
+        >
           <Text
             style={{
               color: isSubmitting
                 ? theme.colors["disabled-text"]
                 : theme.colors.white,
-            }}>
+            }}
+          >
             Edit Patient
           </Text>
         </TouchableOpacity>

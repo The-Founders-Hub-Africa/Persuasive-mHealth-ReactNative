@@ -16,10 +16,7 @@ import formStyles from "@/styles/formStyles";
 import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import { useOTPMutation } from "@/integrations/features/apis/apiSlice";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
-import {
-  loginUser,
-  logoutUser,
-} from "@/integrations/features/user/usersSlice";
+import { loginUser, logoutUser } from "@/integrations/features/user/usersSlice";
 import ModalPopup from "@/components/common/ModalPopup";
 import { useLocalSearchParams, useRouter } from "expo-router";
 // import Alert_System from "@/src/integrations/features/alert/Alert";
@@ -59,7 +56,7 @@ export default function OTPVerificationScreen() {
   const [OTP, { isLoading }] = useOTPMutation();
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector(state => state.user);
+  const user = useAppSelector((state) => state.user);
 
   useEffect(() => {
     let timer: string | number | NodeJS.Timeout | undefined;
@@ -105,7 +102,7 @@ export default function OTPVerificationScreen() {
         // loginUser({ ...user, verified_number: true, logedin: true, save: true })
         logoutUser()
       );
-      navigation.replace('./login')
+      navigation.replace("./login");
     } else if (res.error) {
       dispatch(addAlert({ ...res.error, page: "otp" }));
     }
@@ -126,7 +123,8 @@ export default function OTPVerificationScreen() {
               textAlign: "center",
               marginBottom: 8,
             },
-          ]}>
+          ]}
+        >
           OTP Verification
         </Text>
         {!otpSent ? (
@@ -135,18 +133,21 @@ export default function OTPVerificationScreen() {
               style={[
                 typography.textBase_Regular,
                 {
-                  textAlign: "left",
+                  textAlign: "center",
                   marginBottom: 24,
                 },
-              ]}>
-              We will send you a one-time password to your registered email address.
+              ]}
+            >
+              We will send you a one-time password to your registered email
+              address.
             </Text>
 
             {/* Phone Number Input */}
             <View style={formStyles.inputGroup}>
               <Text style={formStyles.label}>Email</Text>
               <View
-                style={[formStyles.inputCntr, formStyles.inputCntrDisabled]}>
+                style={[formStyles.inputCntr, formStyles.inputCntrDisabled]}
+              >
                 <FontAwesome
                   name="envelope"
                   size={20}
@@ -170,13 +171,15 @@ export default function OTPVerificationScreen() {
                     ? theme.colors["disabled-bg"]
                     : theme.colors["purple-700"],
                 },
-              ]}>
+              ]}
+            >
               <Text
                 style={{
                   color: isLoading
                     ? theme.colors["disabled-text"]
                     : theme.colors.white,
-                }}>
+                }}
+              >
                 Get OTP
               </Text>
             </TouchableOpacity>
@@ -190,7 +193,8 @@ export default function OTPVerificationScreen() {
                   textAlign: "left",
                   marginBottom: 24,
                 },
-              ]}>
+              ]}
+            >
               Enter the code sent to your mobile number.
             </Text>
             {/* OTP Input Fields */}
@@ -199,8 +203,9 @@ export default function OTPVerificationScreen() {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 gap: 16,
-              }}>
-              {[0, 1, 2, 3, 4, 5].map(index => (
+              }}
+            >
+              {[0, 1, 2, 3, 4, 5].map((index) => (
                 <Controller
                   key={index}
                   control={control}
@@ -211,7 +216,7 @@ export default function OTPVerificationScreen() {
                   }}
                   render={({ field: { onChange, value } }) => (
                     <TextInput
-                      ref={el => (inputRefs.current[index] = el)}
+                      ref={(el) => (inputRefs.current[index] = el)}
                       style={{
                         width: 40,
                         height: 62,
@@ -224,7 +229,7 @@ export default function OTPVerificationScreen() {
                       keyboardType="numeric"
                       maxLength={1}
                       value={value}
-                      onChangeText={text => {
+                      onChangeText={(text) => {
                         onChange(text);
                         if (text && index < 5)
                           inputRefs.current[index + 1]?.focus();
@@ -249,13 +254,15 @@ export default function OTPVerificationScreen() {
                     ? theme.colors["disabled-bg"]
                     : theme.colors["purple-700"],
                 },
-              ]}>
+              ]}
+            >
               <Text
                 style={{
                   color: isLoading
                     ? theme.colors["disabled-text"]
                     : theme.colors.white,
-                }}>
+                }}
+              >
                 Verify OTP
               </Text>
             </TouchableOpacity>
@@ -265,12 +272,14 @@ export default function OTPVerificationScreen() {
               <Text style={formStyles.infoText}>Didn't receive the OTP? </Text>
               <TouchableOpacity
                 disabled={resendTimer > 0}
-                onPress={handleGetOTP}>
+                onPress={handleGetOTP}
+              >
                 <Text
                   style={[
                     formStyles.infoLink,
                     resendTimer > 0 && formStyles.inputTextDisabled,
-                  ]}>
+                  ]}
+                >
                   {resendTimer > 0 ? `Resend in ${resendTimer}s` : "Resend"}
                 </Text>
               </TouchableOpacity>

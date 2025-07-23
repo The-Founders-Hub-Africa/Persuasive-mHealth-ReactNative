@@ -15,7 +15,8 @@ const PersonalData = ({ patient }: { patient: PatientProps }) => {
           alignItems: "stretch",
           width: "100%",
           flexWrap: "wrap",
-        }}>
+        }}
+      >
         <View style={{ flex: 1 }}>
           <Text style={[typography.textBase_Regular]}>Date of birth</Text>
           <Text style={[typography.textSmall_Regular, styles.input]}>
@@ -44,7 +45,8 @@ const PersonalData = ({ patient }: { patient: PatientProps }) => {
           alignItems: "stretch",
           width: "100%",
           flexWrap: "wrap",
-        }}>
+        }}
+      >
         <View style={{ flex: 1 }}>
           <Text style={[typography.textBase_Regular]}>Next of kin</Text>
           <Text style={[typography.textSmall_Regular, styles.input]}>
@@ -52,7 +54,7 @@ const PersonalData = ({ patient }: { patient: PatientProps }) => {
           </Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={[typography.textBase_Regular]}>Kin number</Text>
+          <Text style={[typography.textBase_Regular]}>Next of kin number</Text>
           <Text style={[typography.textSmall_Regular, styles.input]}>
             {patient.kin_number}
           </Text>
@@ -65,7 +67,8 @@ const PersonalData = ({ patient }: { patient: PatientProps }) => {
           flexDirection: "row",
           gap: 8,
           justifyContent: "space-between",
-        }}>
+        }}
+      >
         <View style={{ width: "100%" }}>
           <Text style={[typography.textBase_Regular]}>About</Text>
           <TextInput
@@ -75,7 +78,8 @@ const PersonalData = ({ patient }: { patient: PatientProps }) => {
               { height: 150 },
             ]}
             multiline
-            readOnly>
+            readOnly
+          >
             {patient.about}
           </TextInput>
         </View>
@@ -87,7 +91,8 @@ const PersonalData = ({ patient }: { patient: PatientProps }) => {
           flexDirection: "row",
           gap: 8,
           justifyContent: "space-between",
-        }}>
+        }}
+      >
         <View style={{ width: "100%" }}>
           <Text style={[typography.textBase_Regular]}>Symptoms</Text>
           <TextInput
@@ -97,7 +102,8 @@ const PersonalData = ({ patient }: { patient: PatientProps }) => {
               { height: 100 },
             ]}
             multiline
-            readOnly>
+            readOnly
+          >
             {patient.symptoms}
           </TextInput>
         </View>

@@ -25,9 +25,7 @@ import { useAppDispatch, useAppSelector } from "@/integrations/hooks";
 import ModalPopup from "@/components/common/ModalPopup";
 import { addAlert } from "@/integrations/features/alert/alertSlice";
 import { addSinglePatient } from "@/integrations/features/patient/patientsSlice";
-import {
-  Patients,
-} from "@/integrations/axios_store";
+import { Patients } from "@/integrations/axios_store";
 import { addPatientCount } from "@/integrations/features/user/usersSlice";
 
 // import Alert_System from "@/src/integrations/features/alert/Alert";
@@ -102,7 +100,8 @@ export default function NewPatientScreen() {
           status: 403,
           page: "new_patient_page",
         })
-      );    }
+      );
+    }
   };
 
   useEffect(() => {
@@ -262,7 +261,7 @@ export default function NewPatientScreen() {
                       formStyles.inputText,
                       { height: 70, textAlignVertical: "top" },
                     ]}
-                    placeholder="Tell us about yourself..."
+                    placeholder="Patient's Address..."
                     placeholderTextColor={theme.colors["disabled-text"]}
                     value={value}
                     onChangeText={onChange}
@@ -314,7 +313,7 @@ export default function NewPatientScreen() {
                       formStyles.inputText,
                       { height: 150, textAlignVertical: "top" },
                     ]}
-                    placeholder="Tell us about yourself..."
+                    placeholder="About Patient..."
                     placeholderTextColor={theme.colors["disabled-text"]}
                     value={value}
                     onChangeText={onChange}
@@ -365,21 +364,21 @@ export default function NewPatientScreen() {
             </TouchableOpacity>
           </View>
 
-        {/* Date Picker Modal */}
+          {/* Date Picker Modal */}
           {calendarVisible && (
-             <View>
-          <DateTimePicker
-            value={new Date(getValues("date_of_birth"))}
-            mode="date"
-            display="default"
-            onChange={(event, date) => {
-              setCalendarVisible(false);
-              if (date) {
-                setValue("date_of_birth", date.toISOString().split("T")[0]); // Format date to YYYY-MM-DD 
-              }
-            }}
-          />
-        </View>
+            <View>
+              <DateTimePicker
+                value={new Date(getValues("date_of_birth"))}
+                mode="date"
+                display="default"
+                onChange={(event, date) => {
+                  setCalendarVisible(false);
+                  if (date) {
+                    setValue("date_of_birth", date.toISOString().split("T")[0]); // Format date to YYYY-MM-DD
+                  }
+                }}
+              />
+            </View>
           )}
 
           {/* Genotype */}

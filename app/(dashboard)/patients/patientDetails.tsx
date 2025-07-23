@@ -19,13 +19,13 @@ const PatientDetailsScreen = () => {
     id = parseInt(id_);
     patientName = name;
   }
-  const [patient] = useAppSelector(state =>
-    state.patients.data.filter(data => data.id === id)
+  const [patient] = useAppSelector((state) =>
+    state.patients.data.filter((data) => data.id === id)
   );
 
   const tabs = [
     {
-      title: "Personal Data",
+      title: "Patient's Data",
       component: <PersonalData patient={patient} />,
     },
     {
@@ -48,10 +48,10 @@ const PatientDetailsScreen = () => {
       title: "Perscriptions",
       component: <Text>Coming soon!</Text>,
     },
-    {
-      title: "",
-      component: <Text>Coming soon!</Text>,
-    },
+    // {
+    //   title: "",
+    //   component: <Text>Coming soon!</Text>,
+    // },
   ];
 
   return (
@@ -62,7 +62,8 @@ const PatientDetailsScreen = () => {
           {
             gap: 24,
           },
-        ]}>
+        ]}
+      >
         <PatientProfileCard patient={patient} />
 
         <Tabs tabs={tabs} />
